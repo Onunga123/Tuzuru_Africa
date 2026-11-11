@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Green season and calving",
+    "months": "January – February",
+    "description": "A quiet, green window between the short rains and the long rains. Rates are at their lowest, camps are calm, and the southern Serengeti plains hold the calving herds of wildebeest.",
+    "highlights": "Wildebeest calving, predator activity, newborn antelope, strong birdlife",
+    "weather": "Warm to hot days, occasional afternoon showers, clear mornings",
+    "best_for": "Value-conscious travellers, photographers, anyone avoiding crowds",
+    "crowd_level": "quiet",
+    "price_band": "Best value",
+    "imageKey": "serengeti",
+    "sort_order": 1
+  },
+  {
+    "name": "Long rains",
+    "months": "March – May",
+    "description": "The wettest stretch of the year in East Africa. The bush turns green and the skies are dramatic, but some camps close for maintenance and tracks become slow, so itineraries need more flexibility.",
+    "highlights": "Lush landscapes, dramatic light, Victoria Falls near peak flow, excellent gorilla trekking",
+    "weather": "Heavy afternoon and evening rain, high humidity, cooler than the dry months",
+    "best_for": "Photographers, repeat visitors, travellers who want the lowest rates",
+    "crowd_level": "quiet",
+    "price_band": "Best value",
+    "imageKey": "amboseli",
+    "sort_order": 2
+  },
+  {
+    "name": "Peak dry season",
+    "months": "June – October",
+    "description": "The classic safari window. Water and grazing are scarce, so wildlife gathers predictably around rivers and pans, and vegetation is thin enough to see deep into the bush. Demand is at its highest, so lodges and vehicles should be booked well ahead.",
+    "highlights": "Great Migration river crossings, concentrated big game, clear views, cool mornings",
+    "weather": "Dry and sunny, cold early mornings on the highlands, warm afternoons",
+    "best_for": "First-time safari travellers, families, migration-focused itineraries",
+    "crowd_level": "busy",
+    "price_band": "Premium",
+    "imageKey": "migration",
+    "sort_order": 3
+  },
+  {
+    "name": "Short rains",
+    "months": "November – December",
+    "description": "Brief, heavy showers that green the bush before the dry coastal months return. Migratory birds arrive in numbers, the light is soft, and rates ease again before the December holiday peak.",
+    "highlights": "Migratory birds, green landscapes, fewer vehicles, good coastal weather from December",
+    "weather": "Short afternoon storms, humid, warm evenings",
+    "best_for": "Birders, travellers combining safari with the coast, flexible dates",
+    "crowd_level": "moderate",
+    "price_band": "Mid season",
+    "imageKey": "zanzibar",
+    "sort_order": 4
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "safari-wildlife",
+    "name": "Safari & Wildlife",
+    "icon": "Binoculars",
+    "imageKey": "migration",
+    "blurb": "Game drives, walking safaris and river crossings, led by guides who read the bush.",
+    "detail": "Days built around the best light: early mornings, long middle hours at camp, and late drives into golden dusk. Where conservancies allow it, we add walking and night drives."
+  },
+  {
+    "slug": "culture-community",
+    "name": "Culture & Community",
+    "icon": "Users",
+    "imageKey": "culture",
+    "blurb": "Homestead visits, markets, craft and food, arranged respectfully and on local terms.",
+    "detail": "Visits are arranged with the communities themselves, with time and a fair share of the value staying local. We favour smaller, hosted encounters over staged performances."
+  },
+  {
+    "slug": "beach-coast",
+    "name": "Beach & Coast",
+    "icon": "Waves",
+    "imageKey": "escape",
+    "blurb": "Indian Ocean water, dhow sailing and quiet sand after time on the plains.",
+    "detail": "The natural companion to a safari: shallow warm water, reef snorkelling, sailing and long unstructured afternoons. Coastal stays are chosen for access to the water and quiet at night."
+  },
+  {
+    "slug": "adventure",
+    "name": "Adventure",
+    "icon": "Mountain",
+    "imageKey": "gorge",
+    "blurb": "Rafting, gorges, balloon flights and highland trails for travellers who want to move.",
+    "detail": "Adventure is added in proportion to the rest of the trip — a single big day, or a route built around movement for travellers who want it."
+  },
+  {
+    "slug": "nature-landscapes",
+    "name": "Nature & Landscapes",
+    "icon": "Trees",
+    "imageKey": "seasons",
+    "blurb": "Rift Valley escarpments, craters, forests and the mountain horizons between them.",
+    "detail": "For travellers who care as much about the landscape as the wildlife: viewpoints, forests, crater floors and long drives with something to see."
+  },
+  {
+    "slug": "city-food",
+    "name": "City & Food",
+    "icon": "UtensilsCrossed",
+    "imageKey": "door",
+    "blurb": "Markets, spice farms, coffee and the food cultures of the coast and the highlands.",
+    "detail": "Half-days built around markets, cooking and tasting, usually at the start or end of a trip when you are already in town."
+  }
+]

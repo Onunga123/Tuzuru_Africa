@@ -1,0 +1,58 @@
+export const WILDLIFE_CALENDAR = [
+  {
+    species: 'Wildebeest migration',
+    where: 'Maasai Mara and northern Serengeti',
+    when: 'July to October for river crossings; January to February for calving on the southern plains',
+    note: 'Movement follows rainfall, so exact dates shift each year. River crossings are wildlife events, not scheduled sightings.',
+    imageKey: 'migration',
+  },
+  {
+    species: 'Lions and big cats',
+    where: 'Maasai Mara, Serengeti, Okavango Delta',
+    when: 'June to October, when dry-season game concentrates around water',
+    note: 'Resident prides in the Mara and Serengeti are viewable year-round; the dry months simply make them easier to find.',
+    imageKey: 'mara',
+  },
+  {
+    species: 'Elephants',
+    where: 'Amboseli, Chobe, Kruger',
+    when: 'Year-round in Amboseli; June to October in Chobe as herds gather at the river',
+    note: 'Amboseli offers close viewing of habituated family herds against Kilimanjaro through most of the year.',
+    imageKey: 'amboseli',
+  },
+  {
+    species: 'Mountain gorillas',
+    where: 'Bwindi Impenetrable Forest, Volcanoes National Park',
+    when: 'June to August and December to February, when trails are driest',
+    note: 'Trekking runs all year with permits, but wet-season paths are steep and muddy. Permits should be secured months ahead.',
+    imageKey: 'gorilla',
+  },
+  {
+    species: 'Flamingos',
+    where: 'Lake Nakuru, Lake Natron, Walvis Bay',
+    when: 'November to March in East Africa, following water levels and algae blooms',
+    note: 'Flamingo numbers move with the lakes themselves, so a guide’s current local knowledge matters more than the calendar.',
+    imageKey: 'seasons',
+  },
+  {
+    species: 'Southern right whales',
+    where: 'Hermanus and Walker Bay, South Africa',
+    when: 'June to November, with a peak between September and October',
+    note: 'The bay is one of the few places where whales can be watched from the shoreline rather than a boat.',
+    imageKey: 'capetown',
+  },
+  {
+    species: 'Migratory birds',
+    where: 'East African lakes, wetlands and the Mara',
+    when: 'November to March, when Palearctic migrants arrive',
+    note: 'The green season is the strongest birding window, with residents in breeding plumage alongside the visitors.',
+    imageKey: 'falls',
+  },
+  {
+    species: 'Marine turtles',
+    where: 'Watamu and the Kenyan coast, Maputaland in South Africa',
+    when: 'November to March for nesting; hatchlings emerge roughly two months later',
+    note: 'Nesting is nocturnal and dependent on tides, so sightings are never guaranteed on a fixed date.',
+    imageKey: 'zanzibar',
+  },
+];

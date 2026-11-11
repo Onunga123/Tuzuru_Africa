@@ -1,0 +1,64 @@
+{
+  "primary": [
+    {
+      "label": "Tours",
+      "to": "/tours"
+    },
+    {
+      "label": "Destinations",
+      "to": "/destinations"
+    },
+    {
+      "label": "Experiences",
+      "to": "/experiences"
+    },
+    {
+      "label": "Gallery",
+      "to": "/gallery"
+    },
+    {
+      "label": "Travel Guides",
+      "to": "/travel-guides"
+    },
+    {
+      "label": "About",
+      "to": "/about"
+    }
+  ],
+  "secondary": [
+    {
+      "label": "Contact",
+      "to": "/contact"
+    }
+  ],
+  "mobileExtra": [
+    {
+      "label": "When to Travel",
+      "to": "/when-to-travel"
+    },
+    {
+      "label": "Wildlife Calendar",
+      "to": "/wildlife-calendar"
+    },
+    {
+      "label": "Plan Your Trip",
+      "to": "/plan-your-trip"
+    },
+    {
+      "label": "FAQs",
+      "to": "/faqs"
+    },
+    {
+      "label": "Contact",
+      "to": "/contact"
+    }
+  ],
+  "cta": {
+    "label": "Plan Your Trip",
+    "to": "/plan-your-trip"
+  },
+  "mobileCta": {
+    "label": "Enquire",
+    "to": "/plan-your-trip"
+  }
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "group": "General enquiries",
+    "items": [
+      {
+        "q": "What does Tuzuru Africa do?",
+        "a": "We plan and coordinate travel across East and Southern Africa — safaris, coastal stays, cultural visits and city time — and support you from first enquiry through to your return."
+      },
+      {
+        "q": "How do I start planning a trip?",
+        "a": "Send an enquiry through the Plan Your Trip page with your dates, party and what you would like to see. A specialist will reply with questions and an outline of options."
+      },
+      {
+        "q": "Do you only work with the itineraries shown on the site?",
+        "a": "No. The tours listed are starting points. Most travellers end up with a variation built around their dates, interests and pace."
+      }
+    ]
+  },
+  {
+    "group": "Tours and packages",
+    "items": [
+      {
+        "q": "Can tours be customised?",
+        "a": "Yes. Dates, duration, accommodation level and pace can all be adjusted. Tell us what matters most and we will shape the itinerary around it."
+      },
+      {
+        "q": "Are group departures available?",
+        "a": "Availability of shared departures depends on the season and the itinerary. Ask our team and we will confirm what is running for your dates."
+      },
+      {
+        "q": "How much walking or driving is involved?",
+        "a": "It varies by trip. Safari days usually include two drives of a few hours each; trekking itineraries involve considerably more. Each tour page notes what to expect."
+      }
+    ]
+  },
+  {
+    "group": "Pricing and payments",
+    "items": [
+      {
+        "q": "Why are prices shown as “on request”?",
+        "a": "Because accommodation, park fees and flights change with season and availability. We quote once we know your dates, party size and preferred level of accommodation, so the figure reflects the trip you are actually taking."
+      },
+      {
+        "q": "What is included in a quotation?",
+        "a": "Every quotation lists what is included and excluded — typically accommodation, meals, guides, transfers and park fees in, and international flights, visas, insurance and gratuities out."
+      },
+      {
+        "q": "Which currencies do you quote in?",
+        "a": "Quotations are normally issued in US dollars. Local currencies may be used for services on the ground. Confirm with your specialist when you enquire."
+      }
+    ]
+  },
+  {
+    "group": "Reservations and cancellations",
+    "items": [
+      {
+        "q": "Is my trip confirmed when I submit an enquiry?",
+        "a": "No. An enquiry starts a conversation and is never a reservation. A trip is only confirmed once a written quotation has been accepted and the stated deposit terms have been met."
+      },
+      {
+        "q": "What are your cancellation terms?",
+        "a": "Cancellation terms depend on the lodges and operators involved and are set out in the Booking and Cancellation Policy and in your quotation. Please read them before confirming."
+      },
+      {
+        "q": "Can I change my dates after confirming?",
+        "a": "Amendments are often possible but depend on supplier terms. Tell us as early as possible and we will confirm what can be changed and at what cost."
+      }
+    ]
+  },
+  {
+    "group": "Travel practicalities",
+    "items": [
+      {
+        "q": "Do I need vaccinations or a visa?",
+        "a": "Requirements depend on your nationality and route and can change. We will point you to the current official guidance, but confirmation should always come from the relevant embassy or a travel health professional."
+      },
+      {
+        "q": "Is a safari suitable for children?",
+        "a": "Often, yes — with the right vehicle, pace and accommodation. Some camps set minimum ages, and long drives can be hard for young children. Tell us the ages and we will advise honestly."
+      },
+      {
+        "q": "How do I reach you while travelling?",
+        "a": "You will be given contact details for the team handling your trip, including a WhatsApp number for use on the ground."
+      }
+    ]
+  }
+]

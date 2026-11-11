@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 43% 97%;
+    --foreground: 145 14% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 145 14% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 145 14% 11%;
+    --primary: 149 100% 15%;
+    --primary-foreground: 45 43% 97%;
+    --secondary: 40 30% 92%;
+    --secondary-foreground: 145 14% 11%;
+    --muted: 40 26% 93%;
+    --muted-foreground: 140 6% 34%;
+    --accent: 39 48% 56%;
+    --accent-foreground: 145 20% 10%;
+    --destructive: 0 62% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 18% 85%;
+    --input: 40 18% 82%;
+    --ring: 149 100% 15%;
+    --chart-1: 149 100% 15%;
+    --chart-2: 39 48% 56%;
+    --chart-3: 42 98% 53%;
+    --chart-4: 152 30% 38%;
+    --chart-5: 30 25% 55%;
+    --radius: 0.125rem;
+
+    --font-heading: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --forest: 149 100% 15%;
+    --forest-deep: 152 55% 9%;
+    --forest-soft: 150 22% 26%;
+    --gold: 39 48% 56%;
+    --gold-light: 42 98% 53%;
+    --bronze: 39 51% 39%;
+    --paper: 45 43% 97%;
+    --sand: 40 30% 92%;
+    --ink: 145 14% 11%;
+  }
+
+  .dark {
+    --background: 152 30% 6%;
+    --foreground: 45 43% 95%;
+    --card: 152 25% 9%;
+    --card-foreground: 45 43% 95%;
+    --popover: 152 25% 9%;
+    --popover-foreground: 45 43% 95%;
+    --primary: 42 70% 60%;
+    --primary-foreground: 152 40% 8%;
+    --secondary: 152 18% 14%;
+    --secondary-foreground: 45 43% 95%;
+    --muted: 152 15% 16%;
+    --muted-foreground: 45 12% 68%;
+    --accent: 42 70% 60%;
+    --accent-foreground: 152 40% 8%;
+    --border: 152 14% 20%;
+    --input: 152 14% 20%;
+    --ring: 42 70% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+  }
+
+  ::selection {
+    background: hsl(var(--forest));
+    color: hsl(var(--paper));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--forest));
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-body uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.28em;
+    font-weight: 500;
+  }
+
+  .hairline {
+    height: 1px;
+    background: hsl(var(--border));
+  }
+
+  .link-cta {
+    @apply inline-flex items-center gap-2 font-body uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    color: hsl(var(--forest));
+    border-bottom: 1px solid hsl(var(--gold));
+    padding-bottom: 0.35rem;
+    transition: color 220ms ease, border-color 220ms ease, gap 220ms ease;
+  }
+
+  .link-cta:hover {
+    color: hsl(var(--bronze));
+    border-color: hsl(var(--bronze));
+    gap: 0.75rem;
+  }
+
+  .btn-solid {
+    @apply inline-flex items-center justify-center font-body;
+    background: hsl(var(--forest));
+    color: hsl(var(--paper));
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 1rem 1.9rem;
+    border-radius: 2px;
+    transition: background 240ms ease, transform 240ms ease;
+  }
+
+  .btn-solid:hover {
+    background: hsl(var(--forest-deep));
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center font-body;
+    border: 1px solid hsl(var(--forest) / 0.45);
+    color: hsl(var(--forest));
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 1rem 1.9rem;
+    border-radius: 2px;
+    background: transparent;
+    transition: background 240ms ease, border-color 240ms ease, color 240ms ease;
+  }
+
+  .btn-outline:hover {
+    background: hsl(var(--forest) / 0.06);
+    border-color: hsl(var(--forest));
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center font-body;
+    border: 1px solid hsl(0 0% 100% / 0.5);
+    color: hsl(0 0% 100%);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 1rem 1.9rem;
+    border-radius: 2px;
+    transition: background 240ms ease, border-color 240ms ease;
+  }
+
+  .btn-ghost-light:hover {
+    background: hsl(0 0% 100% / 0.12);
+    border-color: hsl(0 0% 100% / 0.9);
+  }
+
+  .prose-editorial {
+    @apply font-body text-[1.0625rem];
+    color: hsl(var(--ink) / 0.86);
+    line-height: 1.8;
+  }
+
+  .prose-editorial h2 {
+    @apply font-heading mt-12 mb-4 text-[1.75rem];
+    color: hsl(var(--forest));
+    line-height: 1.2;
+  }
+
+  .prose-editorial h3 {
+    @apply font-heading mt-8 mb-3 text-[1.35rem];
+    color: hsl(var(--ink));
+  }
+
+  .prose-editorial p {
+    margin-bottom: 1.25rem;
+  }
+
+  .prose-editorial ul {
+    @apply mb-6 space-y-2 pl-5;
+    list-style: disc;
+  }
+
+  .prose-editorial a {
+    color: hsl(var(--forest));
+    border-bottom: 1px solid hsl(var(--gold));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

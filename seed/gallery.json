@@ -1,0 +1,122 @@
+[
+  {
+    "id": "g1",
+    "imageKey": "migration",
+    "caption": "Herds moving across the Mara–Serengeti ecosystem",
+    "category": "Safari & Wildlife",
+    "destination": "Maasai Mara",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g2",
+    "imageKey": "zanzibar",
+    "caption": "A dhow at rest on the shallows",
+    "category": "Beach & Coast",
+    "destination": "Zanzibar",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g3",
+    "imageKey": "amboseli",
+    "caption": "Elephant families on the Amboseli plains",
+    "category": "Safari & Wildlife",
+    "destination": "Amboseli",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g4",
+    "imageKey": "serengeti",
+    "caption": "First light over the Serengeti",
+    "category": "Nature & Landscapes",
+    "destination": "Serengeti",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g5",
+    "imageKey": "falls",
+    "caption": "Mist rising from the gorge",
+    "category": "Adventure",
+    "destination": "Victoria Falls",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g6",
+    "imageKey": "capetown",
+    "caption": "The mountain from the harbour",
+    "category": "City & Food",
+    "destination": "Cape Town",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g7",
+    "imageKey": "culture",
+    "caption": "Beadwork and cloth in a Maasai homestead",
+    "category": "Culture & Community",
+    "destination": "Maasai Mara",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g8",
+    "imageKey": "gorge",
+    "caption": "The Zambezi above the falls",
+    "category": "Nature & Landscapes",
+    "destination": "Victoria Falls",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g9",
+    "imageKey": "mara",
+    "caption": "Golden grass and acacia in the Mara",
+    "category": "Nature & Landscapes",
+    "destination": "Maasai Mara",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g10",
+    "imageKey": "winelands",
+    "caption": "Vine rows running toward the mountains",
+    "category": "City & Food",
+    "destination": "Cape Town",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g11",
+    "imageKey": "escape",
+    "caption": "Evening palms on the northern coast",
+    "category": "Beach & Coast",
+    "destination": "Zanzibar",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  },
+  {
+    "id": "g12",
+    "imageKey": "door",
+    "caption": "A carved Swahili door, Stone Town",
+    "category": "Culture & Community",
+    "destination": "Zanzibar",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim"
+  }
+]

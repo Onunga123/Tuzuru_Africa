@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "maasai-mara",
+    "name": "Maasai Mara",
+    "country": "Kenya",
+    "region": "Rift Valley",
+    "imageKey": "mara",
+    "tagline": "Big-cat country, open plains and the great migration",
+    "intro": "Kenya’s best-known reserve: rolling grassland, river crossings and resident predators, with conservancies that allow quieter, low-density viewing.",
+    "description": "The Mara is a landscape of long grass and scattered acacia, worked by prides of lion, cheetah on the termite mounds and leopards along the riverline. Between July and October the northern herds move through the ecosystem, and the Mara River becomes the setting for some of the most dramatic crossings on the continent. The surrounding conservancies offer night drives, walking safaris and a lower vehicle density than the reserve itself.",
+    "attractions": [
+      "Mara River crossings",
+      "Musiara and Olare Motorogi conservancies",
+      "Mara Triangle",
+      "Maasai homestead visits"
+    ],
+    "bestTime": "Wildlife viewing is strong year-round. River crossings are most associated with July to October; shorter grass from January to March favours predator viewing.",
+    "travelInfo": "Access is by light aircraft to several airstrips or by road from Nairobi. Park and conservancy fees apply and are usually included in a quoted itinerary. Confirm current entry requirements and fees with our team before travelling.",
+    "related": [
+      "great-migration-safari",
+      "family-safari-mara",
+      "maasai-cultural-immersion"
+    ]
+  },
+  {
+    "slug": "serengeti",
+    "name": "Serengeti",
+    "country": "Tanzania",
+    "region": "Northern Tanzania",
+    "imageKey": "serengeti",
+    "tagline": "The endless plain, and the herds that move across it",
+    "intro": "A vast ecosystem of grassland and kopjes where the migration moves with the rains, and where a balloon at dawn is the quietest way to see it.",
+    "description": "The Serengeti rewards patience. Its central plains hold resident game throughout the year, while the western corridor and northern reaches follow the seasonal movement of wildebeest and zebra. Granite kopjes shelter lion and leopard; the plains open out for cheetah. Camps are spread far apart, which keeps the sense of space intact.",
+    "attractions": [
+      "Seronera Valley",
+      "Grumeti and the western corridor",
+      "Northern Serengeti (Kogatende)",
+      "Dawn balloon flights"
+    ],
+    "bestTime": "Movement follows the rains. The southern calving season is usually associated with the early months, northern river crossings with the middle of the year. Exact timing varies each season.",
+    "travelInfo": "Most itineraries combine the Serengeti with the Ngorongoro Conservation Area. Flights connect to several airstrips, and road transfers are long. Our team will confirm current park fees and entry requirements for your dates.",
+    "related": [
+      "migration-safari",
+      "serengeti-balloon-safari"
+    ]
+  },
+  {
+    "slug": "zanzibar",
+    "name": "Zanzibar",
+    "country": "Tanzania",
+    "region": "Indian Ocean coast",
+    "imageKey": "zanzibar",
+    "tagline": "Swahili heritage, spice farms and a warm turquoise sea",
+    "intro": "Stone Town’s carved doors, spice-growing inland, and long white beaches along the northern and eastern coasts.",
+    "description": "Zanzibar works as well after a safari as it does on its own. Stone Town is a dense, walkable grid of coral-rag buildings, carved timber doors and markets; the coast opens into shallow, warm water and reef-protected swimming. Spice farm visits, dhow sailing and reef snorkelling fill days without hurry.",
+    "attractions": [
+      "Stone Town and its carved doors",
+      "Spice farm visits",
+      "Nungwi and Kendwa beaches",
+      "Mnemba Atoll snorkelling"
+    ],
+    "bestTime": "Generally warm year-round, with a wetter period in the middle of the year and a shorter wet spell early in the year. Conditions vary — we will advise for your dates.",
+    "travelInfo": "Ferries connect Dar es Salaam with Stone Town and flights serve Zanzibar International Airport. A visa or entry permit may be required depending on nationality; confirm current requirements before booking.",
+    "related": [
+      "zanzibar-coast-retreat",
+      "swahili-coast-guide"
+    ]
+  },
+  {
+    "slug": "amboseli",
+    "name": "Amboseli",
+    "country": "Kenya",
+    "region": "Southern Kenya",
+    "imageKey": "amboseli",
+    "tagline": "Elephants, dust and Kilimanjaro on the horizon",
+    "intro": "Wide dust plains below Kilimanjaro, with some of the most closely studied elephant families in Africa.",
+    "description": "Amboseli is a compact park with enormous views. Its elephants are habituated to vehicles, the swamps draw hippo and waterbirds, and on clear mornings the mountain fills the southern horizon. The open terrain makes it a good first safari and a natural pairing with the Mara or Tsavo.",
+    "attractions": [
+      "Elephant families of the swamps",
+      "Kilimanjaro viewpoints",
+      "Observation Hill",
+      "Maasai community land bordering the park"
+    ],
+    "bestTime": "Clear mountain views are most common in the cooler months. Wildlife concentrates around water in the drier periods.",
+    "travelInfo": "Access by road from Nairobi or by light aircraft. Park fees apply. Best views of the mountain are early morning. Confirm current entry requirements with our team.",
+    "related": [
+      "amboseli-elephants"
+    ]
+  },
+  {
+    "slug": "cape-town",
+    "name": "Cape Town & the Winelands",
+    "country": "South Africa",
+    "region": "Western Cape",
+    "imageKey": "capetown",
+    "tagline": "A mountain city, long coast and old vineyards",
+    "intro": "A city wrapped around a mountain, with beaches, gardens and wine country within easy reach.",
+    "description": "Cape Town compresses an unusual amount into a small area: the mountain and its cableway, the peninsula drive, penguin colonies, and the vineyards of Stellenbosch and Franschhoek an hour inland. It works well as the beginning or end of a longer African itinerary, where city days balance time in the bush.",
+    "attractions": [
+      "Table Mountain",
+      "Cape Peninsula and Cape Point",
+      "Stellenbosch and Franschhoek winelands",
+      "V&A Waterfront"
+    ],
+    "bestTime": "Summer months bring long dry days and wind. Shoulder months are quieter. Winter is cooler and wetter but greener and cheaper.",
+    "travelInfo": "Cape Town International Airport is a major gateway. Vehicle hire or a private driver is the usual way to reach the winelands. Confirm current visa and entry rules for your nationality.",
+    "related": [
+      "cape-town-winelands"
+    ]
+  },
+  {
+    "slug": "victoria-falls",
+    "name": "Victoria Falls",
+    "country": "Zambia & Zimbabwe",
+    "region": "Zambezi River",
+    "imageKey": "falls",
+    "tagline": "The smoke that thunders, and a river full of life",
+    "intro": "The largest curtain of falling water in the world, with the Zambezi above and below it and adventure on both banks.",
+    "description": "Victoria Falls is both spectacle and base. The falls themselves can be walked in a morning; the surrounding river offers sunset cruises, rafting below the gorge, and game viewing in the national parks on either side. The Zimbabwean and Zambian banks each have their own character, and crossing between them is straightforward.",
+    "attractions": [
+      "The falls walk and rainforest",
+      "Zambezi sunset cruises",
+      "White-water rafting in the gorge",
+      "Chobe day trips"
+    ],
+    "bestTime": "Water volume peaks after the rains and is at its lowest in the drier months, when the gorge and rapids are more visible. Both seasons have advantages.",
+    "travelInfo": "Access via Victoria Falls Airport (Zimbabwe) or Livingstone (Zambia). Some nationalities need visas for one or both countries; confirm current requirements. Our team will advise on cross-border logistics.",
+    "related": [
+      "victoria-falls-chobe"
+    ]
+  }
+]

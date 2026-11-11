@@ -1,0 +1,64 @@
+{
+  "explore": [
+    {
+      "label": "Tours & Packages",
+      "to": "/tours"
+    },
+    {
+      "label": "Destinations",
+      "to": "/destinations"
+    },
+    {
+      "label": "Experiences",
+      "to": "/experiences"
+    },
+    {
+      "label": "Gallery",
+      "to": "/gallery"
+    },
+    {
+      "label": "Travel Guides",
+      "to": "/travel-guides"
+    },
+    {
+      "label": "When to Travel",
+      "to": "/when-to-travel"
+    },
+    {
+      "label": "Wildlife Calendar",
+      "to": "/wildlife-calendar"
+    }
+  ],
+  "company": [
+    {
+      "label": "About Us",
+      "to": "/about"
+    },
+    {
+      "label": "Plan Your Trip",
+      "to": "/plan-your-trip"
+    },
+    {
+      "label": "FAQs",
+      "to": "/faqs"
+    },
+    {
+      "label": "Contact",
+      "to": "/contact"
+    }
+  ],
+  "legal": [
+    {
+      "label": "Privacy Policy",
+      "to": "/privacy-policy"
+    },
+    {
+      "label": "Terms of Use",
+      "to": "/terms-of-use"
+    },
+    {
+      "label": "Booking & Cancellation",
+      "to": "/booking-policy"
+    }
+  ]
+}

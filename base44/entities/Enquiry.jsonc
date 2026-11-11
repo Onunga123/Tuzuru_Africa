@@ -1,0 +1,152 @@
+{
+  "name": "Enquiry",
+  "type": "object",
+  "properties": {
+    "reference_number": {
+      "type": "string",
+      "description": "Generated reference, e.g. TZ-2026-4F8K"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "destinations": {
+      "type": "string",
+      "description": "Destinations of interest"
+    },
+    "related_tour": {
+      "type": "string",
+      "description": "Tour slug or title the enquiry came from"
+    },
+    "travel_dates": {
+      "type": "string"
+    },
+    "adults": {
+      "type": "number"
+    },
+    "children": {
+      "type": "string",
+      "description": "Number of children and their ages"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "budget": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "accommodation_preference": {
+      "type": "string"
+    },
+    "travel_style": {
+      "type": "string"
+    },
+    "enquiry_type": {
+      "type": "string",
+      "enum": [
+        "General enquiry",
+        "Quotation request",
+        "Custom itinerary",
+        "Booking request"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "yellow",
+        "green"
+      ],
+      "default": "General enquiry"
+    },
+    "contact_preference": {
+      "type": "string",
+      "enum": [
+        "Email",
+        "Phone call",
+        "WhatsApp"
+      ],
+      "enumColors": [
+        "blue",
+        "gray",
+        "green"
+      ],
+      "default": "Email"
+    },
+    "message": {
+      "type": "string"
+    },
+    "privacy_acknowledged": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "under_review",
+        "awaiting_customer",
+        "quotation_sent",
+        "follow_up",
+        "booking_requested",
+        "confirmed",
+        "closed",
+        "unserviceable"
+      ],
+      "enumColors": [
+        "blue",
+        "yellow",
+        "yellow",
+        "purple",
+        "pink",
+        "purple",
+        "green",
+        "gray",
+        "red"
+      ],
+      "default": "new"
+    },
+    "assigned_to": {
+      "type": "string"
+    },
+    "staff_notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "full_name",
+    "email",
+    "country"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

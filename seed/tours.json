@@ -1,0 +1,508 @@
+[
+  {
+    "slug": "great-migration-safari",
+    "title": "Great Migration Safari",
+    "destination": "Maasai Mara & Serengeti",
+    "destinationSlug": "maasai-mara",
+    "duration": "7 days / 6 nights",
+    "days": 7,
+    "imageKey": "migration",
+    "experiences": [
+      "Safari & Wildlife",
+      "Nature & Landscapes"
+    ],
+    "featured": true,
+    "overview": "Follow the herds through both halves of the Mara–Serengeti ecosystem, with time in the conservancies for quieter viewing and night drives.",
+    "highlights": [
+      "Mara River crossing points with a specialist guide",
+      "Private conservancy access away from the main reserve",
+      "Two nights in the northern Serengeti",
+      "Optional dawn balloon flight"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Nairobi to the Mara",
+        "detail": "Light-aircraft transfer to the Mara, afternoon game drive and camp briefing."
+      },
+      {
+        "day": 2,
+        "title": "Mara reserve and river",
+        "detail": "Full day in the reserve, with time at the river crossing points and a picnic lunch on the plains."
+      },
+      {
+        "day": 3,
+        "title": "Conservancy day",
+        "detail": "Morning and late-afternoon drives in the conservancy, with a guided walk where permitted."
+      },
+      {
+        "day": 4,
+        "title": "Cross into the Serengeti",
+        "detail": "Road transfer across the border with game viewing en route, arriving at a northern Serengeti camp."
+      },
+      {
+        "day": 5,
+        "title": "Northern Serengeti",
+        "detail": "Full day following the herds and the river line."
+      },
+      {
+        "day": 6,
+        "title": "Serengeti to Arusha",
+        "detail": "Final morning drive, then a flight to Arusha for an overnight stay."
+      },
+      {
+        "day": 7,
+        "title": "Departure",
+        "detail": "Transfer for your international flight or onward extension to Zanzibar."
+      }
+    ],
+    "accommodation": "Tented safari camps in the Mara conservancy and northern Serengeti, chosen for location and quiet rather than star ratings.",
+    "transport": "Light aircraft and 4×4 safari vehicles with a guide throughout; cross-border road transfer between the Mara and the Serengeti.",
+    "inclusions": [
+      "Accommodation on a full-board basis",
+      "Private 4×4 with guide",
+      "Internal flights and transfers",
+      "Park and conservancy fees as quoted"
+    ],
+    "exclusions": [
+      "International flights",
+      "Visas and travel insurance",
+      "Drinks and personal items",
+      "Gratuities"
+    ],
+    "important": "Migration timing varies with rainfall and cannot be guaranteed on specific dates. River crossings are wildlife events, not scheduled sightings."
+  },
+  {
+    "slug": "serengeti-balloon-safari",
+    "title": "Serengeti Balloon & Plains Safari",
+    "destination": "Central Serengeti",
+    "destinationSlug": "serengeti",
+    "duration": "5 days / 4 nights",
+    "days": 5,
+    "imageKey": "balloon",
+    "experiences": [
+      "Safari & Wildlife",
+      "Adventure"
+    ],
+    "featured": true,
+    "overview": "A short, focused Serengeti trip built around the quietest hour of the day — a dawn balloon over the plains, then game drives through the kopjes.",
+    "highlights": [
+      "Dawn balloon flight with bush breakfast",
+      "Seronera Valley wildlife",
+      "Time among the granite kopjes",
+      "Optional Ngorongoro Crater day"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arusha to the Serengeti",
+        "detail": "Flight to Seronera, afternoon drive and camp arrival."
+      },
+      {
+        "day": 2,
+        "title": "Balloon at dawn",
+        "detail": "Early launch over the plains, landing breakfast, then a slow drive back through the valleys."
+      },
+      {
+        "day": 3,
+        "title": "Full day in the park",
+        "detail": "Morning and afternoon drives across the central plains, with a picnic lunch."
+      },
+      {
+        "day": 4,
+        "title": "Kopjes and cats",
+        "detail": "A day focused on predator territory around the kopjes, with an evening drive."
+      },
+      {
+        "day": 5,
+        "title": "Departure",
+        "detail": "Morning drive and flight out of the Serengeti."
+      }
+    ],
+    "accommodation": "A central Serengeti tented camp with views over the plains.",
+    "transport": "Light aircraft to Seronera and 4×4 game drives throughout.",
+    "inclusions": [
+      "Accommodation and meals as specified",
+      "Balloon flight and breakfast",
+      "Park fees",
+      "Guide and vehicle"
+    ],
+    "exclusions": [
+      "International flights",
+      "Insurance",
+      "Drinks",
+      "Gratuities"
+    ],
+    "important": "Balloon flights are weather-dependent and subject to weight limits and operator availability."
+  },
+  {
+    "slug": "zanzibar-coast-retreat",
+    "title": "Zanzibar Coast Retreat",
+    "destination": "Zanzibar",
+    "destinationSlug": "zanzibar",
+    "duration": "6 days / 5 nights",
+    "days": 6,
+    "imageKey": "escape",
+    "experiences": [
+      "Beach & Coast",
+      "Culture & Community"
+    ],
+    "featured": true,
+    "overview": "Two unhurried days in Stone Town, then the northern coast for warm water, reef snorkelling and slow evenings.",
+    "highlights": [
+      "Guided Stone Town walk",
+      "Spice farm visit",
+      "Dhow sunset sail",
+      "Reef snorkelling at Mnemba Atoll"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrive Stone Town",
+        "detail": "Transfer and an evening walk along the waterfront."
+      },
+      {
+        "day": 2,
+        "title": "Stone Town and spice",
+        "detail": "Morning heritage walk, afternoon spice farm visit."
+      },
+      {
+        "day": 3,
+        "title": "To the north coast",
+        "detail": "Transfer north, with the afternoon free at the beach."
+      },
+      {
+        "day": 4,
+        "title": "Reef day",
+        "detail": "Snorkelling trip to Mnemba Atoll with a dhow sail."
+      },
+      {
+        "day": 5,
+        "title": "Free day",
+        "detail": "Time at the coast, or an optional cooking class in the village."
+      },
+      {
+        "day": 6,
+        "title": "Departure",
+        "detail": "Transfer to the airport."
+      }
+    ],
+    "accommodation": "A restored Stone Town house, then a small beach property on the northern coast.",
+    "transport": "Private transfers; boat for the reef trip.",
+    "inclusions": [
+      "Accommodation and breakfast",
+      "Guided town and spice visits",
+      "Snorkelling excursion",
+      "Airport transfers"
+    ],
+    "exclusions": [
+      "International flights",
+      "Meals not specified",
+      "Marine conservation fees",
+      "Insurance"
+    ],
+    "important": "Reef trips depend on sea conditions. Zanzibar is a conservative coastal society; modest dress away from the beach is appreciated."
+  },
+  {
+    "slug": "gorilla-highlands-trek",
+    "title": "Gorilla Highlands Trek",
+    "destination": "Bwindi, Uganda",
+    "destinationSlug": "bwindi",
+    "duration": "4 days / 3 nights",
+    "days": 4,
+    "imageKey": "gorilla",
+    "experiences": [
+      "Safari & Wildlife",
+      "Nature & Landscapes"
+    ],
+    "overview": "A short, focused trek into the Bwindi forest to spend a permitted hour with a habituated mountain gorilla family.",
+    "highlights": [
+      "Permitted gorilla trekking",
+      "Forest walks with ranger guides",
+      "Community coffee visit",
+      "Highland scenery"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Kampala to the highlands",
+        "detail": "Domestic flight or scenic drive to the Bwindi area."
+      },
+      {
+        "day": 2,
+        "title": "Trek day",
+        "detail": "Early briefing, then trekking with ranger guides; one hour with the gorillas."
+      },
+      {
+        "day": 3,
+        "title": "Forest and community",
+        "detail": "Slower day: forest walk, community coffee project, rest."
+      },
+      {
+        "day": 4,
+        "title": "Departure",
+        "detail": "Return to Kampala or Entebbe."
+      }
+    ],
+    "accommodation": "A forest-edge lodge within reach of the trekking trailheads.",
+    "transport": "Road transfers or domestic flight; trekking on foot with guides.",
+    "inclusions": [
+      "Gorilla permit arrangement",
+      "Accommodation and meals",
+      "Ranger guides",
+      "Transfers"
+    ],
+    "exclusions": [
+      "International flights",
+      "Uganda visa",
+      "Insurance",
+      "Gratuities"
+    ],
+    "important": "Gorilla permits are limited and must be secured well in advance. Trekking involves steep, dense forest and can take several hours."
+  },
+  {
+    "slug": "cape-town-winelands",
+    "title": "Cape Town & Winelands Journey",
+    "destination": "Cape Town, South Africa",
+    "destinationSlug": "cape-town",
+    "duration": "8 days / 7 nights",
+    "days": 8,
+    "imageKey": "winelands",
+    "experiences": [
+      "City & Food",
+      "Nature & Landscapes"
+    ],
+    "overview": "City days, the peninsula drive and three nights among the vineyards, at an unhurried pace.",
+    "highlights": [
+      "Table Mountain at first light",
+      "Cape Peninsula drive",
+      "Three winelands nights",
+      "Private tastings"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival",
+        "detail": "Airport transfer; evening at the waterfront."
+      },
+      {
+        "day": 2,
+        "title": "Mountain and city",
+        "detail": "Cableway or early hike, then the city centre and gardens."
+      },
+      {
+        "day": 3,
+        "title": "Peninsula day",
+        "detail": "Chapman’s Peak, Cape Point and the penguin colony."
+      },
+      {
+        "day": 4,
+        "title": "To the winelands",
+        "detail": "Drive inland; afternoon tasting in Stellenbosch."
+      },
+      {
+        "day": 5,
+        "title": "Vineyards",
+        "detail": "Full day of estate visits in Stellenbosch and Franschhoek."
+      },
+      {
+        "day": 6,
+        "title": "Free day in the valley",
+        "detail": "Time at leisure, or a longer hike."
+      },
+      {
+        "day": 7,
+        "title": "Back to the coast",
+        "detail": "Return to Cape Town for a final night."
+      },
+      {
+        "day": 8,
+        "title": "Departure",
+        "detail": "Transfer to the airport."
+      }
+    ],
+    "accommodation": "A small city hotel, then a guest farm in the winelands.",
+    "transport": "Private driver-guide throughout.",
+    "inclusions": [
+      "Accommodation and breakfast",
+      "Private guide and vehicle",
+      "Selected tastings",
+      "Airport transfers"
+    ],
+    "exclusions": [
+      "International flights",
+      "Most lunches and dinners",
+      "Insurance",
+      "Gratuities"
+    ],
+    "important": "Table Mountain access depends on wind and cloud; the itinerary flexes around conditions."
+  },
+  {
+    "slug": "amboseli-elephants",
+    "title": "Amboseli Elephants & Kilimanjaro",
+    "destination": "Amboseli",
+    "destinationSlug": "amboseli",
+    "duration": "4 days / 3 nights",
+    "days": 4,
+    "imageKey": "amboseli",
+    "experiences": [
+      "Safari & Wildlife",
+      "Nature & Landscapes"
+    ],
+    "overview": "A compact first safari: elephant families in the swamps, wide dust plains and, on clear mornings, the mountain behind them.",
+    "highlights": [
+      "Elephant families at close range",
+      "Sunrise with Kilimanjaro",
+      "Birdlife of the swamps",
+      "Community conservancy visit"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Nairobi to Amboseli",
+        "detail": "Road transfer with the afternoon free, then an evening drive."
+      },
+      {
+        "day": 2,
+        "title": "Full park day",
+        "detail": "Sunrise drive, midday rest, late-afternoon game drive."
+      },
+      {
+        "day": 3,
+        "title": "Swamps and community",
+        "detail": "Morning among the elephants, afternoon conservancy visit."
+      },
+      {
+        "day": 4,
+        "title": "Return",
+        "detail": "Early drive and transfer back to Nairobi."
+      }
+    ],
+    "accommodation": "A lodge or tented camp with a view toward the mountain.",
+    "transport": "Road transfer from Nairobi and 4×4 game drives.",
+    "inclusions": [
+      "Accommodation and full board",
+      "Park fees",
+      "Guide and vehicle"
+    ],
+    "exclusions": [
+      "International flights",
+      "Drinks",
+      "Insurance",
+      "Gratuities"
+    ],
+    "important": "Kilimanjaro is often hidden by cloud; clear views are never guaranteed."
+  },
+  {
+    "slug": "victoria-falls-chobe",
+    "title": "Victoria Falls & Chobe",
+    "destination": "Victoria Falls & Botswana",
+    "destinationSlug": "victoria-falls",
+    "duration": "5 days / 4 nights",
+    "days": 5,
+    "imageKey": "gorge",
+    "experiences": [
+      "Adventure",
+      "Safari & Wildlife"
+    ],
+    "overview": "The falls on foot, the river from a boat, and a day across the border in Chobe where the elephant herds gather.",
+    "highlights": [
+      "Guided falls walk",
+      "Zambezi sunset cruise",
+      "Chobe river game viewing",
+      "Free morning for optional adventure"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrive Victoria Falls",
+        "detail": "Transfer, then a guided walk through the rainforest viewpoints."
+      },
+      {
+        "day": 2,
+        "title": "River day",
+        "detail": "Morning at leisure, sunset cruise on the Zambezi."
+      },
+      {
+        "day": 3,
+        "title": "Chobe",
+        "detail": "Cross into Botswana for a river cruise and game drive."
+      },
+      {
+        "day": 4,
+        "title": "Adventure or rest",
+        "detail": "Optional rafting, helicopter flight or a quiet day."
+      },
+      {
+        "day": 5,
+        "title": "Departure",
+        "detail": "Transfer to the airport."
+      }
+    ],
+    "accommodation": "A small hotel within walking distance of the falls.",
+    "transport": "Transfers and a cross-border day vehicle for Chobe.",
+    "inclusions": [
+      "Accommodation and breakfast",
+      "Falls walk",
+      "Sunset cruise",
+      "Chobe day trip"
+    ],
+    "exclusions": [
+      "Visas",
+      "Optional activities",
+      "Insurance",
+      "Gratuities"
+    ],
+    "important": "Cross-border trips require valid documents for both countries. Water levels affect which activities run."
+  },
+  {
+    "slug": "maasai-cultural-immersion",
+    "title": "Maasai Cultural Immersion",
+    "destination": "Maasai Mara",
+    "destinationSlug": "maasai-mara",
+    "duration": "3 days / 2 nights",
+    "days": 3,
+    "imageKey": "culture",
+    "experiences": [
+      "Culture & Community"
+    ],
+    "overview": "A hosted stay with a Maasai family and community guides, with time in the conservancy rather than the reserve.",
+    "highlights": [
+      "Hosted homestead visit",
+      "Guided walk with community rangers",
+      "Beadwork and craft",
+      "Conservancy game drives"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Into the conservancy",
+        "detail": "Transfer in, welcome, and an evening walk with a community guide."
+      },
+      {
+        "day": 2,
+        "title": "A day hosted",
+        "detail": "Morning with the family, afternoon game drive in the conservancy."
+      },
+      {
+        "day": 3,
+        "title": "Return",
+        "detail": "Final morning, then transfer back to Nairobi."
+      }
+    ],
+    "accommodation": "A community-owned camp in the conservancy.",
+    "transport": "Road transfer and conservancy vehicles.",
+    "inclusions": [
+      "Accommodation and meals",
+      "Community hosting and guide fees",
+      "Conservancy fees"
+    ],
+    "exclusions": [
+      "International flights",
+      "Crafts and purchases",
+      "Insurance",
+      "Gratuities"
+    ],
+    "important": "Visits are arranged with host families and paid for directly. Photography is by permission only."
+  }
+]

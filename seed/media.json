@@ -1,0 +1,321 @@
+[
+  {
+    "key": "hero",
+    "filename": "0e73a17ab_generated_3e4f374b.png",
+    "alt": "Elephants crossing golden savanna grassland at sunset",
+    "subject": "Savannah at dawn, generic",
+    "usedOn": [
+      "Home — hero",
+      "Plan Your Trip — page hero"
+    ],
+    "format": "PNG (delivered as AVIF/WebP via transform pipeline)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "mara",
+    "filename": "8043c2dce_generated_8aec397c.png",
+    "alt": "Acacia trees on golden grass in the Maasai Mara",
+    "subject": "Acacia and golden grass, Maasai Mara",
+    "usedOn": [
+      "Maasai Mara destination card/detail",
+      "Gallery g9",
+      "Great Migration Safari card"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "serengeti",
+    "filename": "acbe4249d_generated_ccdf88e4.png",
+    "alt": "Open Serengeti plains at first light",
+    "subject": "Plains at first light, Serengeti",
+    "usedOn": [
+      "Destinations page",
+      "Serengeti destination detail",
+      "Gallery g4",
+      "404 page background"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "zanzibar",
+    "filename": "91c3c5c8c_generated_a24c6faf.png",
+    "alt": "A dhow on shallow turquoise water off Zanzibar",
+    "subject": "Dhow on shallow water, Zanzibar",
+    "usedOn": [
+      "Gallery — page hero",
+      "Zanzibar destination card/detail",
+      "Gallery g2",
+      "Zanzibar Coast Retreat card"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "capetown",
+    "filename": "5fb9ffea2_generated_c368c047.png",
+    "alt": "Table Mountain seen from the Cape Town harbour",
+    "subject": "Table Mountain from the harbour, Cape Town",
+    "usedOn": [
+      "Contact — page hero",
+      "Cape Town destination card/detail",
+      "Gallery g6"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "amboseli",
+    "filename": "9c1edbb26_generated_a307dc8c.png",
+    "alt": "A family of elephants on the Amboseli plains",
+    "subject": "Elephant family on open plains, Amboseli",
+    "usedOn": [
+      "Amboseli destination card/detail",
+      "Gallery g3",
+      "Wildlife calendar entry"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "falls",
+    "filename": "74036181e_generated_2b9fd5fb.png",
+    "alt": "Mist rising from the gorge at Victoria Falls",
+    "subject": "Mist above a gorge, Victoria Falls",
+    "usedOn": [
+      "Victoria Falls destination card/detail",
+      "Gallery g5",
+      "Wildlife calendar entry"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "migration",
+    "filename": "5fe844ee7_generated_b157c766.png",
+    "alt": "Herds moving across open Mara–Serengeti grassland",
+    "subject": "Herds crossing open grassland, Mara–Serengeti",
+    "usedOn": [
+      "Tours — page hero",
+      "Great Migration Safari card/detail",
+      "Gallery g1",
+      "Wildlife Calendar — page hero"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "balloon",
+    "filename": "3f8baa255_generated_0ec597dd.png",
+    "alt": "A balloon above the Serengeti plains at dawn",
+    "subject": "Balloon over plains, Serengeti",
+    "usedOn": [
+      "Experiences page",
+      "Serengeti Balloon & Plains Safari card/detail"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "gorilla",
+    "filename": "103c1ed18_generated_e4fe55ee.png",
+    "alt": "A mountain gorilla in the forest of Bwindi",
+    "subject": "Mountain gorilla in forest",
+    "usedOn": [
+      "Gorilla trekking experience/tour content",
+      "Wildlife calendar entry"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "winelands",
+    "filename": "31ba32625_generated_459e562f.png",
+    "alt": "Vine rows running toward the Cape mountains",
+    "subject": "Vine rows toward mountains, Cape winelands",
+    "usedOn": [
+      "Cape winelands experience/destination content",
+      "Gallery g10"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "culture",
+    "filename": "a866808d8_generated_4a431223.png",
+    "alt": "Beadwork and cloth at a Maasai homestead",
+    "subject": "Beadwork and cloth, Maasai homestead",
+    "usedOn": [
+      "Culture & community experience/tour content",
+      "Gallery g7"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "escape",
+    "filename": "ee22b0ce3_generated_b79aeeec.png",
+    "alt": "Palms along the northern Zanzibar coast at dusk",
+    "subject": "Palms at dusk, northern coast",
+    "usedOn": [
+      "Coastal escape experience/tour content",
+      "Gallery g11"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "gorge",
+    "filename": "afe7e8b73_generated_bf083df5.png",
+    "alt": "The Zambezi river above Victoria Falls",
+    "subject": "River above falls, Zambezi",
+    "usedOn": [
+      "Booking Policy — page hero",
+      "Gallery g8"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "craft",
+    "filename": "3dac8ab54_generated_f77d1b2d.png",
+    "alt": "Craft and market detail from a coastal town",
+    "subject": "Craft and market detail",
+    "usedOn": [
+      "Privacy Policy — page hero",
+      "About page",
+      "Home — Why Tuzuru section"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "seasons",
+    "filename": "e4732653a_generated_0993b46d.png",
+    "alt": "Dry-season landscape under open sky",
+    "subject": "Landscape in dry season light",
+    "usedOn": [
+      "When to Travel — page hero",
+      "Travel Guides — page hero",
+      "Wildlife calendar entry"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "door",
+    "filename": "20fa20b65_generated_038afe97.png",
+    "alt": "A carved Swahili door in Stone Town",
+    "subject": "Carved Swahili door, Stone Town",
+    "usedOn": [
+      "Terms of Use — page hero",
+      "Gallery g12",
+      "Swahili coast guide"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "vehicle",
+    "filename": "37dacae69_generated_622978e6.png",
+    "alt": "A safari vehicle on a bush track",
+    "subject": "Safari vehicle on track",
+    "usedOn": [
+      "FAQs — page hero",
+      "Tours and packages content"
+    ],
+    "format": "PNG (delivered as AVIF/WebP)",
+    "origin": "owner-approved-interim",
+    "credit": "",
+    "licence": "Owner-approved interim imagery — replacement via Payload CMS (DL-009)",
+    "licenceStatus": "owner-approved-interim",
+    "permissionRef": "DL-009 — owner approval recorded 2026-11-11"
+  },
+  {
+    "key": "logo",
+    "filename": "c105a5db7_tuzuru-africa-logo.jpeg",
+    "alt": "Tuzuru Africa",
+    "subject": "Tuzuru Africa logo",
+    "usedOn": [
+      "Header (BrandMark)",
+      "Footer",
+      "Favicon",
+      "Open Graph image"
+    ],
+    "format": "JPEG",
+    "origin": "owner-supplied",
+    "credit": "Tuzuru Africa",
+    "licence": "Owned by Tuzuru Africa (owner-supplied asset)",
+    "licenceStatus": "permission",
+    "permissionRef": "Provided by the owner in this project; retain the original master file for future formats"
+  }
+]

@@ -1,0 +1,89 @@
+{
+  "name": "TravelSeason",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Season name, e.g. Peak dry season"
+    },
+    "months": {
+      "type": "string",
+      "description": "Months covered, e.g. June \u2013 October"
+    },
+    "description": {
+      "type": "string",
+      "description": "What travel is like in these months"
+    },
+    "highlights": {
+      "type": "string",
+      "description": "Wildlife and landscape highlights of the season"
+    },
+    "weather": {
+      "type": "string",
+      "description": "Typical conditions and temperatures"
+    },
+    "best_for": {
+      "type": "string",
+      "description": "The kind of traveller or trip this season suits"
+    },
+    "crowd_level": {
+      "type": "string",
+      "enum": [
+        "quiet",
+        "moderate",
+        "busy"
+      ],
+      "enumColors": [
+        "green",
+        "yellow",
+        "red"
+      ],
+      "default": "moderate"
+    },
+    "price_band": {
+      "type": "string",
+      "enum": [
+        "Best value",
+        "Mid season",
+        "Premium"
+      ],
+      "enumColors": [
+        "green",
+        "yellow",
+        "purple"
+      ],
+      "default": "Mid season"
+    },
+    "image": {
+      "type": "string",
+      "description": "Season image URL"
+    },
+    "sort_order": {
+      "type": "number",
+      "description": "Order the season appears in, starting at 1"
+    }
+  },
+  "required": [
+    "name",
+    "months",
+    "description"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

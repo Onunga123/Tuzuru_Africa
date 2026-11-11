@@ -1,0 +1,59 @@
+{
+  "whyTuzuru": [
+    {
+      "icon": "Map",
+      "title": "Planning, not guesswork",
+      "body": "A specialist works through dates, distances, seasons and pace with you before anything is booked. The itinerary is built to be travelled, not just read."
+    },
+    {
+      "icon": "Compass",
+      "title": "Guides who know the ground",
+      "body": "Trips are led by guides who have spent seasons in these landscapes and communities, and who can read a day as it unfolds."
+    },
+    {
+      "icon": "HeartHandshake",
+      "title": "Hosted by people, not staged",
+      "body": "Cultural visits are arranged with host families and community guides, on their terms and with a fair share of the value staying local."
+    },
+    {
+      "icon": "BedDouble",
+      "title": "Stays chosen for place",
+      "body": "Lodges and camps are selected for location, quiet and character rather than star ratings, and matched to how you actually like to travel."
+    },
+    {
+      "icon": "LifeBuoy",
+      "title": "Support that answers",
+      "body": "One team from enquiry to return, with a contact you can reach on WhatsApp if plans change on the ground."
+    }
+  ],
+  "discoveryPaths": [
+    {
+      "key": "travel",
+      "label": "Travel",
+      "icon": "Plane",
+      "blurb": "Scheduled safaris, private journeys and tailor-made itineraries.",
+      "to": "/tours"
+    },
+    {
+      "key": "stay",
+      "label": "Stay",
+      "icon": "BedDouble",
+      "blurb": "Lodges, tented camps and coastal retreats matched to your trip.",
+      "to": "/plan-your-trip"
+    },
+    {
+      "key": "explore",
+      "label": "Explore",
+      "icon": "Camera",
+      "blurb": "Parks, coastlines, highlands and cities worth the journey.",
+      "to": "/destinations"
+    },
+    {
+      "key": "experience",
+      "label": "Experience",
+      "icon": "MapPin",
+      "blurb": "Wildlife, culture, food, water and open-sky adventure.",
+      "to": "/experiences"
+    }
+  ]
+}

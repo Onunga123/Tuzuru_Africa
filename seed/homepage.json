@@ -1,0 +1,23 @@
+{
+  "hero": {
+    "eyebrow": "East & Southern Africa · Tailor-made journeys",
+    "headline": "Explore Africa.",
+    "headlineAccent": "Experience More.",
+    "intro": "Safaris, coastlines, culture and open country, planned with specialists who know the ground — and arranged around how you actually want to travel.",
+    "primaryCta": {
+      "label": "Explore Our Tours",
+      "to": "/tours"
+    },
+    "secondaryCta": {
+      "label": "Plan Your Trip",
+      "to": "/plan-your-trip"
+    },
+    "imageKey": "hero"
+  },
+  "cta": {
+    "eyebrow": "Start planning",
+    "title": "Tell us when you can travel, and we will tell you what is possible.",
+    "body": "An enquiry costs nothing and commits you to nothing. Send your dates and a rough idea of the trip, and a specialist will reply with questions and an outline.",
+    "note": "Enquiries are never treated as confirmed bookings."
+  }
+}
