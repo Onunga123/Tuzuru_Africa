@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     experiences: Experience;
+    destinations: Destination;
+    tours: Tour;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
+    destinations: DestinationsSelect<false> | DestinationsSelect<true>;
+    tours: ToursSelect<false> | ToursSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -188,6 +192,123 @@ export interface Experience {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "destinations".
+ */
+export interface Destination {
+  id: number;
+  name: string;
+  /**
+   * URL identifier, lowercase and hyphenated, e.g. masai-mara
+   */
+  slug: string;
+  country?: string | null;
+  region?: string | null;
+  image?: (number | null) | Media;
+  /**
+   * Alt text travels with the record
+   */
+  imageAlt?: string | null;
+  tagline?: string | null;
+  intro?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  attractions?:
+    | {
+        attraction?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  bestTime?: string | null;
+  travelInfo?: string | null;
+  /**
+   * Cross-links to tours for related-tours blocks
+   */
+  relatedTours?: (number | Tour)[] | null;
+  status: 'draft' | 'published';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tours".
+ */
+export interface Tour {
+  id: number;
+  title: string;
+  /**
+   * URL identifier, lowercase and hyphenated, e.g. 7-day-masai-mara-safari
+   */
+  slug: string;
+  /**
+   * Primary destination this tour belongs to
+   */
+  destination?: (number | null) | Destination;
+  /**
+   * Display string kept separately from the relationship
+   */
+  destinationLabel?: string | null;
+  /**
+   * Human-readable duration, e.g. 7 days / 6 nights
+   */
+  duration?: string | null;
+  days?: number | null;
+  image?: (number | null) | Media;
+  imageAlt?: string | null;
+  experiences?: (number | Experience)[] | null;
+  featured?: boolean | null;
+  overview?: string | null;
+  highlights?:
+    | {
+        highlight?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  itinerary?:
+    | {
+        day?: string | null;
+        title?: string | null;
+        detail?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  accommodation?: string | null;
+  transport?: string | null;
+  inclusions?:
+    | {
+        inclusion?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  exclusions?:
+    | {
+        exclusion?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  important?: string | null;
+  /**
+   * No prices exist in the seed data (CONT-02) - tours show a price basis instead
+   */
+  priceBasis?: string | null;
+  status: 'draft' | 'published';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -221,6 +342,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'experiences';
         value: number | Experience;
+      } | null)
+    | ({
+        relationTo: 'destinations';
+        value: number | Destination;
+      } | null)
+    | ({
+        relationTo: 'tours';
+        value: number | Tour;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -317,6 +446,83 @@ export interface ExperiencesSelect<T extends boolean = true> {
   blurb?: T;
   detail?: T;
   sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "destinations_select".
+ */
+export interface DestinationsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  country?: T;
+  region?: T;
+  image?: T;
+  imageAlt?: T;
+  tagline?: T;
+  intro?: T;
+  description?: T;
+  attractions?:
+    | T
+    | {
+        attraction?: T;
+        id?: T;
+      };
+  bestTime?: T;
+  travelInfo?: T;
+  relatedTours?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tours_select".
+ */
+export interface ToursSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  destination?: T;
+  destinationLabel?: T;
+  duration?: T;
+  days?: T;
+  image?: T;
+  imageAlt?: T;
+  experiences?: T;
+  featured?: T;
+  overview?: T;
+  highlights?:
+    | T
+    | {
+        highlight?: T;
+        id?: T;
+      };
+  itinerary?:
+    | T
+    | {
+        day?: T;
+        title?: T;
+        detail?: T;
+        id?: T;
+      };
+  accommodation?: T;
+  transport?: T;
+  inclusions?:
+    | T
+    | {
+        inclusion?: T;
+        id?: T;
+      };
+  exclusions?:
+    | T
+    | {
+        exclusion?: T;
+        id?: T;
+      };
+  important?: T;
+  priceBasis?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }
