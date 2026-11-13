@@ -1,4 +1,4 @@
-import { appParams } from '@/lib/app-params';
+﻿import { appParams } from '@/lib/app-params';
 import { base44 } from '@/api/base44Client';
 
 function authPath(suffix) {
@@ -31,7 +31,7 @@ export async function continueMfa(result, returnTo) {
   const { code } = await post('mfa/handoff', { code_challenge: challenge }, result.mfa_session_token);
   sessionStorage.setItem(`app-mfa-pkce:${appParams.appId}`, verifier);
   const url = new URL('/auth/mfa', window.location.origin);
-  url.search = new URLSearchParams({ app_id: appParams.appId, mfa_code: code, from_url: returnTo });
+  url.search = new URLSearchParams({ app_id: appParams.appId, mfa_code: code, from_url: returnTo }).toString();
   window.location.assign(url.href);
 }
 
@@ -42,10 +42,11 @@ export async function loginWithSocial(provider, returnTo) {
   const info = await response.json();
   if (info.auth_config?.mfa_policy !== 'required') return base44.auth.loginWithProvider(provider, returnTo);
   const url = new URL('/auth/mfa', window.location.origin);
-  url.search = new URLSearchParams({ app_id: appParams.appId, oauth_start: provider, from_url: returnTo });
+  url.search = new URLSearchParams({ app_id: appParams.appId, oauth_start: provider, from_url: returnTo }).toString();
   window.location.assign(url.href);
 }
 
 export function loginWithGoogle(returnTo) {
   return loginWithSocial('google', returnTo);
 }
+

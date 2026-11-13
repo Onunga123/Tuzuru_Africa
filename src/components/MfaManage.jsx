@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Smartphone, MessageSquare } from "lucide-react";
 import MfaMethodSetup from "@/components/MfaMethodSetup";
 import { CodeField, MfaHeader, MfaNotice, ResendLine, useCooldown } from "@/components/MfaParts";
 
+/** @type {Array<{ id: "totp" | "sms", name: string, icon: React.ElementType, description: string }>} */
 const METHODS = [
   { id: "totp", name: "Authenticator app", icon: Smartphone,
     description: "Use an app like Google Authenticator or Duo to generate secure sign-in codes." },
@@ -17,7 +18,7 @@ const SMS_RESEND_SECONDS = 30;
 // The helper also offers session.forgetDevices(code, method) for a "forget remembered devices" control.
 export default function MfaManage({ session, returnTo }) {
   const [status, setStatus] = useState(null);
-  const [view, setView] = useState({ name: "list" });
+  const [view, setView] = useState(/** @type {{ name: "list" } | { name: "setup" | "disable", method: "totp" | "sms" }} */ ({ name: "list" }));
   const [error, setError] = useState(null);
 
   const load = async () => {
@@ -50,7 +51,7 @@ export default function MfaManage({ session, returnTo }) {
                 <div className="flex-1 min-w-[10rem]">
                   <p className="font-medium">{name}</p>
                   <p className="text-sm text-muted-foreground">
-                    {enrolled ? (id === "sms" && status.phone_hint ? `Enabled · ${status.phone_hint}` : "Enabled") : description}
+                    {enrolled ? (id === "sms" && status.phone_hint ? `Enabled Â· ${status.phone_hint}` : "Enabled") : description}
                   </p>
                 </div>
                 {/* On a narrow screen the actions drop below the method instead of squeezing it. */}
@@ -137,3 +138,5 @@ function Disable({ session, method, onDone, onBack }) {
     </div>
   );
 }
+
+

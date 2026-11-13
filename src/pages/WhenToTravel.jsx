@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/common/PageHero';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -12,7 +12,7 @@ import {
 } from '@/lib/cms';
 
 export default function WhenToTravel() {
-  const [seasons, setSeasons] = useState(null);
+  const [seasons, setSeasons] = useState(/** @type {import('../lib/cms/types').TravelSeason[] | null} */ (null));
 
   useEffect(() => {
     let active = true;
@@ -42,8 +42,8 @@ export default function WhenToTravel() {
         <div className="prose-editorial max-w-3xl">
           <p>
             Africa is a continent, not a single climate, so there is no one best month to visit. What matters is
-            matching your dates to the place and the wildlife you most want to see. Broadly speaking, East Africa —
-            Kenya and Tanzania — runs on two rainy periods: the long rains of roughly March to May and the short rains
+            matching your dates to the place and the wildlife you most want to see. Broadly speaking, East Africa â€”
+            Kenya and Tanzania â€” runs on two rainy periods: the long rains of roughly March to May and the short rains
             of November, with long dry spells either side. Southern Africa inverts the pattern, with a dry winter from
             about June to October that concentrates game around water, and a green, wetter summer from November.
           </p>
@@ -51,7 +51,7 @@ export default function WhenToTravel() {
             The dry season is the classic safari window: thin vegetation, animals gathered at rivers, and reliable
             sunshine. It is also the busiest and most expensive. The green season brings dramatic skies, newborn
             animals, migratory birds and significantly lower rates, at the cost of some afternoon rain and a few camps
-            closing for maintenance. Neither is better in the abstract — they simply suit different trips.
+            closing for maintenance. Neither is better in the abstract â€” they simply suit different trips.
           </p>
           <p>
             Because conditions shift year to year, we plan by region rather than by a fixed calendar. A trip that
@@ -67,7 +67,7 @@ export default function WhenToTravel() {
             <SectionHeading
               eyebrow="The four travel windows"
               title="What each season actually looks like"
-              intro="The trade-offs between wildlife, weather, crowds and cost — the same four windows our itineraries are built around."
+              intro="The trade-offs between wildlife, weather, crowds and cost â€” the same four windows our itineraries are built around."
             />
           </Reveal>
 
@@ -106,7 +106,7 @@ export default function WhenToTravel() {
           <SectionHeading
             eyebrow="The calendar"
             title="What happens when, across the year"
-            intro="Four moments travellers most often plan around — useful when your dates are fixed and you want to know what is possible."
+            intro="Four moments travellers most often plan around â€” useful when your dates are fixed and you want to know what is possible."
           />
         </Reveal>
 
@@ -124,7 +124,7 @@ export default function WhenToTravel() {
 
         <div className="mt-14 flex flex-col gap-5 border-t border-border pt-10 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-xl text-[0.9375rem] leading-relaxed text-ink/70">
-            Send us your dates and we will tell you honestly what each region will be like — and whether shifting a
+            Send us your dates and we will tell you honestly what each region will be like â€” and whether shifting a
             week or two would give you a better trip.
           </p>
           <div className="flex flex-wrap gap-3">

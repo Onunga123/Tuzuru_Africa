@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,7 @@ import { MfaHeader, MfaNotice, MfaScreen, useAppInfo } from "@/components/MfaPar
 import { finishSignIn, resumeMfa, signInToManageMfa, signInWithProvider } from "@/lib/authMfaFlow";
 import { safeReturnTo } from "@/lib/authReturnTo";
 
+/** @type {Array<{ id: "google" | "microsoft" | "facebook" | "apple", flag: string, name: string }>} */
 const PROVIDERS = [
   { id: "google", flag: "enable_google_login", name: "Google" },
   { id: "microsoft", flag: "enable_microsoft_login", name: "Microsoft" },
@@ -18,10 +19,20 @@ const PROVIDERS = [
 ];
 
 // /mfa: finishes a Google, Microsoft, Facebook, Apple or SSO sign-in that needs a second step
-// (?mfa_code=…), and opened directly it is the two-factor authentication settings page.
+// (?mfa_code=â€¦), and opened directly it is the two-factor authentication settings page.
+/**
+ * @typedef {Object} MfaChallenge
+ * @property {string} [access_token]
+ * @property {string} [mfa_session_token]
+ * @property {string} [next_step]
+ * @property {string[]} [mfa_methods]
+ * @property {string} [phone_hint]
+ * @property {string} [mfa_management_token]
+ */
+
 export default function Mfa() {
   const returnTo = safeReturnTo();
-  const [challenge, setChallenge] = useState(null);
+  const [challenge, setChallenge] = useState(/** @type {MfaChallenge | null} */ (null));
   const [managing, setManaging] = useState(null);
   const [resuming, setResuming] = useState(true);
   const [error, setError] = useState(null);
@@ -54,6 +65,13 @@ export default function Mfa() {
 }
 
 // Changing two-factor settings starts with a fresh sign-in, then a code from an enrolled method.
+/**
+ * @param {{
+ *   returnTo: string,
+ *   onChallenge: (challenge: MfaChallenge) => void,
+ *   initialError: unknown
+ * }} props
+ */
 function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
   const info = useAppInfo();
   const options = info ? info.auth_config || {} : null;
@@ -62,7 +80,7 @@ function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
   const [error, setError] = useState(initialError);
   const [busy, setBusy] = useState(false);
 
-  const submit = async (e) => {
+  const submit = /** @param {React.FormEvent<HTMLFormElement>} e */ async (e) => {
     e.preventDefault();
     setError(null);
     setBusy(true);
@@ -74,6 +92,7 @@ function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
     }
   };
 
+  /** @param {"google" | "microsoft" | "facebook" | "apple" | "sso"} provider */
   const withProvider = (provider) => signInWithProvider(provider, returnTo, { manage: true }).catch(setError);
   const providers = options ? PROVIDERS.filter((provider) => options[provider.flag] ?? provider.id === "google") : [];
 
@@ -109,7 +128,7 @@ function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
                 <Label htmlFor="mfa-password">Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
-                  <Input id="mfa-password" type="password" autoComplete="current-password" placeholder="••••••••" value={password}
+                  <Input id="mfa-password" type="password" autoComplete="current-password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" value={password}
                     onChange={(e) => setPassword(e.target.value)} className="pl-10 h-12" required />
                 </div>
               </div>
@@ -124,3 +143,4 @@ function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
     </>
   );
 }
+

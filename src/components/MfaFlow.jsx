@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+﻿import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import MfaMethodSetup from "@/components/MfaMethodSetup";
@@ -11,6 +11,7 @@ const SMS_RESEND_SECONDS = 60;
 // shows it with `return <MfaScreen><MfaFlow ... /></MfaScreen>` in place of its own layout.
 // session-record-block keeps the QR code, setup key and codes out of session recordings.
 // onManage(session) is called instead of finishing when the sign-in was for managing factors.
+/** @param {{ challenge: any, returnTo: string, onManage?: (session: any) => void }} props */
 export default function MfaFlow({ challenge, returnTo, onManage }) {
   const session = useMemo(() => mfaSession(challenge), [challenge]);
   const finish = (result) => (result.mfa_management_token && onManage ? onManage(session) : finishSignIn(result.access_token, returnTo));
@@ -97,7 +98,7 @@ function Verify({ session, challenge, returnTo, onDone }) {
         <MfaNotice error={error} />
         <p className="text-sm text-muted-foreground text-center">
           {method === "totp" ? "Enter the code from your authenticator app"
-            : sending && !cooldown ? `Sending code to ${phone}…` : `Enter the code sent to ${phone}`}
+            : sending && !cooldown ? `Sending code to ${phone}â€¦` : `Enter the code sent to ${phone}`}
         </p>
         <CodeField id="mfa-code" value={code} onChange={setCode} onComplete={verify} />
         <RememberDevice checked={remember} onChange={setRemember} />
@@ -118,3 +119,4 @@ function Verify({ session, challenge, returnTo, onDone }) {
     </>
   );
 }
+

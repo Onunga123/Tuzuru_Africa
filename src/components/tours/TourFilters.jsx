@@ -1,9 +1,16 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { destinations, experiences, tourDurationFilters } from '@/lib/cms';
 
+/** @typedef {{ query: string, destination: string, experience: string, duration: string }} TourFiltersState */
+/** @type {TourFiltersState} */
 export const defaultFilters = { query: '', destination: 'any', experience: 'any', duration: 'any' };
 
+/**
+ * @param {import('../../lib/cms/types').Tour[]} tours
+ * @param {TourFiltersState} filters
+ * @returns {import('../../lib/cms/types').Tour[]}
+ */
 export function filterTours(tours, filters) {
   const q = filters.query.trim().toLowerCase();
   return tours.filter((tour) => {

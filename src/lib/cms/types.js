@@ -1,10 +1,10 @@
-// MR-02 — Types shaped on the target Payload CMS collections.
+﻿// MR-02 â€” Types shaped on the target Payload CMS collections.
 // These JSDoc definitions are the contract the migration will implement. Field counts follow
-// the master requirements document; the current-seed → Payload field mapping (and every
+// the master requirements document; the current-seed â†’ Payload field mapping (and every
 // mismatch) is recorded in src/docs/cms/payload-schema-mapping.md.
 
 /**
- * Tour — Payload collection `tours` (21 documented fields).
+ * Tour â€” Payload collection `tours` (21 documented fields).
  * @typedef {Object} Tour
  * @property {string} slug
  * @property {string} title
@@ -13,6 +13,7 @@
  * @property {string} duration
  * @property {number} days
  * @property {string} imageKey         Media key resolved by the media module
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} imageAlt
  * @property {string} imageCredit
  * @property {string[]} experiences
@@ -30,7 +31,7 @@
  */
 
 /**
- * Destination — Payload collection `destinations` (14 documented fields).
+ * Destination â€” Payload collection `destinations` (14 documented fields).
  * @typedef {Object} Destination
  * @property {string} slug
  * @property {string} name
@@ -38,6 +39,7 @@
  * @property {string} region
  * @property {string} imageKey
  * @property {string} imageAlt
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} tagline
  * @property {string} intro
  * @property {string} description
@@ -49,19 +51,20 @@
  */
 
 /**
- * Experience — Payload collection `experiences` (7 documented fields).
+ * Experience â€” Payload collection `experiences` (7 documented fields).
  * @typedef {Object} Experience
  * @property {string} slug
  * @property {string} name
  * @property {string} icon
  * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} blurb
  * @property {string} detail
  * @property {number} sortOrder
  */
 
 /**
- * Offer — Payload collection `offers` (9 documented fields).
+ * Offer â€” Payload collection `offers` (9 documented fields).
  * No offer records exist in the current app; the collection is created at migration.
  * @typedef {Object} Offer
  * @property {string} title
@@ -76,7 +79,7 @@
  */
 
 /**
- * Gallery item — Payload collection `gallery` (8 documented fields).
+ * Gallery item â€” Payload collection `gallery` (8 documented fields).
  * @typedef {Object} GalleryItem
  * @property {string} id
  * @property {string} imageKey
@@ -89,7 +92,7 @@
  */
 
 /**
- * Review — Payload collection `reviews` (6 documented fields).
+ * Review â€” Payload collection `reviews` (6 documented fields).
  * Only authorised, genuine reviews may be published; no records exist today.
  * @typedef {Object} Review
  * @property {string} authorName
@@ -101,12 +104,13 @@
  */
 
 /**
- * Travel guide — Payload collection `travel-guides` (13 documented fields).
+ * Travel guide â€” Payload collection `travel-guides` (13 documented fields).
  * @typedef {Object} TravelGuide
  * @property {string} slug
  * @property {string} title
  * @property {string} category
  * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} imageAlt
  * @property {string} date
  * @property {string} updatedAt
@@ -119,7 +123,34 @@
  */
 
 /**
- * Enquiry — Payload collection `enquiries` (20 fields, 9 statuses).
+ * Travel season — Base44 TravelSeason collection / Payload travel-seasons collection.
+ * @typedef {Object} TravelSeason
+ * @property {string} [id]
+ * @property {string} name
+ * @property {string} months
+ * @property {string} description
+ * @property {string} [highlights]
+ * @property {string} [weather]
+ * @property {string} [best_for]
+ * @property {string} [price_band]
+ * @property {string} [crowd_level]
+ * @property {string} [image]
+ */
+
+/**
+ * Wildlife calendar entry.
+ * @typedef {Object} WildlifeCalendarEntry
+ * @property {string} species
+ * @property {string} where
+ * @property {string} when
+ * @property {string} note
+ * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
+ */
+
+/**
+ * Enquiry â€” Payload collection `enquiries` (20 fields, 9 statuses).
+
  * @typedef {Object} Enquiry
  * @property {string} reference_number
  * @property {string} full_name
@@ -172,3 +203,4 @@ export const COLLECTIONS = [
 ];
 
 export const GLOBALS = ['site-settings', 'homepage', 'navigation', 'footer'];
+

@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import PageHero from '@/components/common/PageHero';
 import Reveal from '@/components/common/Reveal';
 import { experiences, IMAGES, tours } from '@/lib/cms';
 import { Binoculars, Users, Waves, Mountain, Trees, UtensilsCrossed } from 'lucide-react';
 
+/** @type {Record<string, import('lucide-react').LucideIcon>} */
 const ICONS = { Binoculars, Users, Waves, Mountain, Trees, UtensilsCrossed };
 
 export default function Experiences() {

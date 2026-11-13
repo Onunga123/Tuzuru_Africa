@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { signInWithProvider } from "@/lib/authMfaFlow";
@@ -25,7 +25,7 @@ export default function Register() {
   const [mfaChallenge, setMfaChallenge] = useState(null);
   const loginPath = "/login" + (safeReturnTo() !== "/" ? "?returnTo=" + encodeURIComponent(safeReturnTo()) : "");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = /** @param {React.FormEvent<HTMLFormElement>} e */ async (e) => {
     e.preventDefault();
     setError("");
     if (password !== confirmPassword) {
@@ -37,7 +37,7 @@ export default function Register() {
       await base44.auth.register({ email, password });
       setShowOtp(true);
     } catch (err) {
-      setError(err.message || "Registration failed");
+      setError(err instanceof Error ? err.message : "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -57,7 +57,7 @@ export default function Register() {
       }
       window.location.href = safeReturnTo();
     } catch (err) {
-      setError(err.message || "Invalid verification code");
+      setError(err instanceof Error ? err.message : "Invalid verification code");
     } finally {
       setLoading(false);
     }
@@ -72,13 +72,13 @@ export default function Register() {
         description: "Check your email for the new code.",
       });
     } catch (err) {
-      setError(err.message || "Failed to resend code");
+      setError(err instanceof Error ? err.message : "Failed to resend code");
     }
   };
 
   const handleGoogle = async () => {
     try { await signInWithProvider("google", safeReturnTo()); }
-    catch (err) { setError(err.message || 'Unable to sign in with Google'); }
+    catch (err) { setError(err instanceof Error ? err.message : 'Unable to sign in with Google'); }
   };
 
   // The account is verified; the second sign-in step replaces the whole page and finishes signing in.
@@ -205,7 +205,7 @@ export default function Register() {
               id="password"
               type="password"
               autoComplete="new-password"
-              placeholder="••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="pl-10 h-12"
@@ -221,7 +221,7 @@ export default function Register() {
               id="confirm"
               type="password"
               autoComplete="new-password"
-              placeholder="••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="pl-10 h-12"
@@ -243,3 +243,4 @@ export default function Register() {
     </AuthLayout>
   );
 }
+

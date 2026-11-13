@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = /** @param {React.FormEvent<HTMLFormElement>} e */ async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -23,6 +23,10 @@ export default function ForgotPassword() {
       setLoading(false);
       setSent(true);
     }
+  };
+
+  const handleEmailChange = /** @param {React.ChangeEvent<HTMLInputElement>} e */ (e) => {
+    setEmail(e.target.value);
   };
 
   return (
@@ -53,7 +57,7 @@ export default function ForgotPassword() {
                 autoFocus
                 placeholder="you@example.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 className="pl-10 h-12"
                 required
               />

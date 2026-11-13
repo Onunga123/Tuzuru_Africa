@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import { ChevronRight } from 'lucide-react';
 
-export default function PageHero({ image, eyebrow, title, intro, crumbs = [], compact = false }) {
+export default function PageHero({ image, eyebrow, title, intro, crumbs = /** @type {Array<{ label: string, to?: string }>} */ ([]), compact = false }) {
   return (
     <section className="relative">
       <div className={`relative w-full overflow-hidden bg-forest-deep ${compact ? 'min-h-[300px]' : 'min-h-[420px] lg:min-h-[500px]'}`}>

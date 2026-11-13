@@ -1,17 +1,17 @@
-// MR-03 — Enquiry contract. The UI calls submitEnquiry() and nothing else.
+﻿// MR-03 â€” Enquiry contract. The UI calls submitEnquiry() and nothing else.
 //
 // Contract
 //  fields      : the 20 enquiry fields listed in ENQUIRY_FIELDS
 //  statuses    : the 9 enquiry statuses in ENQUIRY_STATUSES (staff-only; never set by the UI)
 //  reference   : /^TZ-\d{4}-[A-Z0-9]{4}$/  e.g. TZ-2026-4F8K
 //  success     : { ok: true, reference, name, received: true }
-//  validation  : rejected with an Error whose `.fieldErrors` maps field → message,
+//  validation  : rejected with an Error whose `.fieldErrors` maps field â†’ message,
 //                and whose `.kind` is 'validation'
 //  failure     : rejected with an Error, `.kind` 'server' | 'network'
 //
 // The preview implementation below calls the interim serverless function. At migration the
 // Payload implementation (persistence, staff notification, email-failure survival) sits behind
-// this same interface — see src/docs/cms/enquiry-contract.md.
+// this same interface â€” see src/docs/cms/enquiry-contract.md.
 import { base44 } from '@/api/base44Client';
 
 export const ENQUIRY_FIELDS = [
@@ -33,7 +33,7 @@ export const ENQUIRY_FIELDS = [
   'contact_preference',
   'message',
   'privacy_acknowledged',
-  'company', // honeypot — never persisted
+  'company', // honeypot â€” never persisted
   'reference_number', // assigned server-side
 ];
 
@@ -83,8 +83,9 @@ export const emptyEnquiry = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 
-/** Client-side validation. Returns a field → message map; empty means valid. */
+/** Client-side validation. Returns a field â†’ message map; empty means valid. */
 export function validateEnquiry(data, { compact = false } = {}) {
+  /** @type {Record<string, string>} */
   const errors = {};
   if (!String(data.full_name || '').trim()) errors.full_name = 'Please tell us your name.';
   if (!String(data.email || '').trim()) errors.email = 'Please add an email address so we can reply.';
@@ -115,21 +116,22 @@ export async function submitEnquiry(data) {
     const message =
       err?.response?.data?.error ||
       'Something went wrong sending your enquiry. Please try again, or contact us on WhatsApp.';
-    const error = new Error(message);
+    const error = /** @type {Error & { kind?: 'network' | 'server' }} */ (new Error(message));
     error.kind = 'network';
     throw error;
   });
 
   const body = response?.data || {};
   if (body.error) {
-    const error = new Error(body.error);
+    const error = /** @type {Error & { kind?: 'network' | 'server' }} */ (new Error(body.error));
     error.kind = 'server';
     throw error;
   }
   if (!body.reference) {
-    const error = new Error('We did not receive a reference for this enquiry. Please try again.');
+    const error = /** @type {Error & { kind?: 'network' | 'server' }} */ (new Error('We did not receive a reference for this enquiry. Please try again.'));
     error.kind = 'server';
     throw error;
   }
   return { ok: true, reference: body.reference, name: body.name || data.full_name, received: true };
 }
+

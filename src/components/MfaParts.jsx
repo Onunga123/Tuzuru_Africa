@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import { Check, ChevronsUpDown, Copy, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -12,11 +12,20 @@ import { safeReturnTo } from "@/lib/authReturnTo";
 
 // Building blocks shared by MfaFlow, MfaMethodSetup and MfaManage.
 
+/**
+ * @typedef {Object} AppInfo
+ * @property {string} [name]
+ * @property {string} [organization_id]
+ * @property {Record<string, boolean | string | undefined>} [auth_config]
+ */
+
+/** @type {Promise<AppInfo> | undefined} */
 let appInfo;
 
 // The app's name and sign-in settings, as login-info reports them.
+/** @returns {AppInfo | null} */
 export function useAppInfo() {
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState(/** @type {AppInfo | null} */ (null));
   useEffect(() => {
     appInfo ||= loadSignInOptions().catch(() => ({}));
     appInfo.then((value) => setInfo(value || {}));
@@ -36,6 +45,7 @@ export function MfaScreen({ children }) {
 
 // An icon, a title and a description, then the step's controls. A title that waits for the app's
 // name is null until it loads, so the right text appears once instead of replacing a placeholder.
+/** @param {{ title: React.ReactNode, description?: React.ReactNode }} props */
 export function MfaHeader({ title, description }) {
   return (
     <div className="flex flex-col items-center text-center mb-6">
@@ -68,6 +78,7 @@ export function CodeField({ id, label = "Enter the 6-digit code", value, onChang
 }
 
 // "Didn't receive a code? Resend", counting down while a resend isn't allowed yet.
+/** @param {{ cooldown: number, disabled?: boolean, onResend: () => void | Promise<void>, error?: string | null }} props */
 export function ResendLine({ cooldown, disabled, onResend, error }) {
   return (
     <div className="space-y-1 text-center">
@@ -96,7 +107,7 @@ const COUNTRY_DIAL_CODES = new Map(
 );
 const DIAL_CODES = [...new Set(COUNTRY_DIAL_CODES.values())].sort((a, b) => Number(a) - Number(b));
 
-// The dial code of the browser's region (en-DE → +49), else +1.
+// The dial code of the browser's region (en-DE â†’ +49), else +1.
 export function defaultDialCode() {
   const region = typeof navigator === "undefined" ? undefined : navigator.language.split("-")[1]?.toLowerCase();
   const dialCode = region && COUNTRY_DIAL_CODES.get(region);
@@ -235,6 +246,7 @@ export function RememberDevice({ checked, onChange }) {
 }
 
 // Seconds left before another text message can be sent.
+/** @returns {[number, React.Dispatch<React.SetStateAction<number>>]} */
 export function useCooldown() {
   const [left, setLeft] = useState(0);
   useEffect(() => {
@@ -249,3 +261,5 @@ export function useCooldown() {
 export function isTouchDevice() {
   return typeof window !== "undefined" && window.matchMedia?.("(pointer: coarse)").matches;
 }
+
+

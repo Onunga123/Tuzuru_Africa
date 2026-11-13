@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { Check, Loader2, AlertCircle } from 'lucide-react';
 import {
@@ -14,6 +14,9 @@ const inputBase =
   'w-full border border-border bg-paper px-4 py-3 font-body text-[0.875rem] text-ink placeholder:text-ink/35 focus:border-forest focus:outline-none';
 const labelBase = 'mb-2 block font-body text-[0.6875rem] uppercase tracking-[0.16em] text-ink/60';
 
+/**
+ * @param {{ label: string, error?: string, children: import('react').ReactNode, htmlFor: string }} props
+ */
 function Field({ label, error, children, htmlFor }) {
   return (
     <div>
@@ -35,7 +38,7 @@ export default function EnquiryForm({ compact = false }) {
     destinations: preset ? `${preset.destination} (${preset.title})` : '',
     related_tour: preset ? preset.title : '',
   }));
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(/** @type {Record<string, string | undefined>} */ ({}));
   const [status, setStatus] = useState('idle');
   const [serverError, setServerError] = useState('');
 
@@ -79,7 +82,7 @@ export default function EnquiryForm({ compact = false }) {
         <div className="flex items-start gap-3 border-l-2 border-gold bg-sand/60 px-5 py-4">
           <Check size={16} className="mt-0.5 shrink-0 text-forest" aria-hidden="true" />
           <p className="text-[0.875rem] leading-relaxed text-ink/75">
-            Enquiring about <strong className="font-semibold text-forest">{preset.title}</strong> — {preset.duration}.
+            Enquiring about <strong className="font-semibold text-forest">{preset.title}</strong> â€” {preset.duration}.
             You can change any of the details below.
           </p>
         </div>
@@ -139,7 +142,7 @@ export default function EnquiryForm({ compact = false }) {
                     className={inputBase}
                     value={form.travel_dates}
                     onChange={set('travel_dates')}
-                    placeholder="e.g. mid-July 2027, or 12–22 August"
+                    placeholder="e.g. mid-July 2027, or 12â€“22 August"
                   />
                 </Field>
               </div>
@@ -208,7 +211,7 @@ export default function EnquiryForm({ compact = false }) {
               </Field>
             </div>
             <p className="text-[0.75rem] leading-relaxed text-ink/50">
-              A “Booking request” starts a conversation. It does not create a reservation — nothing is held or charged
+              A â€œBooking requestâ€ starts a conversation. It does not create a reservation â€” nothing is held or charged
               until you accept a written quotation.
             </p>
           </fieldset>
@@ -229,7 +232,7 @@ export default function EnquiryForm({ compact = false }) {
             placeholder={
               compact
                 ? 'How can we help?'
-                : 'Anything we should know — pace, interests, accessibility needs, special occasions.'
+                : 'Anything we should know â€” pace, interests, accessibility needs, special occasions.'
             }
           />
         </Field>
@@ -286,3 +289,4 @@ export default function EnquiryForm({ compact = false }) {
     </form>
   );
 }
+

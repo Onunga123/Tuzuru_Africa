@@ -1,3 +1,6 @@
+﻿/**
+ * @param {{ title: string, body?: string, action?: import('react').ReactNode }} props
+ */
 export default function EmptyState({ title, body, action }) {
   return (
     <div className="border border-dashed border-border bg-paper px-6 py-16 text-center">

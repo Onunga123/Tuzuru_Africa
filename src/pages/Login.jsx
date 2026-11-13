@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { loginWithMfa } from "@/lib/authMfa";
 import { signInWithProvider } from "@/lib/authMfaFlow";
@@ -22,7 +22,7 @@ export default function Login() {
   // with returnTo so the grant flow can resume). Same-origin paths only.
   const returnTo = safeReturnTo();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = /** @param {React.FormEvent<HTMLFormElement>} e */ async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -34,7 +34,7 @@ export default function Login() {
       }
       window.location.href = returnTo;
     } catch (err) {
-      setError(err.message || "Invalid email or password");
+      setError(err instanceof Error ? err.message : "Invalid email or password");
     } finally {
       setLoading(false);
     }
@@ -42,7 +42,7 @@ export default function Login() {
 
   const handleGoogle = async () => {
     try { await signInWithProvider("google", returnTo); }
-    catch (err) { setError(err.message || 'Unable to sign in with Google'); }
+    catch (err) { setError(err instanceof Error ? err.message : 'Unable to sign in with Google'); }
   };
 
   // The second sign-in step (authenticator app or text message) replaces the whole page.
@@ -120,7 +120,7 @@ export default function Login() {
               id="password"
               type="password"
               autoComplete="current-password"
-              placeholder="••••••••"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="pl-10 h-12"
@@ -142,3 +142,4 @@ export default function Login() {
     </AuthLayout>
   );
 }
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
@@ -12,6 +12,7 @@ const FULL_CODE = "Enter the full 6-digit code";
 
 // Sets up one method: method is "totp" (authenticator app) or "sms" (text messages).
 // onDone receives the server's result once the code is confirmed; onBack leaves the setup.
+/** @param {{ session: any, method: "totp" | "sms", onDone: (result: any) => void, onBack: () => void, signInPath?: string }} props */
 export default function MfaMethodSetup({ session, method, onDone, onBack, signInPath }) {
   const [setup, setSetup] = useState(null);
   const [step, setStep] = useState("start");
@@ -185,3 +186,4 @@ export default function MfaMethodSetup({ session, method, onDone, onBack, signIn
     </div>
   );
 }
+

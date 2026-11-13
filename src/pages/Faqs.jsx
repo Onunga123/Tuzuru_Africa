@@ -1,11 +1,11 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Minus, Plus } from 'lucide-react';
 import PageHero from '@/components/common/PageHero';
 import { faqGroups, IMAGES, site } from '@/lib/cms';
 
 export default function Faqs() {
-  const [open, setOpen] = useState(`${faqGroups[0].group}-0`);
+  const [open, setOpen] = useState(/** @type {string | null} */ (`${faqGroups[0].group}-0`));
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function Faqs() {
         crumbs={[{ label: 'FAQs' }]}
         eyebrow="Help & information"
         title="Questions travellers ask before booking"
-        intro="If something is not covered here, ask us directly — a specialist will answer properly rather than point you at a form."
+        intro="If something is not covered here, ask us directly â€” a specialist will answer properly rather than point you at a form."
         image={IMAGES.vehicle}
         compact
       />
@@ -88,7 +88,7 @@ export default function Faqs() {
               <p className="font-heading text-[1.15rem] text-forest">Still unsure about something?</p>
               <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink/70">
                 Email <a href={`mailto:${site.email}`} className="text-forest underline decoration-gold underline-offset-4">{site.email}</a>{' '}
-                or send an enquiry — you will get a written answer, not a brochure.
+                or send an enquiry â€” you will get a written answer, not a brochure.
               </p>
               <Link to="/contact" className="link-cta mt-5">Contact us</Link>
             </div>
@@ -98,3 +98,4 @@ export default function Faqs() {
     </>
   );
 }
+

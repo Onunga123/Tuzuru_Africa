@@ -1,4 +1,4 @@
-import { base44 } from '@/api/base44Client';
+﻿import { base44 } from '@/api/base44Client';
 import { appParams } from '@/lib/app-params';
 
 // The app's own MFA: sign-in challenge, enrollment and factor management, against the app's
@@ -25,6 +25,10 @@ function authPath(suffix) {
   return `/api/apps/${appParams.appId}/auth/${suffix}`;
 }
 
+/**
+ * @param {string} suffix
+ * @param {{ method?: string, body?: unknown, token?: string, headers?: Record<string, string> }} [options]
+ */
 async function request(suffix, { method = 'POST', body, token, headers } = {}) {
   const response = await fetch(authPath(suffix), {
     method,
@@ -72,9 +76,21 @@ export function signInToManageMfa(email, password) {
   return request('login', { body: { email, password }, headers: { 'X-App-Mfa-Action': 'manage' } });
 }
 
+/**
+ * @typedef {Object} MfaResumeResult
+ * @property {string} [access_token]
+ * @property {string} [mfa_session_token]
+ * @property {string} [next_step]
+ * @property {string[]} [mfa_methods]
+ * @property {string} [phone_hint]
+ * @property {string} [mfa_management_token]
+ */
+
+/** @type {Promise<MfaResumeResult | null> | undefined} */
 let resumed;
 
-// Picks up the challenge a social or SSO sign-in sends back to /mfa?mfa_code=…
+// Picks up the challenge a social or SSO sign-in sends back to /mfa?mfa_code=â€¦
+/** @returns {Promise<MfaResumeResult | null>} */
 export function resumeMfa() {
   // The code works once, so a second call (e.g. React StrictMode) reuses the first exchange.
   resumed ||= (async () => {
@@ -113,7 +129,7 @@ export async function signInWithProvider(provider, returnTo, { manage = false } 
   if (isInAppBrowser()) {
     // In-app browsers hand sign-in to the system browser through the platform's MFA page.
     const url = new URL('/auth/mfa', window.location.origin);
-    url.search = new URLSearchParams({ app_id: appParams.appId, oauth_start: provider, from_url: returnTo, ...(manage ? { security: '1' } : {}) });
+    url.search = new URLSearchParams({ app_id: appParams.appId, oauth_start: provider, from_url: returnTo, ...(manage ? { security: '1' } : {}) }).toString();
     window.location.assign(url.href);
     return;
   }
@@ -131,7 +147,7 @@ export async function signInWithProvider(provider, returnTo, { manage = false } 
     ...(manage ? { app_mfa_action: 'manage' } : {}),
     app_mfa_code_challenge: challenge,
     app_mfa_return: '/mfa',
-  });
+  }).toString();
   window.location.assign(url.href);
 }
 
@@ -144,3 +160,6 @@ export function finishSignIn(accessToken, returnTo) {
   }
   window.location.href = returnTo;
 }
+
+
+
