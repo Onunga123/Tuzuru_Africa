@@ -72,6 +72,8 @@ export interface Config {
     experiences: Experience;
     destinations: Destination;
     tours: Tour;
+    gallery: Gallery;
+    guides: Guide;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +86,8 @@ export interface Config {
     experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
     destinations: DestinationsSelect<false> | DestinationsSelect<true>;
     tours: ToursSelect<false> | ToursSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
+    guides: GuidesSelect<false> | GuidesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -309,6 +313,87 @@ export interface Tour {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: number;
+  image: number | Media;
+  /**
+   * Alt text travels with the record
+   */
+  alt?: string | null;
+  caption?: string | null;
+  category:
+    'Safari & Wildlife' | 'Beach & Coast' | 'Nature & Landscapes' | 'Adventure' | 'City & Food' | 'Culture & Community';
+  destination?: (number | null) | Destination;
+  credit?: string | null;
+  /**
+   * Imagery licence governance (DL-009) - no default by design
+   */
+  licenceStatus: 'owner-approved-interim' | 'licensed' | 'permission';
+  /**
+   * Licence/permission note kept with the record (DL-009)
+   */
+  permission?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides".
+ */
+export interface Guide {
+  id: number;
+  /**
+   * Frontend route identifier - /travel-guides/:slug
+   */
+  slug: string;
+  title: string;
+  category: 'Seasonal planning' | 'Destinations' | 'Practical advice';
+  image: number | Media;
+  /**
+   * Alt text travels with the record
+   */
+  imageAlt?: string | null;
+  /**
+   * Editorial date shown on the guide page
+   */
+  date: string;
+  /**
+   * PAGE-19 editorial last-updated date - mapping lists guide updatedAt
+   */
+  lastUpdated?: string | null;
+  /**
+   * Mapping: text now, computed later - decision pending
+   */
+  readingTime?: string | null;
+  excerpt: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * PAGE-19 sharing image - falls back to image
+   */
+  socialImage?: (number | null) | Media;
+  relatedDestinations?: (number | Destination)[] | null;
+  status: 'draft' | 'published';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -350,6 +435,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tours';
         value: number | Tour;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: number | Gallery;
+      } | null)
+    | ({
+        relationTo: 'guides';
+        value: number | Guide;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -522,6 +615,43 @@ export interface ToursSelect<T extends boolean = true> {
       };
   important?: T;
   priceBasis?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  image?: T;
+  alt?: T;
+  caption?: T;
+  category?: T;
+  destination?: T;
+  credit?: T;
+  licenceStatus?: T;
+  permission?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides_select".
+ */
+export interface GuidesSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  category?: T;
+  image?: T;
+  imageAlt?: T;
+  date?: T;
+  lastUpdated?: T;
+  readingTime?: T;
+  excerpt?: T;
+  content?: T;
+  socialImage?: T;
+  relatedDestinations?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
