@@ -74,6 +74,9 @@ export interface Config {
     tours: Tour;
     gallery: Gallery;
     guides: Guide;
+    enquiries: Enquiry;
+    offers: Offer;
+    reviews: Review;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +91,9 @@ export interface Config {
     tours: ToursSelect<false> | ToursSelect<true>;
     gallery: GallerySelect<false> | GallerySelect<true>;
     guides: GuidesSelect<false> | GuidesSelect<true>;
+    enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
+    offers: OffersSelect<false> | OffersSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -394,6 +400,100 @@ export interface Guide {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries".
+ */
+export interface Enquiry {
+  id: number;
+  reference_number?: string | null;
+  status?:
+    | (
+        | 'new'
+        | 'under_review'
+        | 'awaiting_customer'
+        | 'quotation_sent'
+        | 'follow_up'
+        | 'booking_requested'
+        | 'confirmed'
+        | 'closed'
+        | 'unserviceable'
+      )
+    | null;
+  assigned_to?: string | null;
+  staff_notes?: string | null;
+  full_name: string;
+  email: string;
+  phone?: string | null;
+  country: string;
+  destinations?: string | null;
+  /**
+   * Tour slug or title the enquiry came from. Kept as text per MR-03 contract (form submits a slug, not an id).
+   */
+  related_tour?: string | null;
+  travel_dates?: string | null;
+  adults?: number | null;
+  /**
+   * Number of children and their ages
+   */
+  children?: string | null;
+  duration?: string | null;
+  budget?: string | null;
+  currency?: ('USD' | 'EUR' | 'GBP' | 'KES' | 'ZAR') | null;
+  accommodation_preference?: string | null;
+  travel_style?: string | null;
+  enquiry_type?: ('General enquiry' | 'Quotation request' | 'Custom itinerary' | 'Booking request') | null;
+  contact_preference?: ('Email' | 'Phone call' | 'WhatsApp') | null;
+  message?: string | null;
+  /**
+   * Must be true for the enquiry to be accepted.
+   */
+  privacy_acknowledged: boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers".
+ */
+export interface Offer {
+  id: number;
+  title: string;
+  description?: string | null;
+  /**
+   * CONT-02: default "On request" - no price invented without a source.
+   */
+  priceBasis?: ('On request' | 'Fixed' | 'From') | null;
+  inclusions?: string | null;
+  validFrom?: string | null;
+  validTo?: string | null;
+  image?: (number | null) | Media;
+  status?: ('draft' | 'published') | null;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: number;
+  authorName: string;
+  quote: string;
+  /**
+   * The tour this review is about (optional).
+   */
+  tripReference?: (number | null) | Tour;
+  /**
+   * Consent record reference. CONT-02: no review may be invented without consent.
+   */
+  consentRef: string;
+  publishedAt?: string | null;
+  published?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -443,6 +543,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'guides';
         value: number | Guide;
+      } | null)
+    | ({
+        relationTo: 'enquiries';
+        value: number | Enquiry;
+      } | null)
+    | ({
+        relationTo: 'offers';
+        value: number | Offer;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: number | Review;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -653,6 +765,67 @@ export interface GuidesSelect<T extends boolean = true> {
   socialImage?: T;
   relatedDestinations?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries_select".
+ */
+export interface EnquiriesSelect<T extends boolean = true> {
+  reference_number?: T;
+  status?: T;
+  assigned_to?: T;
+  staff_notes?: T;
+  full_name?: T;
+  email?: T;
+  phone?: T;
+  country?: T;
+  destinations?: T;
+  related_tour?: T;
+  travel_dates?: T;
+  adults?: T;
+  children?: T;
+  duration?: T;
+  budget?: T;
+  currency?: T;
+  accommodation_preference?: T;
+  travel_style?: T;
+  enquiry_type?: T;
+  contact_preference?: T;
+  message?: T;
+  privacy_acknowledged?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers_select".
+ */
+export interface OffersSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  priceBasis?: T;
+  inclusions?: T;
+  validFrom?: T;
+  validTo?: T;
+  image?: T;
+  status?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  authorName?: T;
+  quote?: T;
+  tripReference?: T;
+  consentRef?: T;
+  publishedAt?: T;
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }

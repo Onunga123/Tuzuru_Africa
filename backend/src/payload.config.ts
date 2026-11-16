@@ -12,6 +12,9 @@ import { Destinations } from './collections/Destinations'
 import { Tours } from './collections/Tours'
 import { Gallery } from './collections/Gallery'
 import { Guides } from './collections/Guides'
+import { Enquiries } from './collections/Enquiries'
+import { Offers } from './collections/Offers'
+import { Reviews } from './collections/Reviews'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Experiences, Destinations, Tours, Gallery, Guides],
+  collections: [Users, Media, Experiences, Destinations, Tours, Gallery, Guides, Enquiries, Offers, Reviews],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
