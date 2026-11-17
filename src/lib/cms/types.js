@@ -12,7 +12,8 @@
  * @property {string} destinationSlug
  * @property {string} duration
  * @property {number} days
- * @property {string} imageKey         Media key resolved by the media module
+ * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()         Media key resolved by the media module
  * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} imageAlt
  * @property {string} imageCredit
@@ -38,6 +39,7 @@
  * @property {string} country
  * @property {string} region
  * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} imageAlt
  * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} tagline
@@ -58,6 +60,7 @@
  * @property {string} icon
  * @property {string} imageKey
  * @property {string} [image] Resolved image URL attached by withMedia()
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} blurb
  * @property {string} detail
  * @property {number} sortOrder
@@ -74,6 +77,7 @@
  * @property {string} validFrom
  * @property {string} validTo
  * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} status
  * @property {number} sortOrder
  */
@@ -83,6 +87,7 @@
  * @typedef {Object} GalleryItem
  * @property {string} id
  * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} alt
  * @property {string} caption
  * @property {string} category
@@ -110,6 +115,7 @@
  * @property {string} title
  * @property {string} category
  * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} imageAlt
  * @property {string} date
@@ -145,6 +151,7 @@
  * @property {string} when
  * @property {string} note
  * @property {string} imageKey
+ * @property {string} [image] Resolved image URL attached by withMedia()
  * @property {string} [image] Resolved image URL attached by withMedia()
  */
 
@@ -203,4 +210,6 @@ export const COLLECTIONS = [
 ];
 
 export const GLOBALS = ['site-settings', 'homepage', 'navigation', 'footer'];
+
+
 

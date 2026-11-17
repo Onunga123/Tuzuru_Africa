@@ -42,8 +42,14 @@ export default function EnquiryForm({ compact = false }) {
   const [status, setStatus] = useState('idle');
   const [serverError, setServerError] = useState('');
 
+  /**
+   * @param {keyof typeof emptyEnquiry} key
+   * @returns {(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void}
+   */
   const set = (key) => (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const value = e.currentTarget instanceof HTMLInputElement && e.currentTarget.type === 'checkbox'
+      ? e.currentTarget.checked
+      : e.currentTarget.value;
     setForm((f) => ({ ...f, [key]: value }));
     setErrors((prev) => ({ ...prev, [key]: undefined }));
   };
@@ -54,7 +60,7 @@ export default function EnquiryForm({ compact = false }) {
     return Object.keys(next).length === 0;
   };
 
-  const submit = async (e) => {
+  const submit = /** @param {React.FormEvent<HTMLFormElement>} e */ async (e) => {
     e.preventDefault();
     setServerError('');
     if (!validate()) {
@@ -69,7 +75,7 @@ export default function EnquiryForm({ compact = false }) {
         state: { reference: result.reference, name: result.name, destinations: form.destinations },
       });
     } catch (err) {
-      setServerError(err?.message || 'Something went wrong sending your enquiry. Please try again, or contact us on WhatsApp.');
+      setServerError(err instanceof Error ? err.message : 'Something went wrong sending your enquiry. Please try again, or contact us on WhatsApp.');
       setStatus('idle');
     }
   };
@@ -289,4 +295,5 @@ export default function EnquiryForm({ compact = false }) {
     </form>
   );
 }
+
 

@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 
+/**
+ * @param {{
+ *   destination: import('../../lib/cms/types').Destination,
+ *   tall?: boolean
+ * }} props
+ */
 export default function DestinationCard({ destination, tall = false }) {
   return (
     <article className="group relative">

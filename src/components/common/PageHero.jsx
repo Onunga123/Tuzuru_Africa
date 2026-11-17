@@ -2,6 +2,16 @@
 import { Image } from '@/components/ui/image';
 import { ChevronRight } from 'lucide-react';
 
+/**
+ * @param {{
+ *   image?: string,
+ *   eyebrow?: string,
+ *   title: string,
+ *   intro?: string,
+ *   crumbs?: Array<{ label: string, to?: string }>,
+ *   compact?: boolean
+ * }} props
+ */
 export default function PageHero({ image, eyebrow, title, intro, crumbs = /** @type {Array<{ label: string, to?: string }>} */ ([]), compact = false }) {
   return (
     <section className="relative">
@@ -38,3 +48,4 @@ export default function PageHero({ image, eyebrow, title, intro, crumbs = /** @t
     </section>
   );
 }
+

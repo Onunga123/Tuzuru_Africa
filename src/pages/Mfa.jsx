@@ -35,7 +35,7 @@ export default function Mfa() {
   const [challenge, setChallenge] = useState(/** @type {MfaChallenge | null} */ (null));
   const [managing, setManaging] = useState(null);
   const [resuming, setResuming] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(/** @type {(Error & { mustSignInAgain?: boolean }) | null} */ (null));
 
   useEffect(() => {
     resumeMfa()
@@ -45,7 +45,7 @@ export default function Mfa() {
         if (result) setChallenge(result);
         setResuming(false);
       })
-      .catch((err) => { setError(err); setResuming(false); });
+      .catch((err) => { setError(err instanceof Error ? err : new Error(String(err))); setResuming(false); });
   }, []);
 
   if (resuming) {
@@ -69,7 +69,7 @@ export default function Mfa() {
  * @param {{
  *   returnTo: string,
  *   onChallenge: (challenge: MfaChallenge) => void,
- *   initialError: unknown
+ *   initialError: (Error & { mustSignInAgain?: boolean }) | null
  * }} props
  */
 function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
@@ -87,13 +87,13 @@ function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
     try {
       onChallenge(await signInToManageMfa(email, password));
     } catch (err) {
-      setError(err);
+      setError(err instanceof Error ? err : new Error(String(err)));
       setBusy(false);
     }
   };
 
   /** @param {"google" | "microsoft" | "facebook" | "apple" | "sso"} provider */
-  const withProvider = (provider) => signInWithProvider(provider, returnTo, { manage: true }).catch(setError);
+  const withProvider = (provider) => signInWithProvider(provider, returnTo, { manage: true }).catch((err) => setError(err instanceof Error ? err : new Error(String(err))));
   const providers = options ? PROVIDERS.filter((provider) => options[provider.flag] ?? provider.id === "google") : [];
 
   return (
@@ -143,4 +143,5 @@ function ConfirmIdentity({ returnTo, onChallenge, initialError }) {
     </>
   );
 }
+
 

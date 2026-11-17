@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, X } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 
+/** @param {{ items: import('../../lib/cms/types').GalleryItem[] }} props */
 export default function GalleryGrid({ items }) {
-  const [index, setIndex] = useState(null);
+  const [index, setIndex] = useState(/** @type {number | null} */ (null));
   const active = index === null ? null : items[index];
 
   useEffect(() => {
     if (index === null) return undefined;
-    const onKey = (e) => {
+    const onKey = (/** @type {KeyboardEvent} */ e) => {
       if (e.key === 'Escape') setIndex(null);
-      if (e.key === 'ArrowRight') setIndex((i) => (i + 1) % items.length);
-      if (e.key === 'ArrowLeft') setIndex((i) => (i - 1 + items.length) % items.length);
+      if (e.key === 'ArrowRight') setIndex((i) => ((i ?? 0) + 1) % items.length);
+      if (e.key === 'ArrowLeft') setIndex((i) => ((i ?? 0) - 1 + items.length) % items.length);
     };
     window.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
@@ -70,7 +71,7 @@ export default function GalleryGrid({ items }) {
         >
           <div className="flex items-center justify-between">
             <p className="font-body text-[0.6875rem] uppercase tracking-[0.2em] text-paper/60">
-              {index + 1} / {items.length} · {active.destination}
+              {(index ?? 0) + 1} / {items.length} Â· {active.destination}
             </p>
             <button
               type="button"
@@ -91,7 +92,7 @@ export default function GalleryGrid({ items }) {
           <div className="flex items-center justify-between gap-6">
             <button
               type="button"
-              onClick={() => setIndex((i) => (i - 1 + items.length) % items.length)}
+              onClick={() => setIndex((i) => ((i ?? 0) - 1 + items.length) % items.length)}
               className="inline-flex items-center gap-2 font-body text-[0.6875rem] uppercase tracking-[0.18em] text-paper/80 hover:text-paper"
             >
               <ArrowLeft size={14} /> Previous
@@ -106,7 +107,7 @@ export default function GalleryGrid({ items }) {
             </div>
             <button
               type="button"
-              onClick={() => setIndex((i) => (i + 1) % items.length)}
+              onClick={() => setIndex((i) => ((i ?? 0) + 1) % items.length)}
               className="inline-flex items-center gap-2 font-body text-[0.6875rem] uppercase tracking-[0.18em] text-paper/80 hover:text-paper"
             >
               Next <ArrowRight size={14} />
@@ -123,3 +124,5 @@ export default function GalleryGrid({ items }) {
     </>
   );
 }
+
+

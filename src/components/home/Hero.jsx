@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Image } from '@/components/ui/image';
 import { site, discoveryPaths, homepage, getImage } from '@/lib/cms';
 import { Plane, BedDouble, Camera, MapPin } from 'lucide-react';
 
-const ICONS = { Plane, BedDouble, Camera, MapPin };
+const ICONS = /** @type {Record<string, import('lucide-react').LucideIcon>} */ ({ Plane, BedDouble, Camera, MapPin });
 
 export default function Hero() {
   const hero = homepage.hero;
@@ -58,7 +58,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Travel · Stay · Explore · Experience */}
+      {/* Travel Â· Stay Â· Explore Â· Experience */}
       <div className="relative z-10 bg-forest">
         <div className="mx-auto grid max-w-[1400px] grid-cols-2 divide-paper/15 px-5 sm:px-8 lg:grid-cols-4 lg:divide-x lg:px-12">
           {discoveryPaths.map((path) => {

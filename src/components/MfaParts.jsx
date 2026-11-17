@@ -35,6 +35,7 @@ export function useAppInfo() {
 
 // A whole page holding one MFA card. MfaFlow and MfaManage are card content, so a page that
 // shows them returns <MfaScreen> in place of its own layout instead of nesting them in its card.
+/** @param {{ children: React.ReactNode }} props */
 export function MfaScreen({ children }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4 py-8">
@@ -60,6 +61,16 @@ export function MfaHeader({ title, description }) {
 
 // Six digits. Like the built-in code box, any change that leaves six digits, a paste over a full code
 // included, and the Enter key both call onComplete with the code as it stands.
+/**
+ * @param {{
+ *   id: string,
+ *   label?: string,
+ *   value: string,
+ *   onChange: (value: string) => void,
+ *   onComplete?: (code: string) => void,
+ *   hasError?: boolean
+ * }} props
+ */
 export function CodeField({ id, label = "Enter the 6-digit code", value, onChange, onComplete, hasError = false }) {
   return (
     <div className="space-y-2">
@@ -117,22 +128,25 @@ export function defaultDialCode() {
 // The built-in screen asks libphonenumber whether the number is valid for its country. Here only the
 // length E.164 allows is checked (the shortest real numbers have 7 digits in all, the longest 15); the
 // server runs the full per-country check before any text is sent, and answers with the same message.
+/** @param {string} fullPhone */
 export function isPlausiblePhone(fullPhone) {
   const digits = fullPhone.replace(/\D/g, "");
   return digits.length >= 7 && digits.length <= 15;
 }
 
+/** @param {string} code @param {string} search */
 const matchesSearch = (code, search) => {
   const normalized = search.replace(/\+/g, "");
   return normalized === "" || code.startsWith(normalized);
 };
 
 // A searchable list of dial codes. Typing narrows it, and closing it with one match left picks that one.
+/** @param {{ value: string, onChange: (value: string) => void }} props */
 function DialCodePicker({ value, onChange }) {
   const [open, setOpen] = useState(false);
   const search = useRef("");
 
-  const handleOpenChange = (next) => {
+  const handleOpenChange = (/** @type {boolean} */ next) => {
     if (!next && search.current) {
       const matches = DIAL_CODES.filter((code) => matchesSearch(code, search.current));
       if (matches.length === 1) onChange(`+${matches[0]}`);
@@ -172,6 +186,16 @@ function DialCodePicker({ value, onChange }) {
 
 // Dial code picker plus the number (digits only, 15 at most). Once 4 digits are in, a number that can't
 // be real is flagged as you type; `error` (from a failed send) takes the place of that message.
+/**
+ * @param {{
+ *   countryCode: string,
+ *   onCountryCodeChange: (code: string) => void,
+ *   phoneNumber: string,
+ *   onPhoneNumberChange: (number: string) => void,
+ *   error?: string | null,
+ *   onSubmit?: () => void
+ * }} props
+ */
 export function PhoneField({ countryCode, onCountryCodeChange, phoneNumber, onPhoneNumberChange, error, onSubmit }) {
   const [touched, setTouched] = useState(false);
   const invalid = touched && phoneNumber.length >= 4 && !isPlausiblePhone(`${countryCode}${phoneNumber}`);
@@ -194,6 +218,7 @@ export function PhoneField({ countryCode, onCountryCodeChange, phoneNumber, onPh
 }
 
 // Copies the setup key: an icon next to the key, or with `wide` the full-width "Copy key" button used on phones.
+/** @param {{ text: string, wide?: boolean }} props */
 export function CopyKeyButton({ text, wide = false }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
@@ -219,6 +244,7 @@ export function CopyKeyButton({ text, wide = false }) {
 // An expired or used-up challenge can't be retried: send the user back through sign-in
 // (signInPath "/mfa" for factor management, whose sign-in lives on that page). The server's
 // wording for that case already says "sign in again", so it is replaced, not repeated.
+/** @param {{ error?: (Error & { mustSignInAgain?: boolean }) | null, signInPath?: string }} props */
 export function MfaNotice({ error, signInPath = "/login" }) {
   if (!error) return null;
   const returnTo = safeReturnTo();
@@ -236,6 +262,7 @@ export function MfaNotice({ error, signInPath = "/login" }) {
   );
 }
 
+/** @param {{ checked: boolean, onChange: (checked: boolean) => void }} props */
 export function RememberDevice({ checked, onChange }) {
   return (
     <label className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -261,5 +288,7 @@ export function useCooldown() {
 export function isTouchDevice() {
   return typeof window !== "undefined" && window.matchMedia?.("(pointer: coarse)").matches;
 }
+
+
 
 

@@ -5,9 +5,10 @@ import { appParams } from '@/lib/app-params';
 // /api/apps/<id>/auth/mfa routes. Credentials stay in memory, never in the URL or storage.
 
 const PKCE_KEY = () => `app-mfa-pkce:${appParams.appId}`;
-const encode = bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const encode = /** @type {(bytes: Uint8Array) => string} */ (bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
 
 export class MfaError extends Error {
+  /** @param {string} message @param {number} status @param {number | null} retryAfter */
   constructor(message, status, retryAfter) {
     super(message);
     this.status = status;
@@ -20,6 +21,7 @@ export class MfaError extends Error {
   }
 }
 
+/** @param {string} suffix */
 function authPath(suffix) {
   if (!/^[a-f0-9]{24}$/i.test(appParams.appId)) throw new Error('Invalid app ID');
   return `/api/apps/${appParams.appId}/auth/${suffix}`;
@@ -46,8 +48,14 @@ async function request(suffix, { method = 'POST', body, token, headers } = {}) {
 
 // One MFA credential (sign-in challenge, then the management grant) and every call made with it.
 // Each success may rotate the grant and revoke older sessions, so both are swapped every time.
+/** @param {{ mfa_session_token: string }} challenge */
 export function mfaSession(challenge) {
   let credential = challenge.mfa_session_token;
+  /**
+   * @param {string} suffix
+   * @param {Record<string, unknown>} [body]
+   * @param {string} [method]
+   */
   const call = async (suffix, body, method) => {
     const result = await request(`mfa/${suffix}`, { method, body, token: credential });
     if (result.mfa_management_token) credential = result.mfa_management_token;
@@ -56,22 +64,23 @@ export function mfaSession(challenge) {
   };
   return {
     // Sign-in with an enrolled method. method: 'totp' | 'sms'
-    verify: (code, method, rememberDevice) => call('verify', { code, method, remember_device: rememberDevice }),
+    verify: (/** @type {string} */ code, /** @type {'totp' | 'sms'} */ method, /** @type {boolean} */ rememberDevice) => call('verify', { code, method, remember_device: rememberDevice }),
     sendSignInCode: () => call('resend'),
     // Enrollment, and adding or replacing a method during management.
     setupAuthenticator: () => call('totp/setup', {}),
-    confirmAuthenticator: (code, rememberDevice = false) => call('totp/verify', { code, remember_device: rememberDevice }),
-    sendPhoneCode: phoneNumber => call('sms/send-code', { phone_number: phoneNumber }),
-    confirmPhone: (code, rememberDevice = false) => call('sms/verify', { code, remember_device: rememberDevice }),
+    confirmAuthenticator: (/** @type {string} */ code, /** @type {boolean} */ rememberDevice = false) => call('totp/verify', { code, remember_device: rememberDevice }),
+    sendPhoneCode: (/** @type {string} */ phoneNumber) => call('sms/send-code', { phone_number: phoneNumber }),
+    confirmPhone: (/** @type {string} */ code, /** @type {boolean} */ rememberDevice = false) => call('sms/verify', { code, remember_device: rememberDevice }),
     // Management only.
     status: () => call('status', undefined, 'GET'),
     sendProofCode: () => call('sms/send-code', { phone_number: '' }),
-    removeMethod: (method, code, proofMethod) => call('disable', { method, code, verification_method: proofMethod }),
-    forgetDevices: (code, proofMethod) => call('trusted-devices/clear', { code, method: proofMethod }),
+    removeMethod: (/** @type {'totp' | 'sms'} */ method, /** @type {string} */ code, /** @type {'totp' | 'sms'} */ proofMethod) => call('disable', { method, code, verification_method: proofMethod }),
+    forgetDevices: (/** @type {string} */ code, /** @type {'totp' | 'sms'} */ proofMethod) => call('trusted-devices/clear', { code, method: proofMethod }),
   };
 }
 
 // Password sign-in that opens factor management instead of signing in.
+/** @param {string} email @param {string} password */
 export function signInToManageMfa(email, password) {
   return request('login', { body: { email, password }, headers: { 'X-App-Mfa-Action': 'manage' } });
 }
@@ -120,7 +129,11 @@ export async function loadSignInOptions() {
 
 // provider: 'google' | 'microsoft' | 'facebook' | 'apple' | 'sso'. With manage, the sign-in opens
 // factor management. Returns to this app's /mfa page when MFA is needed.
-export async function signInWithProvider(provider, returnTo, { manage = false } = {}) {
+/**
+ * @param {'google' | 'microsoft' | 'facebook' | 'apple' | 'sso'} provider
+ * @param {string} returnTo
+ * @param {{ manage?: boolean }} [options]
+ */export async function signInWithProvider(provider, returnTo, { manage = false } = {}) {
   const info = await loadSignInOptions();
   // Enterprise SSO sign-in is exempt from Base44 MFA; only managing factors asks for it.
   if (!manage && (info.auth_config?.mfa_policy !== 'required' || provider === 'sso')) {
@@ -152,6 +165,7 @@ export async function signInWithProvider(provider, returnTo, { manage = false } 
 }
 
 // After MFA: a popup sign-in hands the session to the window that opened it; otherwise go on.
+/** @param {string} accessToken @param {string} returnTo */
 export function finishSignIn(accessToken, returnTo) {
   if (new URLSearchParams(window.location.search).get('popup') === '1' && window.opener) {
     window.opener.postMessage({ access_token: accessToken }, window.location.origin);
@@ -160,6 +174,10 @@ export function finishSignIn(accessToken, returnTo) {
   }
   window.location.href = returnTo;
 }
+
+
+
+
 
 
 

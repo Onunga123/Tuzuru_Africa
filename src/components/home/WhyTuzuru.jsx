@@ -1,10 +1,10 @@
-import { Image } from '@/components/ui/image';
+﻿import { Image } from '@/components/ui/image';
 import Reveal from '@/components/common/Reveal';
 import SectionHeading from '@/components/common/SectionHeading';
 import { IMAGES, whyTuzuru } from '@/lib/cms';
 import { Map, Compass, HeartHandshake, BedDouble, LifeBuoy } from 'lucide-react';
 
-const ICONS = { Map, Compass, HeartHandshake, BedDouble, LifeBuoy };
+const ICONS = /** @type {Record<string, import('lucide-react').LucideIcon>} */ ({ Map, Compass, HeartHandshake, BedDouble, LifeBuoy });
 
 export default function WhyTuzuru() {
   return (

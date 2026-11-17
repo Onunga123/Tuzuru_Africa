@@ -1,3 +1,12 @@
+﻿/**
+ * @param {{
+ *   eyebrow?: string,
+ *   title: React.ReactNode,
+ *   intro?: string,
+ *   align?: "left" | "center",
+ *   tone?: "light" | "dark"
+ * }} props
+ */
 export default function SectionHeading({ eyebrow, title, intro, align = 'left', tone = 'light' }) {
   const isCenter = align === 'center';
   const titleColor = tone === 'dark' ? 'text-paper' : 'text-forest';

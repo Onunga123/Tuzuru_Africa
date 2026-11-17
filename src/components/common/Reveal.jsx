@@ -1,5 +1,13 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 
+/**
+ * @param {{
+ *   children: import('react').ReactNode,
+ *   delay?: number,
+ *   y?: number,
+ *   className?: string
+ * }} props
+ */
 export default function Reveal({ children, delay = 0, y = 24, className = '' }) {
   return (
     <motion.div

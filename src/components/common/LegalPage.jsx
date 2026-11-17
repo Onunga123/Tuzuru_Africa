@@ -1,7 +1,21 @@
-import PageHero from '@/components/common/PageHero';
+﻿import PageHero from '@/components/common/PageHero';
 import { Link } from 'react-router-dom';
 import { AlertTriangle } from 'lucide-react';
 
+/**
+ * @param {{
+ *   title: string,
+ *   intro: string,
+ *   updated: string,
+ *   sections: Array<{
+ *     heading: string,
+ *     paragraphs: string[],
+ *     list?: string[]
+ *   }>,
+ *   image?: string,
+ *   crumb?: string
+ * }} props
+ */
 export default function LegalPage({ title, intro, updated, sections, image, crumb }) {
   return (
     <>
@@ -13,7 +27,7 @@ export default function LegalPage({ title, intro, updated, sections, image, crum
           <p className="text-[0.8125rem] leading-relaxed text-ink/70">
             <strong className="font-semibold text-forest">Draft for review.</strong> This document is a working draft
             prepared for Tuzuru Africa. It must be reviewed by a qualified legal adviser and completed with the
-            company’s registered details before publication. A policy page is not, in itself, evidence of compliance.
+            companyâ€™s registered details before publication. A policy page is not, in itself, evidence of compliance.
           </p>
         </div>
 
