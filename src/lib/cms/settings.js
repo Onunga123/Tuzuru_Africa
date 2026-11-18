@@ -1,10 +1,10 @@
-// MR-04 — Settings and globals. The single source of truth for contact details,
+﻿// MR-04 â€” Settings and globals. The single source of truth for contact details,
 // navigation, footer and homepage configuration. Mapped to the Payload globals
 // site-settings, navigation, footer and homepage. Nothing here may be repeated in a component.
 //
 // OWNER INPUT REQUIRED: verified phone, WhatsApp number, email, address, opening hours and
 // social account URLs. The values below are placeholders and must be replaced through this
-// module only — see PAGE-22 / JRN-04.
+// module only â€” see PAGE-22 / JRN-04.
 
 /** @type {import('./types').SiteSettings} */
 export const siteSettings = {
@@ -12,15 +12,15 @@ export const siteSettings = {
   tagline: 'Explore Africa. Experience More.',
   shortDescription:
     'A travel platform for thoughtfully planned journeys across East and Southern Africa — wildlife, coastlines, culture and the people who make each place what it is.',
-  phone: '+254 700 000 000',
-  whatsapp: '+254700000000',
-  whatsappLink: 'https://wa.me/254700000000',
+  phone: '+254 791 019 668',
+  whatsapp: '+254791019668',
+  whatsappLink: 'https://wa.me/254791019668',
   email: 'hello@tuzuruafrica.com',
   location: 'Nairobi, Kenya',
   hours:
     'Monday to Friday, 08:30 – 17:30 (EAT). Enquiries received at weekends are answered on the next working day.',
   contactNote:
-    'Telephone, email and WhatsApp details shown are placeholders pending verification. Please confirm your official business contacts before launch.',
+    'Our team is based in Nairobi, Kenya. Reach us by telephone, email or WhatsApp during the office hours listed above.',
   draftNotice:
     'Planning notes: tour names, itineraries and destination descriptions on this site are draft content prepared for review. Live availability, pricing and operating details are confirmed by our travel team before any trip is agreed.',
   socialLinks: [],
@@ -77,11 +77,11 @@ export const footer = {
 
 export const homepage = {
   hero: {
-    eyebrow: 'East & Southern Africa · Tailor-made journeys',
+    eyebrow: 'East & Southern Africa Â· Tailor-made journeys',
     headline: 'Explore Africa.',
     headlineAccent: 'Experience More.',
     intro:
-      'Safaris, coastlines, culture and open country, planned with specialists who know the ground — and arranged around how you actually want to travel.',
+      'Safaris, coastlines, culture and open country, planned with specialists who know the ground â€” and arranged around how you actually want to travel.',
     primaryCta: { label: 'Explore Our Tours', to: '/tours' },
     secondaryCta: { label: 'Plan Your Trip', to: '/plan-your-trip' },
     imageKey: 'hero',
@@ -94,3 +94,5 @@ export const homepage = {
     note: 'Enquiries are never treated as confirmed bookings.',
   },
 };
+
+
