@@ -209,7 +209,7 @@ export const tours = [
     experiences: ['Safari & Wildlife', 'Nature & Landscapes'],
     featured: true,
     overview:
-      'Follow the herds through both halves of the Maraâ€“Serengeti ecosystem, with time in the conservancies for quieter viewing and night drives.',
+      'Follow the herds through both halves of the Mara–Serengeti ecosystem, with time in the conservancies for quieter viewing and night drives.',
     highlights: [
       'Mara River crossing points with a specialist guide',
       'Private conservancy access away from the main reserve',
@@ -508,7 +508,7 @@ const INTERIM = {
 };
 
 export const gallery = [
-  { id: 'g1', imageKey: 'migration', caption: 'Herds moving across the Maraâ€“Serengeti ecosystem', category: 'Safari & Wildlife', destination: 'Maasai Mara', ...INTERIM },
+  { id: 'g1', imageKey: 'migration', caption: 'Herds moving across the Mara–Serengeti ecosystem', category: 'Safari & Wildlife', destination: 'Maasai Mara', ...INTERIM },
   { id: 'g2', imageKey: 'zanzibar', caption: 'A dhow at rest on the shallows', category: 'Beach & Coast', destination: 'Zanzibar', ...INTERIM },
   { id: 'g3', imageKey: 'amboseli', caption: 'Elephant families on the Amboseli plains', category: 'Safari & Wildlife', destination: 'Amboseli', ...INTERIM },
   { id: 'g4', imageKey: 'serengeti', caption: 'First light over the Serengeti', category: 'Nature & Landscapes', destination: 'Serengeti', ...INTERIM },

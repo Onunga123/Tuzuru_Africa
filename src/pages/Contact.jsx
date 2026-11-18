@@ -8,7 +8,6 @@ export default function Contact() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Contact' }]}
         eyebrow="Contact"
         title="Talk to a specialist"
         intro="Ask a question, check whether an idea is workable, or start planning properly. Either way, a person will reply."

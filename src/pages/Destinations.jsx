@@ -23,7 +23,6 @@ export default function Destinations() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Destinations' }]}
         eyebrow="Where to go"
         title="Six regions we plan around most"
         intro="Each has its own season, its own rhythm and its own reason to go. Start with a place, and we will build the trip outward from there."

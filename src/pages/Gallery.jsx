@@ -12,11 +12,10 @@ export default function Gallery() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Gallery' }]}
         eyebrow="Gallery"
         title="The places, in pictures"
-        intro="Wildlife, coastlines, craft and open country — a sense of what the days actually look like."
-        image={IMAGES.zanzibar}
+        intro="A visual journey through the wildlife, coastlines, landscapes and cultures of East and Southern Africa."
+        image={IMAGES.gorilla}
         compact
       />
 
@@ -33,6 +32,9 @@ export default function Gallery() {
               }`}
             >
               {c}
+              <span className="ml-2 text-[0.625rem] tabular-nums opacity-60">
+                {c === 'All' ? gallery.length : gallery.filter((g) => g.category === c).length}
+              </span>
             </button>
           ))}
         </div>

@@ -31,7 +31,7 @@ export default function TravelInspiration() {
                   <Image
                     src={guide.image}
                     alt={guide.title}
-                    className="h-full w-full transition-transform duration-[900ms] group-hover:scale-[1.04]"
+                    className="h-full w-full transition-transform [transition-duration:900ms] group-hover:scale-[1.04]"
                   />
                 </div>
                 <p className="mt-5 eyebrow text-gold-bronze">{guide.category}</p>

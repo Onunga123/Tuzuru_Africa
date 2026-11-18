@@ -10,7 +10,6 @@ export default function Faqs() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'FAQs' }]}
         eyebrow="Help & information"
         title="Questions travellers ask before booking"
         intro="If something is not covered here, ask us directly â€” a specialist will answer properly rather than point you at a form."

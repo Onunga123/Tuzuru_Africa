@@ -35,7 +35,7 @@ export default function ExperienceCategories() {
                   <Image
                     src={exp.image}
                     alt={exp.name}
-                    className="h-full w-full opacity-90 transition-all duration-[900ms] group-hover:scale-[1.04] group-hover:opacity-100"
+                    className="h-full w-full opacity-90 transition-all [transition-duration:900ms] group-hover:scale-[1.04] group-hover:opacity-100"
                   />
                 </div>
                 <h3 className="mt-5 font-heading text-[1.3rem] text-paper group-hover:text-gold">{exp.name}</h3>

@@ -35,7 +35,6 @@ export default function WhenToTravel() {
         eyebrow="When to travel"
         title="When to travel in Africa: a season-by-season guide"
         intro="Timing shapes a safari more than almost any other decision. Here is how the rains, the dry months and the wildlife calendar line up across East and Southern Africa."
-        crumbs={[{ label: 'When to travel' }]}
       />
 
       <section className="mx-auto max-w-[1100px] px-5 py-16 sm:px-8 lg:py-24">

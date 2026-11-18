@@ -12,7 +12,6 @@ export default function Experiences() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Experiences' }]}
         eyebrow="Ways to travel"
         title="Choose the kind of days you want"
         intro="Most trips combine two or three of these. Tell us which matter most and we will build the route around them."

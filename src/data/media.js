@@ -75,7 +75,7 @@ export const MEDIA_REGISTER = {
   migration: {
     ...INTERIM,
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/5fe844ee7_generated_b157c766.png',
-    subject: 'Herds crossing open grassland, Maraâ€“Serengeti',
+    subject: 'Herds crossing open grassland, Mara–Serengeti',
     format: 'PNG (delivered as AVIF/WebP)',
     usedOn: ['Tours â€” page hero', 'Great Migration Safari card/detail', 'Gallery g1', 'Wildlife Calendar â€” page hero'],
   },
@@ -172,7 +172,7 @@ export const MEDIA_ALT = {
   capetown: 'Table Mountain seen from the Cape Town harbour',
   amboseli: 'A family of elephants on the Amboseli plains',
   falls: 'Mist rising from the gorge at Victoria Falls',
-  migration: 'Herds moving across open Maraâ€“Serengeti grassland',
+  migration: 'Herds moving across open Mara–Serengeti grassland',
   balloon: 'A balloon above the Serengeti plains at dawn',
   gorilla: 'A mountain gorilla in the forest of Bwindi',
   winelands: 'Vine rows running toward the Cape mountains',

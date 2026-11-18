@@ -21,7 +21,7 @@ export default function PageHero({ image, eyebrow, title, intro, crumbs = /** @t
         <div className="relative mx-auto flex max-w-[1400px] flex-col justify-end px-5 pb-12 pt-20 sm:px-8 lg:px-12 lg:pb-16">
           {crumbs.length > 0 && (
             <nav aria-label="Breadcrumb" className="mb-6">
-              <ol className="flex flex-wrap items-center gap-2 font-body text-[0.6875rem] uppercase tracking-[0.16em] text-paper/55">
+              <ol className="list-none flex flex-wrap items-center gap-2 font-body text-[0.6875rem] uppercase tracking-[0.16em] text-paper/55">
                 <li>
                   <Link to="/" className="hover:text-paper">Home</Link>
                 </li>

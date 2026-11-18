@@ -10,7 +10,6 @@ export default function About() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'About' }]}
         eyebrow="Who we are"
         title="A travel platform built around the places, not the packages."
         intro="Tuzuru Africa plans journeys across East and Southern Africa — wildlife, coastlines, culture and open country — with specialists who know the ground."

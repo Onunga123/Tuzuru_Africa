@@ -10,7 +10,7 @@ export default function TourCard({ tour }) {
           <Image
             src={tour.image}
             alt={tour.title}
-            className="h-full w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+            className="h-full w-full transition-transform [transition-duration:900ms] ease-out group-hover:scale-[1.04]"
           />
         </div>
         <span className="absolute left-0 top-0 bg-paper/95 px-3 py-1.5 font-body text-[0.625rem] uppercase tracking-[0.2em] text-forest">

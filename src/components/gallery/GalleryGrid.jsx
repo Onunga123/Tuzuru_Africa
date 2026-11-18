@@ -7,6 +7,7 @@ import { Image } from '@/components/ui/image';
 export default function GalleryGrid({ items }) {
   const [index, setIndex] = useState(/** @type {number | null} */ (null));
   const active = index === null ? null : items[index];
+  const imageAlt = (item) => /** @type {{ imageAlt?: string }} */ (item).imageAlt || item.caption;
 
   useEffect(() => {
     if (index === null) return undefined;
@@ -39,19 +40,19 @@ export default function GalleryGrid({ items }) {
             key={item.id}
             type="button"
             onClick={() => setIndex(i)}
-            className="group block w-full break-inside-avoid text-left"
+            className="group block w-full break-inside-avoid text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
             aria-label={`Open image: ${item.caption}`}
           >
-            <div className="overflow-hidden bg-sand">
+            <div className="relative aspect-[4/3] overflow-hidden bg-sand">
               <Image
                 src={item.image}
-                alt={item.caption}
-                className="h-full w-full transition-transform duration-[900ms] group-hover:scale-[1.04]"
+                alt={imageAlt(item)}
+                className="h-full w-full transition-transform [transition-duration:900ms] group-hover:scale-[1.04]"
               />
             </div>
-            <div className="flex items-start justify-between gap-4 pt-3">
-              <p className="text-[0.8125rem] leading-snug text-ink/70">{item.caption}</p>
-              <span className="shrink-0 font-body text-[0.5625rem] uppercase tracking-[0.16em] text-ink/35">
+            <div className="flex flex-col gap-1.5 pt-3">
+              <p className="font-heading text-[1rem] leading-snug text-forest">{item.caption}</p>
+              <span className="font-body text-[0.5625rem] uppercase tracking-[0.18em] text-ink/45">
                 {item.destination}
               </span>
             </div>
@@ -71,7 +72,7 @@ export default function GalleryGrid({ items }) {
         >
           <div className="flex items-center justify-between">
             <p className="font-body text-[0.6875rem] uppercase tracking-[0.2em] text-paper/60">
-              {(index ?? 0) + 1} / {items.length} Â· {active.destination}
+              {(index ?? 0) + 1} / {items.length} · {active.destination}
             </p>
             <button
               type="button"
@@ -85,7 +86,7 @@ export default function GalleryGrid({ items }) {
 
           <div className="flex flex-1 items-center justify-center py-4">
             <div className="relative h-[58vh] w-full max-w-5xl sm:h-[64vh]">
-              <Image src={active.image} alt={active.caption} className="h-full w-full" fittingType="fit" />
+              <Image src={active.image} alt={imageAlt(active)} className="h-full w-full" fittingType="fit" />
             </div>
           </div>
 
@@ -97,7 +98,7 @@ export default function GalleryGrid({ items }) {
             >
               <ArrowLeft size={14} /> Previous
             </button>
-            <div className="hidden text-center sm:block">
+            <div className="min-w-0 flex-1 text-center">
               <p className="text-[0.8125rem] text-paper/70">{active.caption}</p>
               {active.credit && (
                 <p className="mt-1 font-body text-[0.5625rem] uppercase tracking-[0.16em] text-paper/40">

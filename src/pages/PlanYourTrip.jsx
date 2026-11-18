@@ -8,7 +8,6 @@ export default function PlanYourTrip() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Plan Your Trip' }]}
         eyebrow="Plan your trip"
         title="Tell us what you have in mind"
         intro="A few details is enough to start. A specialist will reply within one working day with questions and an outline — no obligation, no cost."

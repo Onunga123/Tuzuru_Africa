@@ -16,7 +16,7 @@ export default function DestinationCard({ destination, tall = false }) {
           <Image
             src={destination.image}
             alt={`${destination.name}, ${destination.country}`}
-            className="h-full w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+            className="h-full w-full transition-transform [transition-duration:900ms] ease-out group-hover:scale-[1.05]"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/85 via-forest-deep/10 to-transparent" />

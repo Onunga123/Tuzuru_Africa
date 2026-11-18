@@ -14,7 +14,6 @@ export default function WildlifeCalendar() {
         eyebrow="Wildlife calendar"
         title="Where and when to see Africa's wildlife"
         intro="A month-by-month view of the continent's most sought-after wildlife experiences — from the migration to gorillas, whales and nesting turtles."
-        crumbs={[{ label: 'Wildlife calendar' }]}
       />
 
       <section className="mx-auto max-w-[1100px] px-5 py-16 sm:px-8 lg:py-24">

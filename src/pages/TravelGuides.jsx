@@ -14,7 +14,6 @@ export default function TravelGuides() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Travel Guides' }]}
         eyebrow="Travel guides"
         title="Notes from the ground"
         intro="Practical writing on seasons, regions and how travel in these places actually works — written to be useful before you book."
@@ -29,7 +28,7 @@ export default function TravelGuides() {
               <Image
                 src={featured.image}
                 alt={featured.title}
-                className="h-full w-full transition-transform duration-[900ms] group-hover:scale-[1.03]"
+                className="h-full w-full transition-transform [transition-duration:900ms] group-hover:scale-[1.03]"
               />
             </div>
             <div className="flex flex-col justify-center">
@@ -71,7 +70,7 @@ export default function TravelGuides() {
                     <Image
                       src={guide.image}
                       alt={guide.title}
-                      className="h-full w-full transition-transform duration-[900ms] group-hover:scale-[1.04]"
+                      className="h-full w-full transition-transform [transition-duration:900ms] group-hover:scale-[1.04]"
                     />
                   </div>
                   <p className="mt-5 eyebrow text-gold-bronze">{guide.category}</p>

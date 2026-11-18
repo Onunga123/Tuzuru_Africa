@@ -13,7 +13,6 @@ export default function Tours() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Tours & Packages' }]}
         eyebrow="Tours & packages"
         title="Journeys to start from"
         intro="Eight starting points across East and Southern Africa. Every one of them can be reshaped around your dates, your party and the pace you want."
