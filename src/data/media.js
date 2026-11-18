@@ -1,24 +1,24 @@
-// Media register — the single source of truth for image provenance and licensing.
+﻿// Media register â€” the single source of truth for image provenance and licensing.
 // Requirement: PAGE-17. No image may be published without a recorded licence status.
 //
 // origin values:
-//   'owner-approved-interim' — imagery approved by the owner for interim use (DL-009, 2026-11-11).
-//   'owner-supplied'         — supplied directly by the owner (with permission on file).
+//   'owner-approved-interim' â€” imagery approved by the owner for interim use (DL-009, 2026-11-11).
+//   'owner-supplied'         â€” supplied directly by the owner (with permission on file).
 //
 // licenceStatus values:
-//   'owner-approved-interim' — approved for publication by the owner; replacement happens through
+//   'owner-approved-interim' â€” approved for publication by the owner; replacement happens through
 //                              the Payload CMS after migration, so no photography action is pending.
-//   'licensed'               — owner holds a licence or ownership record.
-//   'permission'             — written permission held from the rights holder.
+//   'licensed'               â€” owner holds a licence or ownership record.
+//   'permission'             â€” written permission held from the rights holder.
 //
 // Provenance recorded here is internal to this file and the compliance records. None of it is
 // rendered on the public site (DL-009 e).
 
 const INTERIM = {
   origin: 'owner-approved-interim',
-  licence: 'Owner-approved interim imagery — replacement via Payload CMS (DL-009)',
+  licence: 'Owner-approved interim imagery â€” replacement via Payload CMS (DL-009)',
   licenceStatus: 'owner-approved-interim',
-  permissionRef: 'DL-009 — owner approval recorded 2026-11-11',
+  permissionRef: 'DL-009 â€” owner approval recorded 2026-11-11',
   credit: '',
 };
 
@@ -28,7 +28,7 @@ export const MEDIA_REGISTER = {
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/0e73a17ab_generated_3e4f374b.png',
     subject: 'Savannah at dawn, generic',
     format: 'PNG (delivered as AVIF/WebP via transform pipeline)',
-    usedOn: ['Home — hero', 'Plan Your Trip — page hero'],
+    usedOn: ['Home â€” hero', 'Plan Your Trip â€” page hero'],
   },
   mara: {
     ...INTERIM,
@@ -49,14 +49,14 @@ export const MEDIA_REGISTER = {
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/91c3c5c8c_generated_a24c6faf.png',
     subject: 'Dhow on shallow water, Zanzibar',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['Gallery — page hero', 'Zanzibar destination card/detail', 'Gallery g2', 'Zanzibar Coast Retreat card'],
+    usedOn: ['Gallery â€” page hero', 'Zanzibar destination card/detail', 'Gallery g2', 'Zanzibar Coast Retreat card'],
   },
   capetown: {
     ...INTERIM,
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/5fb9ffea2_generated_c368c047.png',
     subject: 'Table Mountain from the harbour, Cape Town',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['Contact — page hero', 'Cape Town destination card/detail', 'Gallery g6'],
+    usedOn: ['Contact â€” page hero', 'Cape Town destination card/detail', 'Gallery g6'],
   },
   amboseli: {
     ...INTERIM,
@@ -75,9 +75,9 @@ export const MEDIA_REGISTER = {
   migration: {
     ...INTERIM,
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/5fe844ee7_generated_b157c766.png',
-    subject: 'Herds crossing open grassland, Mara–Serengeti',
+    subject: 'Herds crossing open grassland, Maraâ€“Serengeti',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['Tours — page hero', 'Great Migration Safari card/detail', 'Gallery g1', 'Wildlife Calendar — page hero'],
+    usedOn: ['Tours â€” page hero', 'Great Migration Safari card/detail', 'Gallery g1', 'Wildlife Calendar â€” page hero'],
   },
   balloon: {
     ...INTERIM,
@@ -119,35 +119,35 @@ export const MEDIA_REGISTER = {
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/afe7e8b73_generated_bf083df5.png',
     subject: 'River above falls, Zambezi',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['Booking Policy — page hero', 'Gallery g8'],
+    usedOn: ['Booking Policy â€” page hero', 'Gallery g8'],
   },
   craft: {
     ...INTERIM,
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/3dac8ab54_generated_f77d1b2d.png',
     subject: 'Craft and market detail',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['Privacy Policy — page hero', 'About page', 'Home — Why Tuzuru section'],
+    usedOn: ['Privacy Policy â€” page hero', 'About page', 'Home â€” Why Tuzuru section'],
   },
   seasons: {
     ...INTERIM,
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/e4732653a_generated_0993b46d.png',
     subject: 'Landscape in dry season light',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['When to Travel — page hero', 'Travel Guides — page hero', 'Wildlife calendar entry'],
+    usedOn: ['When to Travel â€” page hero', 'Travel Guides â€” page hero', 'Wildlife calendar entry'],
   },
   door: {
     ...INTERIM,
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/20fa20b65_generated_038afe97.png',
     subject: 'Carved Swahili door, Stone Town',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['Terms of Use — page hero', 'Gallery g12', 'Swahili coast guide'],
+    usedOn: ['Terms of Use â€” page hero', 'Gallery g12', 'Swahili coast guide'],
   },
   vehicle: {
     ...INTERIM,
     url: 'https://media.base44.com/images/public/6af2d158f0c17bb742b0ac03/37dacae69_generated_622978e6.png',
     subject: 'Safari vehicle on track',
     format: 'PNG (delivered as AVIF/WebP)',
-    usedOn: ['FAQs — page hero', 'Tours and packages content'],
+    usedOn: ['FAQs â€” page hero', 'Tours and packages content'],
   },
   logo: {
     url: 'https://base44.app/api/apps/6af2d158f0c17bb742b0ac03/files/mp/public/6af2d158f0c17bb742b0ac03/c105a5db7_tuzuru-africa-logo.jpeg',
@@ -172,7 +172,7 @@ export const MEDIA_ALT = {
   capetown: 'Table Mountain seen from the Cape Town harbour',
   amboseli: 'A family of elephants on the Amboseli plains',
   falls: 'Mist rising from the gorge at Victoria Falls',
-  migration: 'Herds moving across open Mara–Serengeti grassland',
+  migration: 'Herds moving across open Maraâ€“Serengeti grassland',
   balloon: 'A balloon above the Serengeti plains at dawn',
   gorilla: 'A mountain gorilla in the forest of Bwindi',
   winelands: 'Vine rows running toward the Cape mountains',
@@ -186,6 +186,8 @@ export const MEDIA_ALT = {
   logo: 'Tuzuru Africa',
 };
 
+/** @param {string} key */
 export function mediaEntry(key) {
-  return MEDIA_REGISTER[key] || null;
+  if (!Object.prototype.hasOwnProperty.call(MEDIA_REGISTER, key)) return null;
+  return MEDIA_REGISTER[/** @type {keyof typeof MEDIA_REGISTER} */ (key)] || null;
 }

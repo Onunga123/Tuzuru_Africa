@@ -1,4 +1,4 @@
-// Central site content. All business copy lives here so it can be updated in one place.
+﻿// Central site content. All business copy lives here so it can be updated in one place.
 // Items flagged `draft: true` are placeholder content awaiting verification by Tuzuru Africa.
 
 // Media URLs live in the media module (@/lib/cms/media, MR-05) and contact/navigation copy in
@@ -44,7 +44,7 @@ export const destinations = [
     imageKey: 'mara',
     tagline: 'Big-cat country, open plains and the great migration',
     intro:
-      'Kenya’s best-known reserve: rolling grassland, river crossings and resident predators, with conservancies that allow quieter, low-density viewing.',
+      'Kenyaâ€™s best-known reserve: rolling grassland, river crossings and resident predators, with conservancies that allow quieter, low-density viewing.',
     description:
       'The Mara is a landscape of long grass and scattered acacia, worked by prides of lion, cheetah on the termite mounds and leopards along the riverline. Between July and October the northern herds move through the ecosystem, and the Mara River becomes the setting for some of the most dramatic crossings on the continent. The surrounding conservancies offer night drives, walking safaris and a lower vehicle density than the reserve itself.',
     attractions: ['Mara River crossings', 'Musiara and Olare Motorogi conservancies', 'Mara Triangle', 'Maasai homestead visits'],
@@ -78,11 +78,11 @@ export const destinations = [
     imageKey: 'zanzibar',
     tagline: 'Swahili heritage, spice farms and a warm turquoise sea',
     intro:
-      'Stone Town’s carved doors, spice-growing inland, and long white beaches along the northern and eastern coasts.',
+      'Stone Townâ€™s carved doors, spice-growing inland, and long white beaches along the northern and eastern coasts.',
     description:
       'Zanzibar works as well after a safari as it does on its own. Stone Town is a dense, walkable grid of coral-rag buildings, carved timber doors and markets; the coast opens into shallow, warm water and reef-protected swimming. Spice farm visits, dhow sailing and reef snorkelling fill days without hurry.',
     attractions: ['Stone Town and its carved doors', 'Spice farm visits', 'Nungwi and Kendwa beaches', 'Mnemba Atoll snorkelling'],
-    bestTime: 'Generally warm year-round, with a wetter period in the middle of the year and a shorter wet spell early in the year. Conditions vary — we will advise for your dates.',
+    bestTime: 'Generally warm year-round, with a wetter period in the middle of the year and a shorter wet spell early in the year. Conditions vary â€” we will advise for your dates.',
     travelInfo:
       'Ferries connect Dar es Salaam with Stone Town and flights serve Zanzibar International Airport. A visa or entry permit may be required depending on nationality; confirm current requirements before booking.',
     related: ['zanzibar-coast-retreat', 'swahili-coast-guide'],
@@ -175,7 +175,7 @@ export const experiences = [
     imageKey: 'gorge',
     blurb: 'Rafting, gorges, balloon flights and highland trails for travellers who want to move.',
     detail:
-      'Adventure is added in proportion to the rest of the trip — a single big day, or a route built around movement for travellers who want it.',
+      'Adventure is added in proportion to the rest of the trip â€” a single big day, or a route built around movement for travellers who want it.',
   },
   {
     slug: 'nature-landscapes',
@@ -209,7 +209,7 @@ export const tours = [
     experiences: ['Safari & Wildlife', 'Nature & Landscapes'],
     featured: true,
     overview:
-      'Follow the herds through both halves of the Mara–Serengeti ecosystem, with time in the conservancies for quieter viewing and night drives.',
+      'Follow the herds through both halves of the Maraâ€“Serengeti ecosystem, with time in the conservancies for quieter viewing and night drives.',
     highlights: [
       'Mara River crossing points with a specialist guide',
       'Private conservancy access away from the main reserve',
@@ -226,8 +226,8 @@ export const tours = [
       { day: 7, title: 'Departure', detail: 'Transfer for your international flight or onward extension to Zanzibar.' },
     ],
     accommodation: 'Tented safari camps in the Mara conservancy and northern Serengeti, chosen for location and quiet rather than star ratings.',
-    transport: 'Light aircraft and 4×4 safari vehicles with a guide throughout; cross-border road transfer between the Mara and the Serengeti.',
-    inclusions: ['Accommodation on a full-board basis', 'Private 4×4 with guide', 'Internal flights and transfers', 'Park and conservancy fees as quoted'],
+    transport: 'Light aircraft and 4Ã—4 safari vehicles with a guide throughout; cross-border road transfer between the Mara and the Serengeti.',
+    inclusions: ['Accommodation on a full-board basis', 'Private 4Ã—4 with guide', 'Internal flights and transfers', 'Park and conservancy fees as quoted'],
     exclusions: ['International flights', 'Visas and travel insurance', 'Drinks and personal items', 'Gratuities'],
     important:
       'Migration timing varies with rainfall and cannot be guaranteed on specific dates. River crossings are wildlife events, not scheduled sightings.',
@@ -243,7 +243,7 @@ export const tours = [
     experiences: ['Safari & Wildlife', 'Adventure'],
     featured: true,
     overview:
-      'A short, focused Serengeti trip built around the quietest hour of the day — a dawn balloon over the plains, then game drives through the kopjes.',
+      'A short, focused Serengeti trip built around the quietest hour of the day â€” a dawn balloon over the plains, then game drives through the kopjes.',
     highlights: ['Dawn balloon flight with bush breakfast', 'Seronera Valley wildlife', 'Time among the granite kopjes', 'Optional Ngorongoro Crater day'],
     itinerary: [
       { day: 1, title: 'Arusha to the Serengeti', detail: 'Flight to Seronera, afternoon drive and camp arrival.' },
@@ -253,7 +253,7 @@ export const tours = [
       { day: 5, title: 'Departure', detail: 'Morning drive and flight out of the Serengeti.' },
     ],
     accommodation: 'A central Serengeti tented camp with views over the plains.',
-    transport: 'Light aircraft to Seronera and 4×4 game drives throughout.',
+    transport: 'Light aircraft to Seronera and 4Ã—4 game drives throughout.',
     inclusions: ['Accommodation and meals as specified', 'Balloon flight and breakfast', 'Park fees', 'Guide and vehicle'],
     exclusions: ['International flights', 'Insurance', 'Drinks', 'Gratuities'],
     important: 'Balloon flights are weather-dependent and subject to weight limits and operator availability.',
@@ -325,7 +325,7 @@ export const tours = [
     itinerary: [
       { day: 1, title: 'Arrival', detail: 'Airport transfer; evening at the waterfront.' },
       { day: 2, title: 'Mountain and city', detail: 'Cableway or early hike, then the city centre and gardens.' },
-      { day: 3, title: 'Peninsula day', detail: 'Chapman’s Peak, Cape Point and the penguin colony.' },
+      { day: 3, title: 'Peninsula day', detail: 'Chapmanâ€™s Peak, Cape Point and the penguin colony.' },
       { day: 4, title: 'To the winelands', detail: 'Drive inland; afternoon tasting in Stellenbosch.' },
       { day: 5, title: 'Vineyards', detail: 'Full day of estate visits in Stellenbosch and Franschhoek.' },
       { day: 6, title: 'Free day in the valley', detail: 'Time at leisure, or a longer hike.' },
@@ -357,7 +357,7 @@ export const tours = [
       { day: 4, title: 'Return', detail: 'Early drive and transfer back to Nairobi.' },
     ],
     accommodation: 'A lodge or tented camp with a view toward the mountain.',
-    transport: 'Road transfer from Nairobi and 4×4 game drives.',
+    transport: 'Road transfer from Nairobi and 4Ã—4 game drives.',
     inclusions: ['Accommodation and full board', 'Park fees', 'Guide and vehicle'],
     exclusions: ['International flights', 'Drinks', 'Insurance', 'Gratuities'],
     important: 'Kilimanjaro is often hidden by cloud; clear views are never guaranteed.',
@@ -433,7 +433,7 @@ export const guides = [
       },
       {
         heading: 'The middle of the year: north and west',
-        body: 'As the grass dries, the herds move west along the corridor and then north toward the Mara River. This is the period most associated with crossings — dramatic, unpredictable, and best viewed with a guide who has spent the season on that stretch of river.',
+        body: 'As the grass dries, the herds move west along the corridor and then north toward the Mara River. This is the period most associated with crossings â€” dramatic, unpredictable, and best viewed with a guide who has spent the season on that stretch of river.',
       },
       {
         heading: 'The other months',
@@ -443,7 +443,7 @@ export const guides = [
   },
   {
     slug: 'swahili-coast-guide',
-    title: 'A first-timer’s guide to the Swahili coast',
+    title: 'A first-timerâ€™s guide to the Swahili coast',
     category: 'Destinations',
     imageKey: 'door',
     date: '2026-07-02',
@@ -481,7 +481,7 @@ export const guides = [
     content: [
       {
         heading: 'Soft bags, small weights',
-        body: 'Bush flights usually cap luggage at 15kg per person in a soft bag. This is the constraint that decides everything else — pack for it at home, not at the airstrip.',
+        body: 'Bush flights usually cap luggage at 15kg per person in a soft bag. This is the constraint that decides everything else â€” pack for it at home, not at the airstrip.',
       },
       {
         heading: 'Layers beat coats',
@@ -503,12 +503,12 @@ export const guides = [
 // imagery is owner-approved under DL-009; provenance stays internal and is never rendered.
 const INTERIM = {
   credit: '',
-  licence: 'Owner-approved interim imagery — replacement via Payload CMS (DL-009)',
+  licence: 'Owner-approved interim imagery â€” replacement via Payload CMS (DL-009)',
   licenceStatus: 'owner-approved-interim',
 };
 
 export const gallery = [
-  { id: 'g1', imageKey: 'migration', caption: 'Herds moving across the Mara–Serengeti ecosystem', category: 'Safari & Wildlife', destination: 'Maasai Mara', ...INTERIM },
+  { id: 'g1', imageKey: 'migration', caption: 'Herds moving across the Maraâ€“Serengeti ecosystem', category: 'Safari & Wildlife', destination: 'Maasai Mara', ...INTERIM },
   { id: 'g2', imageKey: 'zanzibar', caption: 'A dhow at rest on the shallows', category: 'Beach & Coast', destination: 'Zanzibar', ...INTERIM },
   { id: 'g3', imageKey: 'amboseli', caption: 'Elephant families on the Amboseli plains', category: 'Safari & Wildlife', destination: 'Amboseli', ...INTERIM },
   { id: 'g4', imageKey: 'serengeti', caption: 'First light over the Serengeti', category: 'Nature & Landscapes', destination: 'Serengeti', ...INTERIM },
@@ -526,7 +526,7 @@ export const faqGroups = [
   {
     group: 'General enquiries',
     items: [
-      { q: 'What does Tuzuru Africa do?', a: 'We plan and coordinate travel across East and Southern Africa — safaris, coastal stays, cultural visits and city time — and support you from first enquiry through to your return.' },
+      { q: 'What does Tuzuru Africa do?', a: 'We plan and coordinate travel across East and Southern Africa â€” safaris, coastal stays, cultural visits and city time â€” and support you from first enquiry through to your return.' },
       { q: 'How do I start planning a trip?', a: 'Send an enquiry through the Plan Your Trip page with your dates, party and what you would like to see. A specialist will reply with questions and an outline of options.' },
       { q: 'Do you only work with the itineraries shown on the site?', a: 'No. The tours listed are starting points. Most travellers end up with a variation built around their dates, interests and pace.' },
     ],
@@ -542,8 +542,8 @@ export const faqGroups = [
   {
     group: 'Pricing and payments',
     items: [
-      { q: 'Why are prices shown as “on request”?', a: 'Because accommodation, park fees and flights change with season and availability. We quote once we know your dates, party size and preferred level of accommodation, so the figure reflects the trip you are actually taking.' },
-      { q: 'What is included in a quotation?', a: 'Every quotation lists what is included and excluded — typically accommodation, meals, guides, transfers and park fees in, and international flights, visas, insurance and gratuities out.' },
+      { q: 'Why are prices shown as â€œon requestâ€?', a: 'Because accommodation, park fees and flights change with season and availability. We quote once we know your dates, party size and preferred level of accommodation, so the figure reflects the trip you are actually taking.' },
+      { q: 'What is included in a quotation?', a: 'Every quotation lists what is included and excluded â€” typically accommodation, meals, guides, transfers and park fees in, and international flights, visas, insurance and gratuities out.' },
       { q: 'Which currencies do you quote in?', a: 'Quotations are normally issued in US dollars. Local currencies may be used for services on the ground. Confirm with your specialist when you enquire.' },
     ],
   },
@@ -559,7 +559,7 @@ export const faqGroups = [
     group: 'Travel practicalities',
     items: [
       { q: 'Do I need vaccinations or a visa?', a: 'Requirements depend on your nationality and route and can change. We will point you to the current official guidance, but confirmation should always come from the relevant embassy or a travel health professional.' },
-      { q: 'Is a safari suitable for children?', a: 'Often, yes — with the right vehicle, pace and accommodation. Some camps set minimum ages, and long drives can be hard for young children. Tell us the ages and we will advise honestly.' },
+      { q: 'Is a safari suitable for children?', a: 'Often, yes â€” with the right vehicle, pace and accommodation. Some camps set minimum ages, and long drives can be hard for young children. Tell us the ages and we will advise honestly.' },
       { q: 'How do I reach you while travelling?', a: 'You will be given contact details for the team handling your trip, including a WhatsApp number for use on the ground.' },
     ],
   },
@@ -593,22 +593,27 @@ export const whyTuzuru = [
   },
 ];
 
+/** @param {string} slug */
 export function findTour(slug) {
   return tours.find((t) => t.slug === slug);
 }
 
+/** @param {string} slug */
 export function findDestination(slug) {
   return destinations.find((d) => d.slug === slug);
 }
 
+/** @param {string} slug */
 export function findGuide(slug) {
   return guides.find((g) => g.slug === slug);
 }
 
+/** @param {string} slug */
 export function toursByDestination(slug) {
   return tours.filter((t) => t.destinationSlug === slug);
 }
 
+/** @param {string | number} value */
 export function formatDate(value) {
   return new Date(value).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
