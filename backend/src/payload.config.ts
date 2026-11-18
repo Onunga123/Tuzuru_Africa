@@ -15,6 +15,10 @@ import { Guides } from './collections/Guides'
 import { Enquiries } from './collections/Enquiries'
 import { Offers } from './collections/Offers'
 import { Reviews } from './collections/Reviews'
+import { SiteSettings } from './globals/SiteSettings'
+import { Navigation } from './globals/Navigation'
+import { Footer } from './globals/Footer'
+import { Homepage } from './globals/Homepage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,6 +31,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Experiences, Destinations, Tours, Gallery, Guides, Enquiries, Offers, Reviews],
+  globals: [SiteSettings, Navigation, Footer, Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

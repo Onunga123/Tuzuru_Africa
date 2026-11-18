@@ -103,8 +103,18 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+    navigation: Navigation;
+    footer: Footer;
+    homepage: Homepage;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -868,6 +878,216 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Site-wide identity and contact details used across the TUZURU AFRICA website.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  siteName: string;
+  tagline?: string | null;
+  aboutShort?: string | null;
+  contactEmail: string;
+  contactPhone?: string | null;
+  /**
+   * International format, digits only, e.g. 254712345678.
+   */
+  whatsappNumber?: string | null;
+  address?: string | null;
+  socials?:
+    | {
+        platform: 'Instagram' | 'Facebook' | 'X' | 'YouTube' | 'TikTok' | 'LinkedIn';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Main menu items rendered in the site header.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: number;
+  items?:
+    | {
+        label: string;
+        /**
+         * Internal path like /experiences or a full URL.
+         */
+        href: string;
+        openInNewTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Footer link columns and legal line rendered site-wide.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  copyright?: string | null;
+  privacyNote?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Hero, intro and featured sections of the landing page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  heroTitle: string;
+  heroSubtitle?: string | null;
+  heroImage?: (number | null) | Media;
+  heroCtaLabel?: string | null;
+  heroCtaHref?: string | null;
+  introTitle?: string | null;
+  introBody?: string | null;
+  featuredExperiencesHeading?: string | null;
+  featuredExperiences?:
+    | {
+        experience: number | Experience;
+        id?: string | null;
+      }[]
+    | null;
+  featuredToursHeading?: string | null;
+  featuredTours?:
+    | {
+        tour: number | Tour;
+        id?: string | null;
+      }[]
+    | null;
+  ctaBannerTitle?: string | null;
+  ctaBannerBody?: string | null;
+  ctaBannerLabel?: string | null;
+  ctaBannerHref?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  tagline?: T;
+  aboutShort?: T;
+  contactEmail?: T;
+  contactPhone?: T;
+  whatsappNumber?: T;
+  address?: T;
+  socials?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        openInNewTab?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  copyright?: T;
+  privacyNote?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroImage?: T;
+  heroCtaLabel?: T;
+  heroCtaHref?: T;
+  introTitle?: T;
+  introBody?: T;
+  featuredExperiencesHeading?: T;
+  featuredExperiences?:
+    | T
+    | {
+        experience?: T;
+        id?: T;
+      };
+  featuredToursHeading?: T;
+  featuredTours?:
+    | T
+    | {
+        tour?: T;
+        id?: T;
+      };
+  ctaBannerTitle?: T;
+  ctaBannerBody?: T;
+  ctaBannerLabel?: T;
+  ctaBannerHref?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
