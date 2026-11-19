@@ -1,11 +1,6 @@
-import type { CollectionConfig, Access } from 'payload';
+import type { CollectionConfig } from 'payload';
+import { adminOrApproved } from '../access/adminOrApproved'
 
-// Dual-mode access on the `published` boolean (Reviews use a boolean gate, not a
-// status enum). Authenticated admins see all; anonymous callers see only published.
-const adminOrPublished: Access = ({ req: { user } }) => {
-  if (user) return true;
-  return { published: { equals: true } };
-};
 
 export const Reviews: CollectionConfig = {
   slug: 'reviews',
@@ -16,7 +11,7 @@ export const Reviews: CollectionConfig = {
     defaultColumns: ['authorName', 'published', 'publishedAt', 'tripReference'],
   },
   access: {
-    read: adminOrPublished,
+    read: adminOrApproved,
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),

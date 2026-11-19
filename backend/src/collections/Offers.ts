@@ -1,11 +1,6 @@
-import type { CollectionConfig, Access } from 'payload';
+import type { CollectionConfig } from 'payload';
+import { adminOrPublished } from '../access/adminOrPublished'
 
-// Dual-mode access: authenticated admins see all offers; anonymous callers see
-// only published offers (the public catalogue surface).
-const adminOrPublished: Access = ({ req: { user } }) => {
-  if (user) return true;
-  return { status: { equals: 'published' } };
-};
 
 export const Offers: CollectionConfig = {
   slug: 'offers',

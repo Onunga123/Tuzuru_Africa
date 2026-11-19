@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { adminOrPublished } from '../access/adminOrPublished'
 
 export const Guides: CollectionConfig = {
   slug: 'guides',
@@ -8,10 +9,7 @@ export const Guides: CollectionConfig = {
     defaultColumns: ['title', 'category', 'status', 'date'],
   },
   access: {
-    read: ({ req: { user } }) => {
-      if (user) return true
-      return { status: { equals: 'published' } }
-    },
+    read: adminOrPublished,
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
