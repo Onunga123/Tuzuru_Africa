@@ -176,6 +176,26 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  /**
+   * Internal. Asset origin (owner-approved-interim or owner-supplied). Never exposed publicly.
+   */
+  origin?: string | null;
+  /**
+   * Internal. Credit line. Empty for interim assets (DL-009); populated when real photographer credit exists.
+   */
+  credit?: string | null;
+  /**
+   * Internal. Licence statement for this asset.
+   */
+  licence?: string | null;
+  /**
+   * Internal. Licence status; shares the gallery licenceStatus vocabulary.
+   */
+  licenceStatus?: ('owner-approved-interim' | 'licensed' | 'permission') | null;
+  /**
+   * Internal. Pointer to the approval record (e.g. DL-009 owner approval, 2026-11-11).
+   */
+  permissionRef?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -637,6 +657,11 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  origin?: T;
+  credit?: T;
+  licence?: T;
+  licenceStatus?: T;
+  permissionRef?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
