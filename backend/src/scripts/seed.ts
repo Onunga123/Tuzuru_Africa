@@ -21,6 +21,12 @@ import type { Payload } from 'payload'
 // - imageAlt is the media manifest alt for the entry's imageKey (same text as the
 //   media doc; "alt travels with the record").
 // - related[] are tour slugs and are back-filled in layer 4 once tours exist.
+//
+// Layer 3 notes:
+// - upsert on slug (unique + indexed). Contract rule 2 (tours -> experiences by
+//   name) is resolved in layer 4; the name must simply stay unique.
+// - sortOrder = manifest array index: the JSON order is the frontend grid order.
+// - no status field: Experiences read access is public, nothing to publish.
 
 const SEED_DIR = path.resolve(process.cwd(), '../seed')
 const MEDIA_DIR = path.resolve(process.cwd(), 'seed-media')
@@ -59,6 +65,15 @@ type DestinationEntry = {
   bestTime: string
   travelInfo: string
   related: string[]
+}
+
+type ExperienceEntry = {
+  slug: string
+  name: string
+  icon: string
+  imageKey: string
+  blurb: string
+  detail: string
 }
 
 function loadJson<T>(name: string): T {
@@ -225,6 +240,51 @@ async function upsertDestinations(payload: Payload, mediaIndex: Map<string, Medi
   return { created, updated }
 }
 
+async function upsertExperiences(payload: Payload, mediaIndex: Map<string, MediaRef>): Promise<{ created: number; updated: number }> {
+  const manifest = loadJson<ExperienceEntry[]>('experiences.json')
+  let created = 0
+  let updated = 0
+  for (let i = 0; i < manifest.length; i++) {
+    const entry = manifest[i]
+    const media = mediaIndex.get(entry.imageKey)
+    if (!media) throw new Error('imageKey not in media.json: ' + entry.imageKey + ' (experience ' + entry.slug + ')')
+    const data = {
+      name: entry.name,
+      slug: entry.slug,
+      icon: entry.icon,
+      image: media.id,
+      blurb: entry.blurb,
+      detail: entry.detail,
+      sortOrder: i,
+    }
+    const existing = await payload.find({
+      collection: 'experiences',
+      where: { slug: { equals: entry.slug } },
+      limit: 1,
+      overrideAccess: true,
+    })
+    if (existing.docs.length > 0) {
+      await payload.update({
+        collection: 'experiences',
+        id: existing.docs[0].id,
+        data,
+        overrideAccess: true,
+      })
+      updated += 1
+      out('  ~ experience ' + entry.slug)
+    } else {
+      await payload.create({
+        collection: 'experiences',
+        data,
+        overrideAccess: true,
+      })
+      created += 1
+      out('  + experience ' + entry.slug)
+    }
+  }
+  return { created, updated }
+}
+
 async function main(): Promise<void> {
   out('seed start: SEED_DIR=' + SEED_DIR + ' MEDIA_DIR=' + MEDIA_DIR)
   const payload = await getPayload({ config })
@@ -245,7 +305,16 @@ async function main(): Promise<void> {
     throw new Error('destination count mismatch: ' + destinationTotal.totalDocs + ' != ' + expectedDestinations)
   }
 
-  out('seed OK - layers 1-2 verified')
+  out('--- layer 3: experiences ---')
+  const experiences = await upsertExperiences(payload, mediaIndex)
+  const expectedExperiences = loadJson<ExperienceEntry[]>('experiences.json').length
+  const experienceTotal = await payload.count({ collection: 'experiences', overrideAccess: true })
+  out('experiences done: created=' + experiences.created + ' updated=' + experiences.updated + ' total=' + experienceTotal.totalDocs + ' (expected ' + expectedExperiences + ')')
+  if (experienceTotal.totalDocs !== expectedExperiences) {
+    throw new Error('experience count mismatch: ' + experienceTotal.totalDocs + ' != ' + expectedExperiences)
+  }
+
+  out('seed OK - layers 1-3 verified')
   process.exit(0)
 }
 
