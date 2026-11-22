@@ -27,9 +27,22 @@ import type { Payload } from 'payload'
 //   name) is resolved in layer 4; the name must simply stay unique.
 // - sortOrder = manifest array index: the JSON order is the frontend grid order.
 // - no status field: Experiences read access is public, nothing to publish.
+//
+// Layer 4 notes (soft policy: unresolved slugs WARN, never abort):
+// - destinationSlug -> destination relationship (e.g. 'bwindi' has no destination
+//   doc yet: relationship left empty, display string kept in destinationLabel).
+// - experiences resolved by name (contract rule 2).
+// - itinerary day arrives as a number, stored as text (String(day)).
+// - priceBasis left unset: default 'On request' applies on create (CONT-02, no
+//   prices in seed data); updates never clobber a manual admin edit.
+// - 4b back-fill: destinations.related[] tour slugs -> relatedTours relationship,
+//   rewritten whole each run; unresolved slugs (family-safari-mara,
+//   migration-safari, swahili-coast-guide) warn and are dropped.
 
 const SEED_DIR = path.resolve(process.cwd(), '../seed')
 const MEDIA_DIR = path.resolve(process.cwd(), 'seed-media')
+
+let warnings = 0
 
 function out(msg: string): void {
   fs.writeSync(1, msg + '\n')
@@ -37,6 +50,11 @@ function out(msg: string): void {
 
 function err(msg: string): void {
   fs.writeSync(2, msg + '\n')
+}
+
+function warn(msg: string): void {
+  warnings += 1
+  err('WARN: ' + msg)
 }
 
 type MediaEntry = {
@@ -74,6 +92,26 @@ type ExperienceEntry = {
   imageKey: string
   blurb: string
   detail: string
+}
+
+type TourEntry = {
+  slug: string
+  title: string
+  destination: string
+  destinationSlug: string
+  duration: string
+  days: number
+  imageKey: string
+  experiences: string[]
+  featured?: boolean
+  overview: string
+  highlights: string[]
+  itinerary: Array<{ day: number; title: string; detail: string }>
+  accommodation: string
+  transport: string
+  inclusions: string[]
+  exclusions: string[]
+  important: string
 }
 
 function loadJson<T>(name: string): T {
@@ -136,6 +174,22 @@ async function buildMediaIndex(payload: Payload): Promise<Map<string, MediaRef>>
     index.set(entry.key, { id: found.docs[0].id, alt: found.docs[0].alt })
   }
   return index
+}
+
+async function buildDestinationIndex(payload: Payload): Promise<Map<string, number | string>> {
+  const found = await payload.find({ collection: 'destinations', limit: 100, overrideAccess: true })
+  return new Map(found.docs.map((d) => [d.slug, d.id] as [string, number | string]))
+}
+
+// Contract rule 2: tours reference experiences by NAME, not slug.
+async function buildExperienceNameIndex(payload: Payload): Promise<Map<string, number | string>> {
+  const found = await payload.find({ collection: 'experiences', limit: 100, overrideAccess: true })
+  return new Map(found.docs.map((d) => [d.name, d.id] as [string, number | string]))
+}
+
+async function buildTourIndex(payload: Payload): Promise<Map<string, number | string>> {
+  const found = await payload.find({ collection: 'tours', limit: 100, overrideAccess: true })
+  return new Map(found.docs.map((d) => [d.slug, d.id] as [string, number | string]))
 }
 
 async function upsertMedia(payload: Payload): Promise<{ created: number; updated: number }> {
@@ -285,6 +339,111 @@ async function upsertExperiences(payload: Payload, mediaIndex: Map<string, Media
   return { created, updated }
 }
 
+async function upsertTours(
+  payload: Payload,
+  mediaIndex: Map<string, MediaRef>,
+  destinationIndex: Map<string, number | string>,
+  experienceNameIndex: Map<string, number | string>,
+): Promise<{ created: number; updated: number }> {
+  const manifest = loadJson<TourEntry[]>('tours.json')
+  let created = 0
+  let updated = 0
+  for (const entry of manifest) {
+    const media = mediaIndex.get(entry.imageKey)
+    if (!media) throw new Error('imageKey not in media.json: ' + entry.imageKey + ' (tour ' + entry.slug + ')')
+    const expIds: Array<number | string> = []
+    for (const name of entry.experiences) {
+      const id = experienceNameIndex.get(name)
+      if (id === undefined) {
+        warn('tour ' + entry.slug + ' - experience name not found: ' + name + ' (skipped)')
+      } else {
+        expIds.push(id)
+      }
+    }
+    const destId = destinationIndex.get(entry.destinationSlug)
+    if (destId === undefined) {
+      warn('tour ' + entry.slug + ' - destinationSlug not found: ' + entry.destinationSlug + ' (relationship left empty)')
+    }
+    const data = {
+      title: entry.title,
+      slug: entry.slug,
+      destination: destId ?? null,
+      destinationLabel: entry.destination,
+      duration: entry.duration,
+      days: entry.days,
+      image: media.id,
+      imageAlt: media.alt,
+      experiences: expIds,
+      featured: entry.featured === true,
+      overview: entry.overview,
+      highlights: entry.highlights.map((h) => ({ highlight: h })),
+      itinerary: entry.itinerary.map((step) => ({ day: String(step.day), title: step.title, detail: step.detail })),
+      accommodation: entry.accommodation,
+      transport: entry.transport,
+      inclusions: entry.inclusions.map((x) => ({ inclusion: x })),
+      exclusions: entry.exclusions.map((x) => ({ exclusion: x })),
+      important: entry.important,
+      status: 'published',
+    }
+    const existing = await payload.find({
+      collection: 'tours',
+      where: { slug: { equals: entry.slug } },
+      limit: 1,
+      overrideAccess: true,
+    })
+    if (existing.docs.length > 0) {
+      await payload.update({
+        collection: 'tours',
+        id: existing.docs[0].id,
+        data,
+        overrideAccess: true,
+      })
+      updated += 1
+      out('  ~ tour ' + entry.slug)
+    } else {
+      await payload.create({
+        collection: 'tours',
+        data,
+        overrideAccess: true,
+      })
+      created += 1
+      out('  + tour ' + entry.slug)
+    }
+  }
+  return { created, updated }
+}
+
+async function backfillRelatedTours(
+  payload: Payload,
+  destinationIndex: Map<string, number | string>,
+  tourIndex: Map<string, number | string>,
+): Promise<void> {
+  const manifest = loadJson<DestinationEntry[]>('destinations.json')
+  for (const entry of manifest) {
+    const destId = destinationIndex.get(entry.slug)
+    if (destId === undefined) {
+      warn('backfill - destination not found: ' + entry.slug)
+      continue
+    }
+    const tourIds: Array<number | string> = []
+    for (const tourSlug of entry.related) {
+      const id = tourIndex.get(tourSlug)
+      if (id === undefined) {
+        warn('destination ' + entry.slug + ' - related tour slug not found: ' + tourSlug + ' (dropped from relatedTours)')
+      } else {
+        tourIds.push(id)
+      }
+    }
+    await payload.update({
+      collection: 'destinations',
+      id: destId,
+      data: { relatedTours: tourIds },
+      overrideAccess: true,
+    })
+    out('  ~ relatedTours ' + entry.slug + ' -> ' + tourIds.length + ' of ' + entry.related.length)
+  }
+}
+
 async function main(): Promise<void> {
   out('seed start: SEED_DIR=' + SEED_DIR + ' MEDIA_DIR=' + MEDIA_DIR)
   const payload = await getPayload({ config })
@@ -314,7 +473,22 @@ async function main(): Promise<void> {
     throw new Error('experience count mismatch: ' + experienceTotal.totalDocs + ' != ' + expectedExperiences)
   }
 
-  out('seed OK - layers 1-3 verified')
+  out('--- layer 4: tours ---')
+  const destinationIndex = await buildDestinationIndex(payload)
+  const experienceNameIndex = await buildExperienceNameIndex(payload)
+  const tours = await upsertTours(payload, mediaIndex, destinationIndex, experienceNameIndex)
+  const expectedTours = loadJson<TourEntry[]>('tours.json').length
+  const tourTotal = await payload.count({ collection: 'tours', overrideAccess: true })
+  out('tours done: created=' + tours.created + ' updated=' + tours.updated + ' total=' + tourTotal.totalDocs + ' (expected ' + expectedTours + ')')
+  if (tourTotal.totalDocs !== expectedTours) {
+    throw new Error('tour count mismatch: ' + tourTotal.totalDocs + ' != ' + expectedTours)
+  }
+
+  out('--- layer 4b: destinations.relatedTours back-fill ---')
+  const tourIndex = await buildTourIndex(payload)
+  await backfillRelatedTours(payload, destinationIndex, tourIndex)
+
+  out('seed OK - layers 1-4 verified, warnings: ' + warnings)
   process.exit(0)
 }
 
