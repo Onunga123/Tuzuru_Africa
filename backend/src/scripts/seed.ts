@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { getPayload } from 'payload'
 import config from '../payload.config'
-import type { Destination } from '../payload-types'
+import type { Destination, Guide } from '../payload-types'
 import type { Payload } from 'payload'
 
 // S7 seed script — MR-09 import contract (seed/README.md + MIGRATION.md section 8).
@@ -37,7 +37,20 @@ import type { Payload } from 'payload'
 //   prices in seed data); updates never clobber a manual admin edit.
 // - 4b back-fill: destinations.related[] tour slugs -> relatedTours relationship,
 //   rewritten whole each run; unresolved slugs (family-safari-mara,
-//   migration-safari, swahili-coast-guide) warn and are dropped.
+//   migration-safari, swahili-coast-guide) warn and are dropped. Note:
+//   swahili-coast-guide is a GUIDE slug (layer 5), not a tour - dropping it from
+//   relatedTours was correct.
+//
+// Layer 5 notes:
+// - upsert on slug (unique + indexed). category is a closed select: manifest
+//   values must match the three options exactly (they do).
+// - imageAlt from the media entry alt (guides.json carries no per-guide imageAlt).
+// - date is an ISO string in the seed; stored as a Payload date (UTC midnight).
+// - content blocks {heading, body} -> one lexical root with an h2 heading node +
+//   paragraph node per block (contract: heading/body maps to heading + paragraph).
+// - lastUpdated, socialImage, relatedDestinations: absent in the manifest, left
+//   unset (contract rule 3 applies only "when present").
+// - status 'published' (read access is adminOrPublished, same as tours).
 
 const SEED_DIR = path.resolve(process.cwd(), '../seed')
 const MEDIA_DIR = path.resolve(process.cwd(), 'seed-media')
@@ -114,14 +127,65 @@ type TourEntry = {
   important: string
 }
 
+type GuideEntry = {
+  slug: string
+  title: string
+  category: string
+  imageKey: string
+  date: string
+  readingTime: string
+  excerpt: string
+  content: Array<{ heading: string; body: string }>
+}
+
 function loadJson<T>(name: string): T {
   const full = path.join(SEED_DIR, name)
   if (!fs.existsSync(full)) throw new Error('missing seed file: ' + full)
   return JSON.parse(fs.readFileSync(full, 'utf8')) as T
 }
 
-// Payload 3 lexical richText: serialized editor state with one paragraph node.
-function paragraphRichText(text: string): Record<string, unknown> {
+// Payload 3 lexical richText: serialized editor state. Node builders below compose
+// paragraph-only roots (destinations) and heading+paragraph roots (guides).
+function textNode(text: string): Record<string, unknown> {
+  return {
+    type: 'text',
+    version: 1,
+    text,
+    format: 0,
+    detail: 0,
+    mode: 'normal',
+    style: '',
+  }
+}
+
+function paragraphNode(text: string): Record<string, unknown> {
+  return {
+    type: 'paragraph',
+    format: '',
+    indent: 0,
+    textFormat: 0,
+    textStyle: '',
+    direction: null,
+    version: 1,
+    children: [textNode(text)],
+  }
+}
+
+function headingNode(text: string): Record<string, unknown> {
+  return {
+    type: 'heading',
+    tag: 'h2',
+    format: '',
+    indent: 0,
+    textFormat: 0,
+    textStyle: '',
+    direction: null,
+    version: 1,
+    children: [textNode(text)],
+  }
+}
+
+function lexicalRoot(children: Array<Record<string, unknown>>): Record<string, unknown> {
   return {
     root: {
       type: 'root',
@@ -131,30 +195,24 @@ function paragraphRichText(text: string): Record<string, unknown> {
       textStyle: '',
       direction: null,
       version: 1,
-      children: [
-        {
-          type: 'paragraph',
-          format: '',
-          indent: 0,
-          textFormat: 0,
-          textStyle: '',
-          direction: null,
-          version: 1,
-          children: [
-            {
-              type: 'text',
-              version: 1,
-              text,
-              format: 0,
-              detail: 0,
-              mode: 'normal',
-              style: '',
-            },
-          ],
-        },
-      ],
+      children,
     },
   }
+}
+
+// Payload 3 lexical richText: serialized editor state with one paragraph node.
+function paragraphRichText(text: string): Record<string, unknown> {
+  return lexicalRoot([paragraphNode(text)])
+}
+
+// guides.json content blocks -> h2 heading + paragraph per block.
+function blocksRichText(blocks: Array<{ heading: string; body: string }>): Record<string, unknown> {
+  const children: Array<Record<string, unknown>> = []
+  for (const block of blocks) {
+    children.push(headingNode(block.heading))
+    children.push(paragraphNode(block.body))
+  }
+  return lexicalRoot(children)
 }
 
 // media.json key -> live media doc (id + alt), resolved by filename (contract rule 4).
@@ -444,6 +502,53 @@ async function backfillRelatedTours(
   }
 }
 
+async function upsertGuides(payload: Payload, mediaIndex: Map<string, MediaRef>): Promise<{ created: number; updated: number }> {
+  const manifest = loadJson<GuideEntry[]>('guides.json')
+  let created = 0
+  let updated = 0
+  for (const entry of manifest) {
+    const media = mediaIndex.get(entry.imageKey)
+    if (!media) throw new Error('imageKey not in media.json: ' + entry.imageKey + ' (guide ' + entry.slug + ')')
+    const data = {
+      slug: entry.slug,
+      title: entry.title,
+      category: entry.category,
+      image: media.id,
+      imageAlt: media.alt,
+      date: new Date(entry.date + 'T00:00:00.000Z'),
+      readingTime: entry.readingTime,
+      excerpt: entry.excerpt,
+      content: blocksRichText(entry.content) as unknown as NonNullable<Guide['content']>,
+      status: 'published',
+    }
+    const existing = await payload.find({
+      collection: 'guides',
+      where: { slug: { equals: entry.slug } },
+      limit: 1,
+      overrideAccess: true,
+    })
+    if (existing.docs.length > 0) {
+      await payload.update({
+        collection: 'guides',
+        id: existing.docs[0].id,
+        data,
+        overrideAccess: true,
+      })
+      updated += 1
+      out('  ~ guide ' + entry.slug)
+    } else {
+      await payload.create({
+        collection: 'guides',
+        data,
+        overrideAccess: true,
+      })
+      created += 1
+      out('  + guide ' + entry.slug)
+    }
+  }
+  return { created, updated }
+}
+
 async function main(): Promise<void> {
   out('seed start: SEED_DIR=' + SEED_DIR + ' MEDIA_DIR=' + MEDIA_DIR)
   const payload = await getPayload({ config })
@@ -488,7 +593,16 @@ async function main(): Promise<void> {
   const tourIndex = await buildTourIndex(payload)
   await backfillRelatedTours(payload, destinationIndex, tourIndex)
 
-  out('seed OK - layers 1-4 verified, warnings: ' + warnings)
+  out('--- layer 5: guides ---')
+  const guides = await upsertGuides(payload, mediaIndex)
+  const expectedGuides = loadJson<GuideEntry[]>('guides.json').length
+  const guideTotal = await payload.count({ collection: 'guides', overrideAccess: true })
+  out('guides done: created=' + guides.created + ' updated=' + guides.updated + ' total=' + guideTotal.totalDocs + ' (expected ' + expectedGuides + ')')
+  if (guideTotal.totalDocs !== expectedGuides) {
+    throw new Error('guide count mismatch: ' + guideTotal.totalDocs + ' != ' + expectedGuides)
+  }
+
+  out('seed OK - layers 1-5 verified, warnings: ' + warnings)
   process.exit(0)
 }
 
