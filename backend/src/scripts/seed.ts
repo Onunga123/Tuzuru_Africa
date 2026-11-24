@@ -8,7 +8,7 @@ import type { Payload } from 'payload'
 
 // S7 seed script — MR-09 import contract (seed/README.md + MIGRATION.md section 8).
 // Layers: 1 media | 2 destinations | 3 experiences | 4 tours | 5 guides | 6 gallery | 7 globals.
-// Idempotent: upsert on filename (media) / slug (content). Safe to re-run.
+// Idempotent: upsert on filename (media) / slug (content) / image (gallery). Safe to re-run.
 //
 // Entry point MUST use top-level await: `payload run` exits with code 0 as soon as
 // module evaluation resolves. A fire-and-forget main() is killed mid-flight (right
@@ -51,6 +51,16 @@ import type { Payload } from 'payload'
 // - lastUpdated, socialImage, relatedDestinations: absent in the manifest, left
 //   unset (contract rule 3 applies only "when present").
 // - status 'published' (read access is adminOrPublished, same as tours).
+//
+// Layer 6 notes:
+// - gallery has NO slug: upsert keyed on the image relationship (all 12 imageKeys
+//   are distinct media docs, so one gallery doc per media doc is the key).
+// - alt from the media entry alt (gallery.json carries no per-item alt).
+// - manifest field 'licence' -> schema field 'permission' (DL-009 licence note
+//   kept with the record); licenceStatus maps 1:1 (all 'owner-approved-interim').
+// - destination resolved by display NAME via buildDestinationNameIndex (gallery.json
+//   stores names, not slugs); unresolved -> null + WARN (soft policy).
+// - no status field: gallery read access is public; credit is '' in the manifest.
 
 const SEED_DIR = path.resolve(process.cwd(), '../seed')
 const MEDIA_DIR = path.resolve(process.cwd(), 'seed-media')
@@ -136,6 +146,17 @@ type GuideEntry = {
   readingTime: string
   excerpt: string
   content: Array<{ heading: string; body: string }>
+}
+
+type GalleryEntry = {
+  id: string
+  imageKey: string
+  caption: string
+  category: string
+  destination: string
+  credit: string
+  licence: string
+  licenceStatus: string
 }
 
 function loadJson<T>(name: string): T {
@@ -237,6 +258,12 @@ async function buildMediaIndex(payload: Payload): Promise<Map<string, MediaRef>>
 async function buildDestinationIndex(payload: Payload): Promise<Map<string, number | string>> {
   const found = await payload.find({ collection: 'destinations', limit: 100, overrideAccess: true })
   return new Map(found.docs.map((d) => [d.slug, d.id] as [string, number | string]))
+}
+
+// gallery.json references destinations by display NAME, not slug (layer 6).
+async function buildDestinationNameIndex(payload: Payload): Promise<Map<string, number | string>> {
+  const found = await payload.find({ collection: 'destinations', limit: 100, overrideAccess: true })
+  return new Map(found.docs.map((d) => [d.name, d.id] as [string, number | string]))
 }
 
 // Contract rule 2: tours reference experiences by NAME, not slug.
@@ -549,6 +576,61 @@ async function upsertGuides(payload: Payload, mediaIndex: Map<string, MediaRef>)
   return { created, updated }
 }
 
+async function upsertGallery(
+  payload: Payload,
+  mediaIndex: Map<string, MediaRef>,
+  destinationNameIndex: Map<string, number | string>,
+): Promise<{ created: number; updated: number }> {
+  const manifest = loadJson<GalleryEntry[]>('gallery.json')
+  let created = 0
+  let updated = 0
+  for (const entry of manifest) {
+    const media = mediaIndex.get(entry.imageKey)
+    if (!media) throw new Error('imageKey not in media.json: ' + entry.imageKey + ' (gallery ' + entry.id + ')')
+    const destId = destinationNameIndex.get(entry.destination)
+    if (destId === undefined) {
+      warn('gallery ' + entry.id + ' - destination name not found: ' + entry.destination + ' (relationship left empty)')
+    }
+    const data = {
+      image: media.id,
+      alt: media.alt,
+      caption: entry.caption,
+      category: entry.category,
+      destination: destId ?? null,
+      credit: entry.credit,
+      licenceStatus: entry.licenceStatus,
+      permission: entry.licence,
+    }
+    // gallery has no slug: upsert keyed on the image relationship (imageKeys are
+    // distinct across the manifest, so one gallery doc per media doc).
+    const existing = await payload.find({
+      collection: 'gallery',
+      where: { image: { equals: media.id } },
+      limit: 1,
+      overrideAccess: true,
+    })
+    if (existing.docs.length > 0) {
+      await payload.update({
+        collection: 'gallery',
+        id: existing.docs[0].id,
+        data,
+        overrideAccess: true,
+      })
+      updated += 1
+      out('  ~ gallery ' + entry.id + ' (' + entry.imageKey + ')')
+    } else {
+      await payload.create({
+        collection: 'gallery',
+        data,
+        overrideAccess: true,
+      })
+      created += 1
+      out('  + gallery ' + entry.id + ' (' + entry.imageKey + ')')
+    }
+  }
+  return { created, updated }
+}
+
 async function main(): Promise<void> {
   out('seed start: SEED_DIR=' + SEED_DIR + ' MEDIA_DIR=' + MEDIA_DIR)
   const payload = await getPayload({ config })
@@ -602,7 +684,17 @@ async function main(): Promise<void> {
     throw new Error('guide count mismatch: ' + guideTotal.totalDocs + ' != ' + expectedGuides)
   }
 
-  out('seed OK - layers 1-5 verified, warnings: ' + warnings)
+  out('--- layer 6: gallery ---')
+  const destinationNameIndex = await buildDestinationNameIndex(payload)
+  const gallery = await upsertGallery(payload, mediaIndex, destinationNameIndex)
+  const expectedGallery = loadJson<GalleryEntry[]>('gallery.json').length
+  const galleryTotal = await payload.count({ collection: 'gallery', overrideAccess: true })
+  out('gallery done: created=' + gallery.created + ' updated=' + gallery.updated + ' total=' + galleryTotal.totalDocs + ' (expected ' + expectedGallery + ')')
+  if (galleryTotal.totalDocs !== expectedGallery) {
+    throw new Error('gallery count mismatch: ' + galleryTotal.totalDocs + ' != ' + expectedGallery)
+  }
+
+  out('seed OK - layers 1-6 verified, warnings: ' + warnings)
   process.exit(0)
 }
 
