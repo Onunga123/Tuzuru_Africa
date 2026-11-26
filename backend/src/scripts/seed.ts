@@ -1,4 +1,4 @@
-﻿import 'dotenv/config'
+import 'dotenv/config'
 import fs from 'node:fs'
 import path from 'node:path'
 import { getPayload } from 'payload'
@@ -631,6 +631,155 @@ async function upsertGallery(
   return { created, updated }
 }
 
+// ---------------------------------------------------------------------------
+// layer 7: globals
+//
+// Globals are singletons: each manifest maps to exactly one payload.updateGlobal
+// call (naturally idempotent - the same data is written every run). Where the
+// manifest carries more structure than the global schema has fields for, the
+// drop is loud (one WARN per global) and documented here + in the commit:
+//   site-settings: hours, contactNote, draftNotice, whatsappLink dropped
+//   navigation: cta, mobileCta dropped (no CTA fields); items flattened
+//     primary -> secondary -> mobileExtra (order preserved within groups)
+//   footer: column titles derived from manifest keys (explore/company/legal)
+//   homepage: hero.eyebrow, hero.secondaryCta, cta.eyebrow, cta.note dropped;
+//     heroTitle = headline + ' ' + headlineAccent (single title field);
+//     featured sections, intro section and ctaBanner button left unset for
+//     owner curation (no manifest source - not invented by the seed)
+//   home-content.json (whyTuzuru, discoveryPaths): no landing fields on the
+//     homepage global - skipped (schema gap, MR-09 deviation)
+// Contract-order steps travel-seasons / wildlife-calendar / faqs have no
+// collections in the schema - skipped in main() with one WARN (MR-09 deviation;
+// seasonal content survives via destinations bestTime/travelInfo).
+// ---------------------------------------------------------------------------
+
+interface NavLinkEntry {
+  label: string
+  to: string
+}
+
+interface NavigationEntry {
+  primary: NavLinkEntry[]
+  secondary: NavLinkEntry[]
+  mobileExtra: NavLinkEntry[]
+  cta: NavLinkEntry
+  mobileCta: NavLinkEntry
+}
+
+interface FooterEntry {
+  explore: NavLinkEntry[]
+  company: NavLinkEntry[]
+  legal: NavLinkEntry[]
+}
+
+interface SiteSettingsEntry {
+  name: string
+  tagline: string
+  shortDescription: string
+  phone: string
+  whatsapp: string
+  whatsappLink: string
+  email: string
+  location: string
+  hours: string
+  contactNote: string
+  draftNotice: string
+  socialLinks: unknown[]
+}
+
+interface HomepageEntry {
+  hero: {
+    eyebrow: string
+    headline: string
+    headlineAccent: string
+    intro: string
+    primaryCta: NavLinkEntry
+    secondaryCta: NavLinkEntry
+    imageKey: string
+  }
+  cta: {
+    eyebrow: string
+    title: string
+    body: string
+    note: string
+  }
+}
+
+async function seedGlobals(payload: Payload, mediaIndex: Map<string, MediaRef>): Promise<number> {
+  // site-settings
+  const settings = loadJson<SiteSettingsEntry>('site-settings.json')
+  await payload.updateGlobal({
+    slug: 'site-settings',
+    data: {
+      siteName: settings.name,
+      tagline: settings.tagline,
+      aboutShort: settings.shortDescription,
+      contactEmail: settings.email,
+      contactPhone: settings.phone,
+      whatsappNumber: settings.whatsapp,
+      address: settings.location,
+      socials: [],
+    },
+    overrideAccess: true,
+  })
+  warn('site-settings - dropped manifest fields (no column on the global): hours, contactNote, draftNotice, whatsappLink')
+  out('  ~ global site-settings')
+
+  // navigation
+  const navigation = loadJson<NavigationEntry>('navigation.json')
+  const navItems: Array<{ label: string; href: string; openInNewTab: boolean }> = []
+  for (const group of [navigation.primary, navigation.secondary, navigation.mobileExtra]) {
+    for (const item of group) {
+      navItems.push({ label: item.label, href: item.to, openInNewTab: false })
+    }
+  }
+  await payload.updateGlobal({
+    slug: 'navigation',
+    data: { items: navItems },
+    overrideAccess: true,
+  })
+  warn('navigation - cta, mobileCta dropped (no fields on the navigation global); ' + navItems.length + ' menu items flattened primary -> secondary -> mobileExtra')
+  out('  ~ global navigation (' + navItems.length + ' items)')
+
+  // footer
+  const footer = loadJson<FooterEntry>('footer.json')
+  const columnTitle = (key: string): string => key.charAt(0).toUpperCase() + key.slice(1)
+  await payload.updateGlobal({
+    slug: 'footer',
+    data: {
+      columns: [
+        { title: columnTitle('explore'), links: footer.explore.map(l => ({ label: l.label, href: l.to })) },
+        { title: columnTitle('company'), links: footer.company.map(l => ({ label: l.label, href: l.to })) },
+        { title: columnTitle('legal'), links: footer.legal.map(l => ({ label: l.label, href: l.to })) },
+      ],
+    },
+    overrideAccess: true,
+  })
+  out('  ~ global footer (3 columns)')
+
+  // homepage
+  const homepage = loadJson<HomepageEntry>('homepage.json')
+  const heroMedia = mediaIndex.get(homepage.hero.imageKey)
+  if (!heroMedia) throw new Error('homepage hero imageKey not in media.json: ' + homepage.hero.imageKey)
+  await payload.updateGlobal({
+    slug: 'homepage',
+    data: {
+      heroTitle: homepage.hero.headline + ' ' + homepage.hero.headlineAccent,
+      heroSubtitle: homepage.hero.intro,
+      heroImage: heroMedia.id,
+      heroCtaLabel: homepage.hero.primaryCta.label,
+      heroCtaHref: homepage.hero.primaryCta.to,
+      ctaBannerTitle: homepage.cta.title,
+      ctaBannerBody: homepage.cta.body,
+    },
+    overrideAccess: true,
+  })
+  warn('homepage - hero.eyebrow, hero.secondaryCta, cta.eyebrow, cta.note dropped (no fields); heroTitle concatenated from headline + headlineAccent; featured sections, intro section and ctaBanner button left unset (no manifest source)')
+  warn('home-content.json - whyTuzuru, discoveryPaths have no landing fields on the homepage global - skipped (schema gap, MR-09 deviation)')
+  out('  ~ global homepage')
+  return 4
+}
+
 async function main(): Promise<void> {
   out('seed start: SEED_DIR=' + SEED_DIR + ' MEDIA_DIR=' + MEDIA_DIR)
   const payload = await getPayload({ config })
@@ -694,7 +843,12 @@ async function main(): Promise<void> {
     throw new Error('gallery count mismatch: ' + galleryTotal.totalDocs + ' != ' + expectedGallery)
   }
 
-  out('seed OK - layers 1-6 verified, warnings: ' + warnings)
+  out('--- layer 7: globals ---')
+  warn('contract order steps travel-seasons, wildlife-calendar, faqs have no collections in the schema - skipped (MR-09 deviation, schema gap)')
+  const globalsUpdated = await seedGlobals(payload, mediaIndex)
+  out('globals done: ' + globalsUpdated + ' globals updated (expected 4)')
+  if (globalsUpdated !== 4) throw new Error('globals count mismatch: ' + globalsUpdated + ' != 4')
+  out('seed OK - layers 1-7 verified, warnings: ' + warnings)
   process.exit(0)
 }
 
