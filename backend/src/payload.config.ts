@@ -15,6 +15,9 @@ import { Guides } from './collections/Guides'
 import { Enquiries } from './collections/Enquiries'
 import { Offers } from './collections/Offers'
 import { Reviews } from './collections/Reviews'
+import { TravelSeasons } from './collections/TravelSeasons'
+import { WildlifeCalendar } from './collections/WildlifeCalendar'
+import { Faqs } from './collections/Faqs'
 import { SiteSettings } from './globals/SiteSettings'
 import { Navigation } from './globals/Navigation'
 import { Footer } from './globals/Footer'
@@ -30,7 +33,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Experiences, Destinations, Tours, Gallery, Guides, Enquiries, Offers, Reviews],
+  collections: [Users, Media, Experiences, Destinations, Tours, Gallery, Guides, Enquiries, Offers, Reviews, TravelSeasons, WildlifeCalendar, Faqs],
   globals: [SiteSettings, Navigation, Footer, Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -648,9 +648,12 @@ async function upsertGallery(
 //     owner curation (no manifest source - not invented by the seed)
 //   home-content.json (whyTuzuru, discoveryPaths): no landing fields on the
 //     homepage global - skipped (schema gap, MR-09 deviation)
-// Contract-order steps travel-seasons / wildlife-calendar / faqs have no
-// collections in the schema - skipped in main() with one WARN (MR-09 deviation;
-// seasonal content survives via destinations bestTime/travelInfo).
+//   home-content.json (whyTuzuru, discoveryPaths): no landing fields on the
+//     homepage global - skipped (schema gap, MR-09 deviation)
+// Layers 7-9 seed travel-seasons, wildlife-calendar and faqs per the MR-09
+// order. The manifests carry no slug/key, so identity uses the unique natural
+// fields: seasons by name, calendar by species, faqs by question (each
+// verified unique across its manifest).
 // ---------------------------------------------------------------------------
 
 interface NavLinkEntry {
@@ -703,6 +706,140 @@ interface HomepageEntry {
     body: string
     note: string
   }
+}
+
+interface SeasonEntry {
+  name: string
+  months: string
+  description: string
+  highlights: string
+  weather: string
+  best_for: string
+  crowd_level: string
+  price_band: string
+  imageKey: string
+  sort_order: number
+}
+
+interface CalendarEntry {
+  species: string
+  where: string
+  when: string
+  note: string
+  imageKey: string
+}
+
+interface FaqGroupEntry {
+  group: string
+  items: Array<{ q: string; a: string }>
+}
+
+async function upsertTravelSeasons(payload: Payload, mediaIndex: Map<string, MediaRef>): Promise<{ created: number; updated: number }> {
+  const manifest = loadJson<SeasonEntry[]>('travel-seasons.json')
+  let created = 0
+  let updated = 0
+  for (const entry of manifest) {
+    const media = mediaIndex.get(entry.imageKey)
+    if (!media) throw new Error('imageKey not in media.json: ' + entry.imageKey + ' (travel-season ' + entry.name + ')')
+    const data = {
+      name: entry.name,
+      months: entry.months,
+      description: entry.description,
+      highlights: entry.highlights,
+      weather: entry.weather,
+      bestFor: entry.best_for,
+      crowdLevel: entry.crowd_level,
+      priceBand: entry.price_band,
+      image: media.id,
+      sortOrder: entry.sort_order,
+    }
+    // identity: name (manifest carries no slug/key; names unique across manifest)
+    const existing = await payload.find({
+      collection: 'travel-seasons',
+      where: { name: { equals: entry.name } },
+      limit: 1,
+      overrideAccess: true,
+    })
+    if (existing.docs.length > 0) {
+      await payload.update({ collection: 'travel-seasons', id: existing.docs[0].id, data, overrideAccess: true })
+      updated += 1
+      out('  ~ travel-season ' + entry.name)
+    } else {
+      await payload.create({ collection: 'travel-seasons', data, overrideAccess: true })
+      created += 1
+      out('  + travel-season ' + entry.name)
+    }
+  }
+  return { created, updated }
+}
+
+async function upsertWildlifeCalendar(payload: Payload, mediaIndex: Map<string, MediaRef>): Promise<{ created: number; updated: number }> {
+  const manifest = loadJson<CalendarEntry[]>('wildlife-calendar.json')
+  let created = 0
+  let updated = 0
+  for (const entry of manifest) {
+    const media = mediaIndex.get(entry.imageKey)
+    if (!media) throw new Error('imageKey not in media.json: ' + entry.imageKey + ' (wildlife-calendar ' + entry.species + ')')
+    const data = {
+      species: entry.species,
+      where: entry.where,
+      when: entry.when,
+      note: entry.note,
+      image: media.id,
+    }
+    // identity: species (manifest carries no slug/key; species unique across manifest)
+    const existing = await payload.find({
+      collection: 'wildlife-calendar',
+      where: { species: { equals: entry.species } },
+      limit: 1,
+      overrideAccess: true,
+    })
+    if (existing.docs.length > 0) {
+      await payload.update({ collection: 'wildlife-calendar', id: existing.docs[0].id, data, overrideAccess: true })
+      updated += 1
+      out('  ~ wildlife-calendar ' + entry.species)
+    } else {
+      await payload.create({ collection: 'wildlife-calendar', data, overrideAccess: true })
+      created += 1
+      out('  + wildlife-calendar ' + entry.species)
+    }
+  }
+  return { created, updated }
+}
+
+async function upsertFaqs(payload: Payload): Promise<{ created: number; updated: number }> {
+  const manifest = loadJson<FaqGroupEntry[]>('faqs.json')
+  let created = 0
+  let updated = 0
+  let index = 0
+  for (const group of manifest) {
+    for (const item of group.items) {
+      const data = {
+        group: group.group,
+        question: item.q,
+        answer: item.a,
+        sortOrder: index,
+      }
+      // identity: question (unique across the whole flattened manifest)
+      const existing = await payload.find({
+        collection: 'faqs',
+        where: { question: { equals: item.q } },
+        limit: 1,
+        overrideAccess: true,
+      })
+      if (existing.docs.length > 0) {
+        await payload.update({ collection: 'faqs', id: existing.docs[0].id, data, overrideAccess: true })
+        updated += 1
+        out('  ~ faq [' + group.group + '] ' + item.q)
+      } else {
+        await payload.create({ collection: 'faqs', data, overrideAccess: true })
+        created += 1
+        out('  + faq [' + group.group + '] ' + item.q)
+      }
+      index += 1
+    }
+  }
+  return { created, updated }
 }
 
 async function seedGlobals(payload: Payload, mediaIndex: Map<string, MediaRef>): Promise<number> {
@@ -843,12 +980,32 @@ async function main(): Promise<void> {
     throw new Error('gallery count mismatch: ' + galleryTotal.totalDocs + ' != ' + expectedGallery)
   }
 
-  out('--- layer 7: globals ---')
-  warn('contract order steps travel-seasons, wildlife-calendar, faqs have no collections in the schema - skipped (MR-09 deviation, schema gap)')
+  out('--- layer 7: travel-seasons ---')
+  const seasons = await upsertTravelSeasons(payload, mediaIndex)
+  const expectedSeasons = loadJson<SeasonEntry[]>('travel-seasons.json').length
+  const seasonTotal = await payload.count({ collection: 'travel-seasons', overrideAccess: true })
+  out('travel-seasons done: created=' + seasons.created + ' updated=' + seasons.updated + ' total=' + seasonTotal.totalDocs + ' (expected ' + expectedSeasons + ')')
+  if (seasonTotal.totalDocs !== expectedSeasons) throw new Error('travel-seasons count mismatch: ' + seasonTotal.totalDocs + ' != ' + expectedSeasons)
+
+  out('--- layer 8: wildlife-calendar ---')
+  const calendar = await upsertWildlifeCalendar(payload, mediaIndex)
+  const expectedCalendar = loadJson<CalendarEntry[]>('wildlife-calendar.json').length
+  const calendarTotal = await payload.count({ collection: 'wildlife-calendar', overrideAccess: true })
+  out('wildlife-calendar done: created=' + calendar.created + ' updated=' + calendar.updated + ' total=' + calendarTotal.totalDocs + ' (expected ' + expectedCalendar + ')')
+  if (calendarTotal.totalDocs !== expectedCalendar) throw new Error('wildlife-calendar count mismatch: ' + calendarTotal.totalDocs + ' != ' + expectedCalendar)
+
+  out('--- layer 9: faqs ---')
+  const faqs = await upsertFaqs(payload)
+  const expectedFaqs = loadJson<FaqGroupEntry[]>('faqs.json').reduce((n, g) => n + g.items.length, 0)
+  const faqTotal = await payload.count({ collection: 'faqs', overrideAccess: true })
+  out('faqs done: created=' + faqs.created + ' updated=' + faqs.updated + ' total=' + faqTotal.totalDocs + ' (expected ' + expectedFaqs + ')')
+  if (faqTotal.totalDocs !== expectedFaqs) throw new Error('faqs count mismatch: ' + faqTotal.totalDocs + ' != ' + expectedFaqs)
+
+  out('--- layer 10: globals ---')
   const globalsUpdated = await seedGlobals(payload, mediaIndex)
   out('globals done: ' + globalsUpdated + ' globals updated (expected 4)')
   if (globalsUpdated !== 4) throw new Error('globals count mismatch: ' + globalsUpdated + ' != 4')
-  out('seed OK - layers 1-7 verified, warnings: ' + warnings)
+  out('seed OK - layers 1-10 verified, warnings: ' + warnings)
   process.exit(0)
 }
 

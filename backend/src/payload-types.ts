@@ -77,6 +77,9 @@ export interface Config {
     enquiries: Enquiry;
     offers: Offer;
     reviews: Review;
+    'travel-seasons': TravelSeason;
+    'wildlife-calendar': WildlifeCalendar;
+    faqs: Faq;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +97,9 @@ export interface Config {
     enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
     offers: OffersSelect<false> | OffersSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    'travel-seasons': TravelSeasonsSelect<false> | TravelSeasonsSelect<true>;
+    'wildlife-calendar': WildlifeCalendarSelect<false> | WildlifeCalendarSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -524,6 +530,52 @@ export interface Review {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "travel-seasons".
+ */
+export interface TravelSeason {
+  id: number;
+  name: string;
+  months?: string | null;
+  description?: string | null;
+  highlights?: string | null;
+  weather?: string | null;
+  bestFor?: string | null;
+  crowdLevel: 'quiet' | 'moderate' | 'busy';
+  priceBand: 'Best value' | 'Mid season' | 'Premium';
+  image: number | Media;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wildlife-calendar".
+ */
+export interface WildlifeCalendar {
+  id: number;
+  species: string;
+  where?: string | null;
+  when?: string | null;
+  note?: string | null;
+  image: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  group: string;
+  question: string;
+  answer: string;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -585,6 +637,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'reviews';
         value: number | Review;
+      } | null)
+    | ({
+        relationTo: 'travel-seasons';
+        value: number | TravelSeason;
+      } | null)
+    | ({
+        relationTo: 'wildlife-calendar';
+        value: number | WildlifeCalendar;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: number | Faq;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -861,6 +925,49 @@ export interface ReviewsSelect<T extends boolean = true> {
   consentRef?: T;
   publishedAt?: T;
   published?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "travel-seasons_select".
+ */
+export interface TravelSeasonsSelect<T extends boolean = true> {
+  name?: T;
+  months?: T;
+  description?: T;
+  highlights?: T;
+  weather?: T;
+  bestFor?: T;
+  crowdLevel?: T;
+  priceBand?: T;
+  image?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wildlife-calendar_select".
+ */
+export interface WildlifeCalendarSelect<T extends boolean = true> {
+  species?: T;
+  where?: T;
+  when?: T;
+  note?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  group?: T;
+  question?: T;
+  answer?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
